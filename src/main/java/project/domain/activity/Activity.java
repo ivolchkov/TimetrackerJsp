@@ -7,11 +7,12 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Activity extends Entity {
-    private String name;
-    private Time spentTime;
-    private Timestamp start;
-    private Timestamp end;
-    private String description;
+    private final String name;
+    private final Time spentTime;
+    private final Timestamp start;
+    private final Timestamp end;
+    private final String description;
+    private final Long userId;
 
     private Activity(ActivityBuilder builder) {
         super(builder.id);
@@ -20,6 +21,7 @@ public class Activity extends Entity {
         this.start = builder.start;
         this.end = builder.end;
         this.description= builder.description;
+        this.userId = builder.userId;
     }
 
     public String getName() {
@@ -40,6 +42,10 @@ public class Activity extends Entity {
 
     public String getDescription() {
         return description;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     public static ActivityBuilder builder() {
@@ -81,6 +87,7 @@ public class Activity extends Entity {
         private Timestamp start;
         private Timestamp end;
         private String description;
+        private Long userId;
 
         private ActivityBuilder() {}
 
@@ -111,6 +118,11 @@ public class Activity extends Entity {
 
         public ActivityBuilder withDescription(String description) {
             this.description = description;
+            return this;
+        }
+
+        public ActivityBuilder withUserId(Long userId) {
+            this.userId = userId;
             return this;
         }
 

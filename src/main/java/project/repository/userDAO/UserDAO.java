@@ -1,14 +1,14 @@
-package project.repository;
+package project.repository.userDAO;
 
 import project.domain.activity.Activity;
 import project.domain.user.User;
+import project.repository.CRUDRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserDAO extends CRUDRepository<User> {
+public interface UserDAO extends CRUDRepository<Long, User> {
     Optional<User> findByEmail(String email);
-    List<Activity> findActivities(Long id);
 
     boolean deleteByEmail(String email);
 }

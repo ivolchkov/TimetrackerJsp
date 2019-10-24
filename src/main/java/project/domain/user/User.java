@@ -1,7 +1,9 @@
 package project.domain.user;
 
 import project.domain.Entity;
+import project.domain.activity.Activity;
 
+import java.util.List;
 import java.util.Objects;
 
 public class User extends Entity {
@@ -10,6 +12,7 @@ public class User extends Entity {
     private final String email;
     private final String password;
     private final Role role;
+    private final List<Activity> activities;
 
     private User(UserBuilder builder) {
         super(builder.id);
@@ -18,6 +21,7 @@ public class User extends Entity {
         this.email = builder.email;
         this.password = builder.password;
         this.role = builder.role;
+        this.activities = builder.activities;
     }
 
     public User(User user, String password) {
@@ -27,6 +31,7 @@ public class User extends Entity {
         this.email = user.email;
         this.password = password;
         this.role = user.role;
+        this.activities = user.activities;
     }
 
     public String getName() {
@@ -47,6 +52,10 @@ public class User extends Entity {
 
     public Role getRole() {
         return role;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
     }
 
     @Override
@@ -100,6 +109,7 @@ public class User extends Entity {
         private String email;
         private String password;
         private Role role;
+        private List<Activity> activities;
 
         private UserBuilder() {}
 
@@ -130,6 +140,11 @@ public class User extends Entity {
 
         public UserBuilder withRole(Role role) {
             this.role = role;
+            return this;
+        }
+
+        public UserBuilder withActivities(List<Activity> activities) {
+            this.activities = activities;
             return this;
         }
 
