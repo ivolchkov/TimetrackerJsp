@@ -1,11 +1,12 @@
-package project.repository.userDAO;
+package project.repository.userDao;
 
 import org.apache.log4j.Logger;
-import project.domain.activity.Activity;
+import project.domain.story.Status;
+import project.domain.story.Story;
 import project.domain.user.Role;
 import project.domain.user.User;
 import project.exception.DatabaseRuntimeException;
-import project.repository.AbstractDAO;
+import project.repository.AbstractDao;
 import project.repository.connector.WrapperConnector;
 
 import java.sql.*;
@@ -13,21 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
-    private static final Logger LOGGER = Logger.getLogger(UserDAOImpl.class);
+public class UserDaoImpl extends AbstractDao<User> implements UserDao {
+    private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
 
     private static final String INSERT_USER = "INSERT INTO timetracking.users(user_name, user_surname, user_email, user_password, user_role) VALUES(?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.users WHERE user_id = ?";
     private static final String FIND_ALL_USERS = "SELECT * FROM timetracking.users";
     private static final String FIND_BY_EMAIL = "SELECT * FROM timetracking.users WHERE user_email = ?";
-    private static final String FIND_ACTIVITIES = "SELECT * FROM timetracking.activities AS act " +
-            "INNER JOIN timetracking.users as usr ON act.users_user_id = usr.user_id " +
+    private static final String FIND_STORIES = "SELECT * FROM timetracking.stories AS str " +
+            "INNER JOIN timetracking.users as usr ON str.user_id = usr.user_id " +
             "WHERE usr.user_id = ?";
     private static final String UPDATE_USER = "UPDATE timetracking.users SET user_name = ?, user_surname = ?, user_email = ?, user_password = ?, user_role = ? WHERE user_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.users WHERE user_id = ?";
     private static final String DELETE_BY_EMAIL = "DELETE FROM timetracking.users WHERE user_email = ?";
 
-    public UserDAOImpl(WrapperConnector connector) {
+    public UserDaoImpl(WrapperConnector connector) {
         super(connector);
     }
 
@@ -37,7 +38,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<User> findById(Integer id) {
         return findById(id, FIND_BY_ID);
     }
 
@@ -67,7 +68,7 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Integer id) {
         return deleteById(id, DELETE_BY_ID);
     }
 
@@ -87,57 +88,67 @@ public class UserDAOImpl extends AbstractDAO<User> implements UserDAO {
 
 
     @Override
-    protected Optional<User> mapResultSetToEntity(ResultSet entity) throws SQLException {
-        if ( entity.next() ) {
-            long id = entity.getLong(1);
-            List<Activity> activities = findActivities(id);
+    protected Optional<User> mapResultSetToEntity(ResultSet user) throws SQLException {
+        Integer id = user.getInt(1);
+        List<Story> stories = findStories(id);
+        String userRole = user.getString(6);
+        Role role = userRole.equals("Admin") ? Role.ADMIN : (userRole.equals("Developer") ? Role.DEVELOPER : Role.SCRUM_MASTER);
 
-            Role role = entity.getString(6) != null && entity.getString(6).equals("ADMIN")
-                    ? Role.ADMIN : Role.CLIENT;
-
-            return Optional.ofNullable(User.builder().withId(id)
-                    .withName(entity.getString(2))
-                    .withSurname(entity.getString(3))
-                    .withEmail(entity.getString(4))
-                    .withPassword(entity.getString(5))
-                    .withRole(role)
-                    .withActivities(activities).build());
-        }
-
-        return Optional.empty();
+        return Optional.ofNullable(User.builder().withId(id)
+                .withName(user.getString(2))
+                .withSurname(user.getString(3))
+                .withEmail(user.getString(4))
+                .withPassword(user.getString(5))
+                .withRole(role)
+                .withStories(stories).build());
     }
 
-    private Optional<Activity> mapResultSetToActivity(ResultSet activities) throws SQLException {
-        return activities.next() ? Optional.ofNullable(Activity.builder().withId(activities.getLong(1))
-                .withName(activities.getString(2))
-                .withSpentTime(activities.getTime(3))
-                .withStart(activities.getTimestamp(4))
-                .withEnd(activities.getTimestamp(5))
-                .withDescription(activities.getString(6)).build())
-                : Optional.empty();
+    private Optional<Story> mapResultSetToStory(ResultSet story) throws SQLException {
+        String sts = story.getString(5);
+        Status status = sts.equals("To do") ? Status.TO_DO : (sts.equals("In process") ? Status.IN_PROCESS : Status.DONE);
+
+        return Optional.of(Story.builder().withId(story.getInt(1))
+                .withName(story.getString(2))
+                .withSpentTime(story.getTime(3).toLocalTime())
+                .withDescription(story.getString(4))
+                .withStatus(status)
+                .build());
     }
 
+    @Override
     protected int statementMapper(User user, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setString(1, user.getName());
-        preparedStatement.setString(2, user.getSurname());
-        preparedStatement.setString(3, user.getEmail());
-        preparedStatement.setString(4, user.getPassword());
-        preparedStatement.setString(5, user.getRole().name());
+        ParameterMetaData parameterMetaData = preparedStatement.getParameterMetaData();
+        int parameterCount = parameterMetaData.getParameterCount();
+
+        if (parameterCount == 5) {
+            defaultStatementMap(user, preparedStatement);
+        } else if (parameterCount == 6) {
+            defaultStatementMap(user, preparedStatement);
+            preparedStatement.setInt(6, user.getId());
+        }
 
         return preparedStatement.executeUpdate();
     }
 
-    private List<Activity> findActivities(Long id) {
-        List<Activity> result = new ArrayList<>();
+    private void defaultStatementMap(User user, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setString(1, user.getName());
+        preparedStatement.setString(2, user.getSurname());
+        preparedStatement.setString(3, user.getEmail());
+        preparedStatement.setString(4, user.getPassword());
+        preparedStatement.setString(5, user.getRole().getDescription());
+    }
+
+    private List<Story> findStories(Integer id) {
+        List<Story> result = new ArrayList<>();
 
         try (Connection connection = connector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ACTIVITIES)) {
-            preparedStatement.setInt(1, Math.toIntExact(id));
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_STORIES)) {
+            preparedStatement.setInt(1, id);
 
-            ResultSet activities = preparedStatement.executeQuery();
+            ResultSet stories = preparedStatement.executeQuery();
 
-            while (activities.next()) {
-                mapResultSetToActivity(activities).ifPresent(result::add);
+            while (stories.next()) {
+                mapResultSetToStory(stories).ifPresent(result::add);
             }
 
             return result;

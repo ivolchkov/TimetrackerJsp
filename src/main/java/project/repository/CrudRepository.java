@@ -1,11 +1,9 @@
 package project.repository;
 
-import project.domain.Entity;
-
 import java.util.List;
 import java.util.Optional;
 
-public interface CRUDRepository<ID, E extends Entity> {
+public interface CrudRepository<ID, E> {
     boolean save(E entity);
 
     Optional<E> findById(ID id);

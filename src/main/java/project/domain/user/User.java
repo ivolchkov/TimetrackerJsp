@@ -1,37 +1,41 @@
 package project.domain.user;
 
-import project.domain.Entity;
-import project.domain.activity.Activity;
+import project.domain.story.Story;
 
 import java.util.List;
 import java.util.Objects;
 
-public class User extends Entity {
+public class User {
+    private final Integer id;
     private final String name;
     private final String surname;
     private final String email;
     private final String password;
     private final Role role;
-    private final List<Activity> activities;
+    private final List<Story> stories;
 
     private User(UserBuilder builder) {
-        super(builder.id);
+        this.id = builder.id;
         this.name = builder.name;
         this.surname = builder.surname;
         this.email = builder.email;
         this.password = builder.password;
         this.role = builder.role;
-        this.activities = builder.activities;
+        this.stories = builder.stories;
     }
 
     public User(User user, String password) {
-        super(user.getId());
+        this.id = user.id;
         this.name = user.name;
         this.surname = user.surname;
         this.email = user.email;
         this.password = password;
         this.role = user.role;
-        this.activities = user.activities;
+        this.stories = user.stories;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -54,8 +58,8 @@ public class User extends Entity {
         return role;
     }
 
-    public List<Activity> getActivities() {
-        return activities;
+    public List<Story> getStories() {
+        return stories;
     }
 
     @Override
@@ -68,31 +72,30 @@ public class User extends Entity {
             return false;
         }
 
-        if (!super.equals(o)) {
-            return false;
-        }
-
         User user = (User) o;
-        return Objects.equals(name, user.name) &&
+
+        return Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name) &&
                 Objects.equals(surname, user.surname) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
-                role == user.role;
+                role == user.role &&
+                Objects.equals(stories, user.stories);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, surname, email, password, role);
+        return Objects.hash(id, name, surname, email, password, role);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("User № ").append(super.getId()).append(", ").
+        stringBuilder.append("User № ").append(id).append(", ").
                 append("name: ").append(name).append(", ").
                 append("surname: ").append(surname).append(", ").
-                append("email: ").append(email).
+                append("email: ").append(email).append(", ").
                 append("role: ").append(role.getDescription());
 
         return stringBuilder.toString();
@@ -103,17 +106,17 @@ public class User extends Entity {
     }
 
     public static class UserBuilder {
-        private Long id;
+        private Integer id;
         private String name;
         private String surname;
         private String email;
         private String password;
         private Role role;
-        private List<Activity> activities;
+        private List<Story> stories;
 
         private UserBuilder() {}
 
-        public UserBuilder withId(Long id) {
+        public UserBuilder withId(Integer id) {
             this.id = id;
             return this;
         }
@@ -143,8 +146,8 @@ public class User extends Entity {
             return this;
         }
 
-        public UserBuilder withActivities(List<Activity> activities) {
-            this.activities = activities;
+        public UserBuilder withStories(List<Story> stories) {
+            this.stories = stories;
             return this;
         }
 

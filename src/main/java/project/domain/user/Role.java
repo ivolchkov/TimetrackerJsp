@@ -1,7 +1,7 @@
 package project.domain.user;
 
 public enum Role {
-    ADMIN("Admin"), CLIENT("Client");
+    ADMIN("Admin"), DEVELOPER("Developer"), SCRUM_MASTER("Scrum master");
 
     String description;
 
