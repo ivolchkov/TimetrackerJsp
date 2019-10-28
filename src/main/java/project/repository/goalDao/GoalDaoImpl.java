@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class GoalDaoImpl extends AbstractDao<Goal> implements GoalDao {
-    private static final String INSERT_GOAL = "INSERT INTO timetracking.goals(goal_name, goal_id) VALUES(?, ?)";
+    private static final String INSERT_GOAL = "INSERT INTO timetracking.goals(goal_name, backlog_id) VALUES(?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.goals WHERE goal_id = ?";
     private static final String FIND_ALL_GOALS = "SELECT * FROM timetracking.goals";
-    private static final String UPDATE_GOAL = "UPDATE timetracking.goals SET goal_name = ?, goal_id = ? WHERE goal_id = ?";
+    private static final String UPDATE_GOAL = "UPDATE timetracking.goals SET goal_name = ?, backlog_id = ? WHERE goal_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.goals WHERE goal_id = ?";
 
     public GoalDaoImpl(WrapperConnector connector) {

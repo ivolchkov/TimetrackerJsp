@@ -66,6 +66,7 @@ public class SprintDaoImpl extends AbstractDao<Sprint> implements SprintDao {
         preparedStatement.setDate(3, Date.valueOf(sprint.getEnd()));
         preparedStatement.setString(4, sprint.getDescription());
     }
+
     @Override
     protected Optional<Sprint> mapResultSetToEntity(ResultSet sprint) throws SQLException {
         return Optional.of(Sprint.builder().withId(sprint.getInt(1))

@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class BacklogDaoImpl extends AbstractDao<Backlog> implements BacklogDao {
-    private static final String INSERT_BACKLOG = "INSERT INTO timetracking.backlogs(backlog_project_name, sprint_description) VALUES(?, ?)";
-    private static final String FIND_BY_ID = "SELECT * FROM timetracking.sprints WHERE backlog_id = ?";
+    private static final String INSERT_BACKLOG = "INSERT INTO timetracking.backlogs(backlog_project_name, backlog_description) VALUES(?, ?)";
+    private static final String FIND_BY_ID = "SELECT * FROM timetracking.backlogs WHERE backlog_id = ?";
     private static final String FIND_ALL_BACKLOGS = "SELECT * FROM timetracking.backlogs";
     private static final String UPDATE_BACKLOG = "UPDATE timetracking.backlogs SET backlog_project_name = ?, backlog_description = ? WHERE backlog_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.backlogs WHERE backlog_id = ?";

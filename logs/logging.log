@@ -42,3 +42,6 @@ ERROR repository.AbstractDAO: Method:update() Line:73 - Invalid user updating
 ERROR repository.AbstractDAO: Method:update() Line:73 - Invalid user updating
 ERROR repository.AbstractDAO: Method:update() Line:73 - Invalid user updating
 ERROR repository.AbstractDAO: Method:save() Line:29 - Invalid user adding
+ERROR repository.AbstractDao: Method:save() Line:28 - Invalid entity adding
+ERROR repository.AbstractDao: Method:save() Line:28 - Invalid entity adding
+ERROR userDao.UserDaoImpl: Method:findByEmail() Line:60 - Invalid user search

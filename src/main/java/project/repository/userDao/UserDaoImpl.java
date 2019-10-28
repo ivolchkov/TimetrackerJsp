@@ -55,7 +55,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
             ResultSet user = preparedStatement.executeQuery();
 
-            return mapResultSetToEntity(user);
+            return user.next() ? mapResultSetToEntity(user) : Optional.empty();
         } catch (SQLException e) {
             LOGGER.error("Invalid user search");
             throw new DatabaseRuntimeException("Invalid user search", e);
@@ -153,8 +153,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
             return result;
         } catch (SQLException e) {
-            LOGGER.error("Invalid activities search");
-            throw new DatabaseRuntimeException("Invalid activities search", e);
+            LOGGER.error("Invalid stories search");
+            throw new DatabaseRuntimeException("Invalid stories search", e);
         }
     }
 }
