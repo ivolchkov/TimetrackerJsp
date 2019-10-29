@@ -11,11 +11,11 @@ public class Story {
     private final Integer id;
     private final String name;
     private final LocalTime spentTime;
-    private String description;
-    private Status status;
+    private final String description;
+    private final Status status;
     private final Goal goal;
-    private User user;
-    private Sprint sprint;
+    private final User user;
+    private final Sprint sprint;
 
     private Story(StoryBuilder builder) {
         id = builder.id;
@@ -58,26 +58,6 @@ public class Story {
 
     public Sprint getSprint() {
         return sprint;
-    }
-
-    public Story setDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public Story setStatus(Status status) {
-        this.status = status;
-        return this;
-    }
-
-    public Story setUser(User user) {
-        this.user = user;
-        return this;
-    }
-
-    public Story setSprint(Sprint sprint) {
-        this.sprint = sprint;
-        return this;
     }
 
     @Override

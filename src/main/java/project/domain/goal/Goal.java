@@ -12,23 +12,11 @@ public class Goal {
     private Backlog backlog;
     private List<Story> stories;
 
-    public Goal(Integer id) {
-        this.id = id;
-    }
-
-    public Goal(String name, Backlog backlog) {
-        this.name = name;
-        this.backlog = backlog;
-    }
-
-    public Goal(Integer id, String name, Backlog backlog) {
-        this(name, backlog);
-        this.id = id;
-    }
-
-    public Goal(Integer id, String name, Backlog backlog, List<Story> stories) {
-        this(id, name, backlog);
-        this.stories = stories;
+    private Goal(GoalBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.backlog = builder.backlog;
+        this.stories = builder.stories;
     }
 
     public Integer getId() {
@@ -47,10 +35,6 @@ public class Goal {
         return stories;
     }
 
-    public Goal setStories(List<Story> stories) {
-        this.stories = stories;
-        return this;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -78,5 +62,43 @@ public class Goal {
     @Override
     public String toString() {
         return "Goal № " + id + ", name: " + name;
+    }
+
+    public static GoalBuilder builder() {
+        return new GoalBuilder();
+    }
+
+    public static final class GoalBuilder {
+        private Integer id;
+        private String name;
+        private Backlog backlog;
+        private List<Story> stories;
+
+        private GoalBuilder() {
+        }
+
+        public GoalBuilder withId(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public GoalBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public GoalBuilder withBacklog(Backlog backlog) {
+            this.backlog = backlog;
+            return this;
+        }
+
+        public GoalBuilder withStories(List<Story> stories) {
+            this.stories = stories;
+            return this;
+        }
+
+        public Goal build() {
+            return new Goal(this);
+        }
     }
 }

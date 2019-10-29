@@ -46,21 +46,13 @@ public class SprintDaoImpl extends AbstractDao<Sprint> implements SprintDao {
     }
 
     @Override
-    protected int statementMapper(Sprint sprint, PreparedStatement preparedStatement) throws SQLException {
-        ParameterMetaData parameterMetaData = preparedStatement.getParameterMetaData();
-        int parameterCount = parameterMetaData.getParameterCount();
-
-        if (parameterCount == 4) {
-            defaultStatementMap(sprint, preparedStatement);
-        } else if (parameterCount == 5) {
-            defaultStatementMap(sprint, preparedStatement);
-            preparedStatement.setInt(6, sprint.getId());
-        }
-
-        return preparedStatement.executeUpdate();
+    protected void updateStatementMapper(Sprint sprint, PreparedStatement preparedStatement) throws SQLException {
+        createStatementMapper(sprint, preparedStatement);
+        preparedStatement.setInt(5, sprint.getId());
     }
 
-    private void defaultStatementMap(Sprint sprint, PreparedStatement preparedStatement) throws SQLException {
+    @Override
+    protected void createStatementMapper(Sprint sprint, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, sprint.getName());
         preparedStatement.setDate(2, Date.valueOf(sprint.getStart()));
         preparedStatement.setDate(3, Date.valueOf(sprint.getEnd()));

@@ -5,7 +5,6 @@ import project.domain.goal.Goal;
 import project.repository.AbstractDao;
 import project.repository.connector.WrapperConnector;
 
-import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +14,7 @@ import java.util.Optional;
 public class GoalDaoImpl extends AbstractDao<Goal> implements GoalDao {
     private static final String INSERT_GOAL = "INSERT INTO timetracking.goals(goal_name, backlog_id) VALUES(?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.goals WHERE goal_id = ?";
+    private static final String FIND_BY_BACKLOG = "SELECT * FROM timetracking.goals WHERE backlog_id = ?";
     private static final String FIND_ALL_GOALS = "SELECT * FROM timetracking.goals";
     private static final String UPDATE_GOAL = "UPDATE timetracking.goals SET goal_name = ?, backlog_id = ? WHERE goal_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.goals WHERE goal_id = ?";
@@ -49,31 +49,31 @@ public class GoalDaoImpl extends AbstractDao<Goal> implements GoalDao {
     }
 
     @Override
-    protected int statementMapper(Goal goal, PreparedStatement preparedStatement) throws SQLException {
-        ParameterMetaData parameterMetaData = preparedStatement.getParameterMetaData();
-        int parameterCount = parameterMetaData.getParameterCount();
-
-        if (parameterCount == 2) {
-            defaultStatementMap(goal, preparedStatement);
-        } else if (parameterCount == 3) {
-            defaultStatementMap(goal, preparedStatement);
-            preparedStatement.setInt(3, goal.getId());
-        }
-
-        return preparedStatement.executeUpdate();
+    protected void updateStatementMapper(Goal goal, PreparedStatement preparedStatement) throws SQLException {
+        createStatementMapper(goal, preparedStatement);
+        preparedStatement.setInt(3, goal.getId());
     }
 
-    private void defaultStatementMap(Goal goal, PreparedStatement preparedStatement) throws SQLException {
+    @Override
+    protected void createStatementMapper(Goal goal, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, goal.getName());
         preparedStatement.setInt(2, goal.getBacklog().getId());
     }
 
     @Override
     protected Optional<Goal> mapResultSetToEntity(ResultSet goal) throws SQLException {
-        Integer id = goal.getInt(1);
-        String name = goal.getString(2);
-        Backlog backlog = new Backlog(goal.getInt(3));
+        Backlog backlog = Backlog.builder()
+                .withId(goal.getInt(3))
+                .build();
 
-        return Optional.of(new Goal(id, name, backlog));
+        return Optional.of(Goal.builder().withId(goal.getInt(1))
+                .withName(goal.getString(2))
+                .withBacklog(backlog)
+                .build());
+    }
+
+    @Override
+    public List<Goal> findByBacklog(Integer id) {
+        return findEntitiesByForeignKey(id, FIND_BY_BACKLOG);
     }
 }

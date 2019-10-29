@@ -11,8 +11,8 @@ public class Sprint {
     private final String name;
     private final LocalDate start;
     private final LocalDate end;
-    private String description;
-    private List<Story> stories;
+    private final String description;
+    private final List<Story> stories;
 
     private Sprint(SprintBuilder builder) {
         id = builder.id;
@@ -20,6 +20,7 @@ public class Sprint {
         start = builder.start;
         end = builder.end;
         description = builder.description;
+        stories = builder.stories;
     }
 
     public Integer getId() {
@@ -44,16 +45,6 @@ public class Sprint {
 
     public List<Story> getStories() {
         return stories;
-    }
-
-    public Sprint setDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public Sprint setStories(List<Story> stories) {
-        this.stories = stories;
-        return this;
     }
 
     @Override

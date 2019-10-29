@@ -1,5 +1,6 @@
 package project.domain.user;
 
+import project.domain.backlog.Backlog;
 import project.domain.story.Story;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class User {
     private final String email;
     private final String password;
     private final Role role;
+    private final Backlog backlog;
     private final List<Story> stories;
 
     private User(UserBuilder builder) {
@@ -21,6 +23,7 @@ public class User {
         this.email = builder.email;
         this.password = builder.password;
         this.role = builder.role;
+        this.backlog = builder.backlog;
         this.stories = builder.stories;
     }
 
@@ -31,6 +34,7 @@ public class User {
         this.email = user.email;
         this.password = password;
         this.role = user.role;
+        this.backlog = user.backlog;
         this.stories = user.stories;
     }
 
@@ -62,6 +66,10 @@ public class User {
         return stories;
     }
 
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -80,12 +88,13 @@ public class User {
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
                 role == user.role &&
+                Objects.equals(backlog, user.backlog) &&
                 Objects.equals(stories, user.stories);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, email, password, role);
+        return Objects.hash(id, name, surname, email, password, role, backlog, stories);
     }
 
     @Override
@@ -112,6 +121,7 @@ public class User {
         private String email;
         private String password;
         private Role role;
+        private Backlog backlog;
         private List<Story> stories;
 
         private UserBuilder() {}
@@ -143,6 +153,11 @@ public class User {
 
         public UserBuilder withRole(Role role) {
             this.role = role;
+            return this;
+        }
+
+        public UserBuilder withBacklog(Backlog backlog) {
+            this.backlog = backlog;
             return this;
         }
 

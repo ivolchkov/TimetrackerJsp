@@ -21,7 +21,8 @@ public abstract class AbstractDao<E> {
     protected boolean save(E entity, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            int insert = statementMapper(entity, preparedStatement);
+            createStatementMapper(entity, preparedStatement);
+            int insert =  preparedStatement.executeUpdate();
 
             return insert != 0;
         } catch (SQLException e) {
@@ -44,7 +45,7 @@ public abstract class AbstractDao<E> {
         }
     }
 
-    protected List<E> findByString(String data, String query) {
+    protected List<E> findByStringParam(String data, String query) {
         List<E> result = new ArrayList<>();
 
         try (Connection connection = connector.getConnection();
@@ -60,6 +61,26 @@ public abstract class AbstractDao<E> {
         } catch (SQLException e) {
             LOGGER.error("Invalid entity search by string parameter");
             throw new DatabaseRuntimeException("Invalid entity search by string parameter", e);
+        }
+    }
+
+    protected List<E> findEntitiesByForeignKey(Integer id, String query) {
+        List<E> result = new ArrayList<>();
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+
+            ResultSet stories = preparedStatement.executeQuery();
+
+            while (stories.next()) {
+                mapResultSetToEntity(stories).ifPresent(result::add);
+            }
+
+            return result;
+        } catch (SQLException e) {
+            LOGGER.error("Invalid entities search by foreign key");
+            throw new DatabaseRuntimeException("Invalid entities search by foreign key", e);
         }
     }
 
@@ -84,7 +105,8 @@ public abstract class AbstractDao<E> {
     protected void update(E entity, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            statementMapper(entity, preparedStatement);
+            updateStatementMapper(entity, preparedStatement);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Invalid entity updating");
             throw new DatabaseRuntimeException("Invalid entity updating", e);
@@ -103,8 +125,7 @@ public abstract class AbstractDao<E> {
             throw new DatabaseRuntimeException("Invalid entity deleting", e);
         }
     }
-
-    protected abstract int statementMapper(E entity, PreparedStatement preparedStatement) throws SQLException;
-
+    protected abstract void updateStatementMapper(E entity, PreparedStatement preparedStatement) throws SQLException;
+    protected abstract void createStatementMapper(E entity, PreparedStatement preparedStatement) throws SQLException;
     protected abstract Optional<E> mapResultSetToEntity(ResultSet entity) throws SQLException;
 }

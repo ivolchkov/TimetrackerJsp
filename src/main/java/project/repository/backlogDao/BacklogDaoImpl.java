@@ -4,7 +4,6 @@ import project.domain.backlog.Backlog;
 import project.repository.AbstractDao;
 import project.repository.connector.WrapperConnector;
 
-import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,31 +47,23 @@ public class BacklogDaoImpl extends AbstractDao<Backlog> implements BacklogDao {
     }
 
     @Override
-    protected int statementMapper(Backlog backlog, PreparedStatement preparedStatement) throws SQLException {
-        ParameterMetaData parameterMetaData = preparedStatement.getParameterMetaData();
-        int parameterCount = parameterMetaData.getParameterCount();
-
-        if (parameterCount == 2) {
-            defaultStatementMap(backlog, preparedStatement);
-        } else if (parameterCount == 3) {
-            defaultStatementMap(backlog, preparedStatement);
-            preparedStatement.setInt(3, backlog.getId());
-        }
-
-        return preparedStatement.executeUpdate();
+    protected void updateStatementMapper(Backlog backlog, PreparedStatement preparedStatement) throws SQLException {
+        createStatementMapper(backlog, preparedStatement);
+        preparedStatement.setInt(3, backlog.getId());
     }
 
-    private void defaultStatementMap(Backlog backlog, PreparedStatement preparedStatement) throws SQLException {
+    @Override
+    protected void createStatementMapper(Backlog backlog, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, backlog.getProjectName());
         preparedStatement.setString(2, backlog.getDescription());
     }
 
     @Override
     protected Optional<Backlog> mapResultSetToEntity(ResultSet backlog) throws SQLException {
-        Integer id = backlog.getInt(1);
-        String projectName = backlog.getString(2);
-        String description = backlog.getString(3);
-
-        return Optional.of(new Backlog(id, projectName, description));
+        return Optional.of(Backlog.builder()
+                .withId(backlog.getInt(1))
+                .withProjectName(backlog.getString(2))
+                .withDescription(backlog.getString(3))
+                .build());
     }
 }
