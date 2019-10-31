@@ -1,40 +1,37 @@
 package project.domain.goal;
 
 import project.domain.backlog.Backlog;
-import project.domain.story.Story;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Goal {
-    private Integer id;
-    private String name;
-    private Backlog backlog;
-    private List<Story> stories;
+    private final Integer id;
+    private final String name;
+    private final Backlog backlog;
 
-    private Goal(GoalBuilder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.backlog = builder.backlog;
-        this.stories = builder.stories;
+    public Goal(Integer id) {
+        this.id = id;
+        this.name = null;
+        this.backlog = null;
+    }
+
+    public Goal(Integer id, String name, Backlog backlog) {
+        this.id = id;
+        this.name = name;
+        this.backlog = backlog;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public Backlog getBacklog() {
         return backlog;
     }
 
-    public List<Story> getStories() {
-        return stories;
+    public String getName() {
+        return name;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -50,13 +47,12 @@ public class Goal {
 
         return Objects.equals(id, goal.id) &&
                 Objects.equals(name, goal.name) &&
-                Objects.equals(backlog, goal.backlog) &&
-                Objects.equals(stories, goal.stories);
+                Objects.equals(backlog, goal.backlog);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, backlog, stories);
+        return Objects.hash(id, name, backlog);
     }
 
     @Override
@@ -64,41 +60,4 @@ public class Goal {
         return "Goal № " + id + ", name: " + name;
     }
 
-    public static GoalBuilder builder() {
-        return new GoalBuilder();
-    }
-
-    public static final class GoalBuilder {
-        private Integer id;
-        private String name;
-        private Backlog backlog;
-        private List<Story> stories;
-
-        private GoalBuilder() {
-        }
-
-        public GoalBuilder withId(Integer id) {
-            this.id = id;
-            return this;
-        }
-
-        public GoalBuilder withName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public GoalBuilder withBacklog(Backlog backlog) {
-            this.backlog = backlog;
-            return this;
-        }
-
-        public GoalBuilder withStories(List<Story> stories) {
-            this.stories = stories;
-            return this;
-        }
-
-        public Goal build() {
-            return new Goal(this);
-        }
-    }
 }

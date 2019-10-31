@@ -1,18 +1,23 @@
 package project.repository.storyDao;
 
-import project.domain.story.Status;
-import project.domain.story.Story;
+import project.entity.story.Status;
+import project.entity.story.StoryEntity;
 import project.repository.CrudRepository;
 
 import java.util.List;
 
-public interface StoryDao extends CrudRepository<Integer, Story> {
-    List<Story> findByNamePattern(String pattern);
-    List<Story> findByStatus(Status status);
-    List<Story> findByGoal(Integer id);
-    List<Story> findByUser(Integer id);
-    List<Story> findBySprint(Integer id);
+public interface StoryDao extends CrudRepository<Integer, StoryEntity> {
+    List<StoryEntity> findByNamePattern(String pattern);
 
-    void updateUserId(Story story);
-    void updateSprintId(Story story);
+    List<StoryEntity> findByStatus(Status status);
+
+    List<StoryEntity> findByGoal(Integer id);
+
+    List<StoryEntity> findByUser(Integer id);
+
+    List<StoryEntity> findBySprint(Integer id);
+
+    void updateUserId(StoryEntity story);
+
+    void updateSprintId(StoryEntity story);
 }

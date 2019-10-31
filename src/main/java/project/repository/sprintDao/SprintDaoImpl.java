@@ -1,6 +1,6 @@
 package project.repository.sprintDao;
 
-import project.domain.sprint.Sprint;
+import project.entity.sprint.SprintEntity;
 import project.repository.AbstractDao;
 import project.repository.connector.WrapperConnector;
 
@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
-public class SprintDaoImpl extends AbstractDao<Sprint> implements SprintDao {
+public class SprintDaoImpl extends AbstractDao<SprintEntity> implements SprintDao {
     private static final String INSERT_SPRINT = "INSERT INTO timetracking.sprints(sprint_name, sprint_start, sprint_end, sprint_description) VALUES(?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.sprints WHERE sprint_id = ?";
     private static final String FIND_ALL_SPRINTS = "SELECT * FROM timetracking.sprints";
@@ -21,22 +21,22 @@ public class SprintDaoImpl extends AbstractDao<Sprint> implements SprintDao {
     }
 
     @Override
-    public boolean save(Sprint entity) {
+    public boolean save(SprintEntity entity) {
         return save(entity, INSERT_SPRINT);
     }
 
     @Override
-    public Optional<Sprint> findById(Integer id) {
+    public Optional<SprintEntity> findById(Integer id) {
         return findById(id, FIND_BY_ID);
     }
 
     @Override
-    public List<Sprint> findAll() {
+    public List<SprintEntity> findAll() {
         return findAll(FIND_ALL_SPRINTS);
     }
 
     @Override
-    public void update(Sprint entity) {
+    public void update(SprintEntity entity) {
         update(entity, UPDATE_SPRINT);
     }
 
@@ -46,13 +46,13 @@ public class SprintDaoImpl extends AbstractDao<Sprint> implements SprintDao {
     }
 
     @Override
-    protected void updateStatementMapper(Sprint sprint, PreparedStatement preparedStatement) throws SQLException {
+    protected void updateStatementMapper(SprintEntity sprint, PreparedStatement preparedStatement) throws SQLException {
         createStatementMapper(sprint, preparedStatement);
         preparedStatement.setInt(5, sprint.getId());
     }
 
     @Override
-    protected void createStatementMapper(Sprint sprint, PreparedStatement preparedStatement) throws SQLException {
+    protected void createStatementMapper(SprintEntity sprint, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, sprint.getName());
         preparedStatement.setDate(2, Date.valueOf(sprint.getStart()));
         preparedStatement.setDate(3, Date.valueOf(sprint.getEnd()));
@@ -60,8 +60,8 @@ public class SprintDaoImpl extends AbstractDao<Sprint> implements SprintDao {
     }
 
     @Override
-    protected Optional<Sprint> mapResultSetToEntity(ResultSet sprint) throws SQLException {
-        return Optional.of(Sprint.builder().withId(sprint.getInt(1))
+    protected Optional<SprintEntity> mapResultSetToEntity(ResultSet sprint) throws SQLException {
+        return Optional.of(SprintEntity.builder().withId(sprint.getInt(1))
                 .withName(sprint.getString(2))
                 .withStart(sprint.getDate(3).toLocalDate())
                 .withEnd(sprint.getDate(4).toLocalDate())

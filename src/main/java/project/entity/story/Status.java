@@ -1,4 +1,4 @@
-package project.domain.story;
+package project.entity.story;
 
 public enum Status {
     TO_DO("To do"), IN_PROCESS("In Process"), DONE("Done");

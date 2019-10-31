@@ -1,9 +1,7 @@
 package project.domain.sprint;
 
-import project.domain.story.Story;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 public class Sprint {
@@ -12,7 +10,6 @@ public class Sprint {
     private final LocalDate start;
     private final LocalDate end;
     private final String description;
-    private final List<Story> stories;
 
     private Sprint(SprintBuilder builder) {
         id = builder.id;
@@ -20,7 +17,6 @@ public class Sprint {
         start = builder.start;
         end = builder.end;
         description = builder.description;
-        stories = builder.stories;
     }
 
     public Integer getId() {
@@ -43,10 +39,6 @@ public class Sprint {
         return description;
     }
 
-    public List<Story> getStories() {
-        return stories;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -62,13 +54,12 @@ public class Sprint {
                 Objects.equals(name, sprint.name) &&
                 Objects.equals(start, sprint.start) &&
                 Objects.equals(end, sprint.end) &&
-                Objects.equals(description, sprint.description) &&
-                Objects.equals(stories, sprint.stories);
+                Objects.equals(description, sprint.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, start, end, description, stories);
+        return Objects.hash(id, name, start, end, description);
     }
 
     @Override
@@ -95,7 +86,6 @@ public class Sprint {
         private LocalDate start;
         private LocalDate end;
         private String description;
-        private List<Story> stories;
 
         private SprintBuilder() {
         }
@@ -122,11 +112,6 @@ public class Sprint {
 
         public SprintBuilder withDescription(String description) {
             this.description = description;
-            return this;
-        }
-
-        public SprintBuilder withStories(List<Story> stories) {
-            this.stories = stories;
             return this;
         }
 

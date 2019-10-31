@@ -1,11 +1,11 @@
 package project.repository.storyDao;
 
 import org.apache.log4j.Logger;
-import project.domain.goal.Goal;
-import project.domain.sprint.Sprint;
-import project.domain.story.Status;
-import project.domain.story.Story;
-import project.domain.user.User;
+import project.entity.goal.GoalEntity;
+import project.entity.sprint.SprintEntity;
+import project.entity.story.Status;
+import project.entity.story.StoryEntity;
+import project.entity.user.UserEntity;
 import project.exception.DatabaseRuntimeException;
 import project.repository.AbstractDao;
 import project.repository.connector.WrapperConnector;
@@ -14,7 +14,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
-public class StoryDaoImpl extends AbstractDao<Story> implements StoryDao {
+public class StoryDaoImpl extends AbstractDao<StoryEntity> implements StoryDao {
     private static final Logger LOGGER = Logger.getLogger(StoryDaoImpl.class);
 
     private static final String INSERT_STORY = "INSERT INTO timetracking.stories(story_name, story_spent_time, story_description, story_status, goal_id) VALUES(?, ?, ?, ?, ?)";
@@ -34,61 +34,61 @@ public class StoryDaoImpl extends AbstractDao<Story> implements StoryDao {
     }
 
     @Override
-    public boolean save(Story story) {
+    public boolean save(StoryEntity story) {
         return save(story, INSERT_STORY);
     }
 
     @Override
-    public List<Story> findByNamePattern(String pattern) {
+    public List<StoryEntity> findByNamePattern(String pattern) {
         String queryPattern = "%" + pattern + "%";
 
         return findByStringParam(queryPattern, FIND_BY_NAME);
     }
 
     @Override
-    public List<Story> findByStatus(Status status) {
+    public List<StoryEntity> findByStatus(Status status) {
         String queryPattern = status.getDescription();
 
         return findByStringParam(queryPattern, FIND_BY_STATUS);
     }
 
     @Override
-    public List<Story> findByGoal(Integer id) {
+    public List<StoryEntity> findByGoal(Integer id) {
         return findEntitiesByForeignKey(id, FIND_BY_GOAL);
     }
 
     @Override
-    public List<Story> findByUser(Integer id) {
+    public List<StoryEntity> findByUser(Integer id) {
         return findEntitiesByForeignKey(id, FIND_BY_USER);
     }
 
     @Override
-    public List<Story> findBySprint(Integer id) {
+    public List<StoryEntity> findBySprint(Integer id) {
         return findEntitiesByForeignKey(id, FIND_BY_SPRINT);
     }
 
     @Override
-    public Optional<Story> findById(Integer id) {
+    public Optional<StoryEntity> findById(Integer id) {
         return findById(id, FIND_BY_ID);
     }
 
     @Override
-    public List<Story> findAll() {
+    public List<StoryEntity> findAll() {
         return findAll(FIND_ALL_STORIES);
     }
 
     @Override
-    public void update(Story story) {
+    public void update(StoryEntity story) {
         update(story, UPDATE_STORY);
     }
 
     @Override
-    public void updateUserId(Story story) {
+    public void updateUserId(StoryEntity story) {
         updateForeignKeyId(story.getUser().getId(), story.getId());
     }
 
     @Override
-    public void updateSprintId(Story story) {
+    public void updateSprintId(StoryEntity story) {
         updateForeignKeyId(story.getSprint().getId(), story.getId());
     }
 
@@ -98,20 +98,20 @@ public class StoryDaoImpl extends AbstractDao<Story> implements StoryDao {
     }
 
     @Override
-    protected Optional<Story> mapResultSetToEntity(ResultSet story) throws SQLException {
-        Goal goal = Goal.builder()
+    protected Optional<StoryEntity> mapResultSetToEntity(ResultSet story) throws SQLException {
+        GoalEntity goal = GoalEntity.builder()
                 .withId(story.getInt(6))
                 .build();
-        User user = User.builder()
+        UserEntity user = UserEntity.builder()
                 .withId(story.getInt(7))
                 .build();
-        Sprint sprint = Sprint.builder()
+        SprintEntity sprint = SprintEntity.builder()
                 .withId(story.getInt(8))
                 .build();
         String sts = story.getString(5);
         Status status = sts.equals("To do") ? Status.TO_DO : (sts.equals("In process") ? Status.IN_PROCESS : Status.DONE);
 
-        return Optional.of(Story.builder().withId(story.getInt(1))
+        return Optional.of(StoryEntity.builder().withId(story.getInt(1))
                 .withName(story.getString(2))
                 .withSpentTime(story.getTime(3).toLocalTime())
                 .withDescription(story.getString(4))
@@ -123,7 +123,7 @@ public class StoryDaoImpl extends AbstractDao<Story> implements StoryDao {
     }
 
     @Override
-    protected void updateStatementMapper(Story story, PreparedStatement preparedStatement) throws SQLException {
+    protected void updateStatementMapper(StoryEntity story, PreparedStatement preparedStatement) throws SQLException {
         createStatementMapper(story, preparedStatement);
         preparedStatement.setInt(6, story.getUser().getId());
         preparedStatement.setInt(7, story.getSprint().getId());
@@ -131,7 +131,7 @@ public class StoryDaoImpl extends AbstractDao<Story> implements StoryDao {
     }
 
     @Override
-    protected void createStatementMapper(Story story, PreparedStatement preparedStatement) throws SQLException {
+    protected void createStatementMapper(StoryEntity story, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, story.getName());
         preparedStatement.setTime(2, Time.valueOf(story.getSpentTime()));
         preparedStatement.setString(3, story.getDescription());
@@ -147,7 +147,7 @@ public class StoryDaoImpl extends AbstractDao<Story> implements StoryDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Invalid entity updating");
+            LOGGER.error("Invalid entity updating" + e.getMessage());
             throw new DatabaseRuntimeException("Invalid entity updating", e);
         }
     }

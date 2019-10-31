@@ -7,6 +7,7 @@ public interface CrudRepository<ID, E> {
     boolean save(E entity);
 
     Optional<E> findById(ID id);
+
     List<E> findAll();
 
     void update(E entity);

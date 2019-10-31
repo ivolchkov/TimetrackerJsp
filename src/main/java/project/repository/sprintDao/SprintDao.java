@@ -1,8 +1,8 @@
 package project.repository.sprintDao;
 
-import project.domain.sprint.Sprint;
+import project.entity.sprint.SprintEntity;
 import project.repository.CrudRepository;
 
-public interface SprintDao extends CrudRepository<Integer, Sprint> {
+public interface SprintDao extends CrudRepository<Integer, SprintEntity> {
 
 }

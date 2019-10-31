@@ -46,3 +46,31 @@ ERROR repository.AbstractDao: Method:save() Line:28 - Invalid entity adding
 ERROR repository.AbstractDao: Method:save() Line:28 - Invalid entity adding
 ERROR userDao.UserDaoImpl: Method:findByEmail() Line:60 - Invalid user search
 WARN  validator.UserValidator: Method:validatePassword() Line:37 - Incorrect password
+WARN  user.UserServiceImpl: Method:register() Line:32 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:56 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:50 - There is no user with this e-mail
+WARN  user.UserServiceImpl: Method:register() Line:32 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:56 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:50 - There is no user with this e-mail
+WARN  validator.UserValidator: Method:validateEmail() Line:46 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validatePassword() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateSurname() Line:64 - Incorrect surname
+WARN  validator.UserValidator: Method:validateName() Line:55 - Incorrect name
+WARN  validator.UserValidator: Method:validateEmail() Line:46 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validatePassword() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateSurname() Line:64 - Incorrect surname
+WARN  validator.UserValidator: Method:validateName() Line:55 - Incorrect name
+WARN  user.UserServiceImpl: Method:register() Line:39 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:63 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:57 - There is no user with this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:63 - Incorrect password
+WARN  validator.UserValidator: Method:validateEmail() Line:46 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validatePassword() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateSurname() Line:64 - Incorrect surname
+WARN  validator.UserValidator: Method:validateName() Line:55 - Incorrect name
+WARN  user.UserServiceImpl: Method:register() Line:43 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:67 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:61 - There is no user with this e-mail

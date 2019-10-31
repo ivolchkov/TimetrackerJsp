@@ -1,9 +1,6 @@
 package project.domain.user;
 
-import project.domain.backlog.Backlog;
-import project.domain.story.Story;
-
-import java.util.List;
+import project.entity.user.Role;
 import java.util.Objects;
 
 public class User {
@@ -13,8 +10,6 @@ public class User {
     private final String email;
     private final String password;
     private final Role role;
-    private final Backlog backlog;
-    private final List<Story> stories;
 
     private User(UserBuilder builder) {
         this.id = builder.id;
@@ -23,8 +18,6 @@ public class User {
         this.email = builder.email;
         this.password = builder.password;
         this.role = builder.role;
-        this.backlog = builder.backlog;
-        this.stories = builder.stories;
     }
 
     public User(User user, String password) {
@@ -34,8 +27,6 @@ public class User {
         this.email = user.email;
         this.password = password;
         this.role = user.role;
-        this.backlog = user.backlog;
-        this.stories = user.stories;
     }
 
     public Integer getId() {
@@ -62,13 +53,6 @@ public class User {
         return role;
     }
 
-    public List<Story> getStories() {
-        return stories;
-    }
-
-    public Backlog getBacklog() {
-        return backlog;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -87,14 +71,12 @@ public class User {
                 Objects.equals(surname, user.surname) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
-                role == user.role &&
-                Objects.equals(backlog, user.backlog) &&
-                Objects.equals(stories, user.stories);
+                role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, email, password, role, backlog, stories);
+        return Objects.hash(id, name, surname, email, password, role);
     }
 
     @Override
@@ -121,8 +103,6 @@ public class User {
         private String email;
         private String password;
         private Role role;
-        private Backlog backlog;
-        private List<Story> stories;
 
         private UserBuilder() {}
 
@@ -153,16 +133,6 @@ public class User {
 
         public UserBuilder withRole(Role role) {
             this.role = role;
-            return this;
-        }
-
-        public UserBuilder withBacklog(Backlog backlog) {
-            this.backlog = backlog;
-            return this;
-        }
-
-        public UserBuilder withStories(List<Story> stories) {
-            this.stories = stories;
             return this;
         }
 

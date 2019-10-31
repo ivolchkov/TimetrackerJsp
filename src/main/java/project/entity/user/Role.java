@@ -1,4 +1,4 @@
-package project.domain.user;
+package project.entity.user;
 
 public enum Role {
     ADMIN("Admin"), DEVELOPER("Developer"), SCRUM_MASTER("Scrum master");

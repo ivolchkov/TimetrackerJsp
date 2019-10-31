@@ -25,7 +25,7 @@ public final class WrapperConnector {
         try {
             return DriverManager.getConnection(url, user, pass);
         } catch (SQLException e) {
-            LOGGER.error("Could not get connection from database", e);
+            LOGGER.error("Could not get connection from database" + e.getMessage());
             throw new InvalidDatabaseConnectionException("Could not get connection from database");
         }
     }

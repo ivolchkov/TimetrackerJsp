@@ -1,11 +1,10 @@
 package project.domain.story;
 
-import project.domain.goal.Goal;
-import project.domain.sprint.Sprint;
-import project.domain.user.User;
-
 import java.time.LocalTime;
 import java.util.Objects;
+
+import project.domain.goal.Goal;
+import project.entity.story.Status;
 
 public class Story {
     private final Integer id;
@@ -14,8 +13,6 @@ public class Story {
     private final String description;
     private final Status status;
     private final Goal goal;
-    private final User user;
-    private final Sprint sprint;
 
     private Story(StoryBuilder builder) {
         id = builder.id;
@@ -24,8 +21,6 @@ public class Story {
         description = builder.description;
         status = builder.status;
         goal = builder.goal;
-        user = builder.user;
-        sprint = builder.sprint;
     }
 
     public Integer getId() {
@@ -52,14 +47,6 @@ public class Story {
         return goal;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public Sprint getSprint() {
-        return sprint;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -77,14 +64,12 @@ public class Story {
                 Objects.equals(spentTime, story.spentTime) &&
                 Objects.equals(description, story.description) &&
                 status == story.status &&
-                Objects.equals(goal, story.goal) &&
-                Objects.equals(user, story.user) &&
-                Objects.equals(sprint, story.sprint);
+                Objects.equals(goal, story.goal);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, spentTime, description, status, goal, user, sprint);
+        return Objects.hash(id, name, spentTime, description, status, goal);
     }
 
     @Override
@@ -111,8 +96,6 @@ public class Story {
         private String description;
         private Status status;
         private Goal goal;
-        private User user;
-        private Sprint sprint;
 
         private StoryBuilder() {
         }
@@ -144,16 +127,6 @@ public class Story {
 
         public StoryBuilder withGoal(Goal goal) {
             this.goal = goal;
-            return this;
-        }
-
-        public StoryBuilder withUser(User user) {
-            this.user = user;
-            return this;
-        }
-
-        public StoryBuilder withSprint(Sprint sprint) {
-            this.sprint = sprint;
             return this;
         }
 

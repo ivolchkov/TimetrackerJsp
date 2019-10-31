@@ -26,7 +26,7 @@ public abstract class AbstractDao<E> {
 
             return insert != 0;
         } catch (SQLException e) {
-            LOGGER.error("Invalid entity adding");
+            LOGGER.error("Invalid entity adding" + e.getMessage());
             throw new DatabaseRuntimeException("Invalid entity adding", e);
         }
     }
@@ -40,7 +40,7 @@ public abstract class AbstractDao<E> {
 
             return entity.next() ? mapResultSetToEntity(entity) : Optional.empty();
         } catch (SQLException e) {
-            LOGGER.error("Invalid entity search");
+            LOGGER.error("Invalid entity search" + e.getMessage());
             throw new DatabaseRuntimeException("Invalid entity search", e);
         }
     }
@@ -59,7 +59,7 @@ public abstract class AbstractDao<E> {
 
             return result;
         } catch (SQLException e) {
-            LOGGER.error("Invalid entity search by string parameter");
+            LOGGER.error("Invalid entity search by string parameter" + e.getMessage());
             throw new DatabaseRuntimeException("Invalid entity search by string parameter", e);
         }
     }
@@ -79,7 +79,7 @@ public abstract class AbstractDao<E> {
 
             return result;
         } catch (SQLException e) {
-            LOGGER.error("Invalid entities search by foreign key");
+            LOGGER.error("Invalid entities search by foreign key" + e.getMessage());
             throw new DatabaseRuntimeException("Invalid entities search by foreign key", e);
         }
     }
@@ -97,7 +97,7 @@ public abstract class AbstractDao<E> {
 
             return result;
         } catch (SQLException e) {
-            LOGGER.error("Invalid entities search");
+            LOGGER.error("Invalid entities search" + e.getMessage());
             throw new DatabaseRuntimeException("Invalid entities search", e);
         }
     }
@@ -108,7 +108,7 @@ public abstract class AbstractDao<E> {
             updateStatementMapper(entity, preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Invalid entity updating");
+            LOGGER.error("Invalid entity updating" + e.getMessage());
             throw new DatabaseRuntimeException("Invalid entity updating", e);
         }
     }
@@ -121,7 +121,7 @@ public abstract class AbstractDao<E> {
             int delete = preparedStatement.executeUpdate();
             return delete != 0;
         } catch (SQLException e) {
-            LOGGER.error("Invalid entity deleting");
+            LOGGER.error("Invalid entity deleting" + e.getMessage());
             throw new DatabaseRuntimeException("Invalid entity deleting", e);
         }
     }
