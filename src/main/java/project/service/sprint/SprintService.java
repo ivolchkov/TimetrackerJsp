@@ -5,7 +5,7 @@ import project.domain.sprint.Sprint;
 import java.util.List;
 
 public interface SprintService {
-    boolean createBacklog(Sprint sprint);
+    boolean createSprint(Sprint sprint);
 
-    List<Sprint> showAllBacklogs();
+    List<Sprint> showAllSprints();
 }

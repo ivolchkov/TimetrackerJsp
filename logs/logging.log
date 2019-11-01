@@ -74,3 +74,44 @@ WARN  validator.UserValidator: Method:validateName() Line:55 - Incorrect name
 WARN  user.UserServiceImpl: Method:register() Line:43 - User is already registered by this e-mail
 WARN  user.UserServiceImpl: Method:login() Line:67 - Incorrect password
 WARN  user.UserServiceImpl: Method:login() Line:61 - There is no user with this e-mail
+WARN  user.UserServiceImpl: Method:register() Line:43 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:67 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:61 - There is no user with this e-mail
+WARN  user.UserServiceImpl: Method:register() Line:43 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:67 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:61 - There is no user with this e-mail
+WARN  backlog.BacklogServiceImpl: Method:createBacklog() Line:29 - Backlog is not valid
+WARN  backlog.BacklogServiceImpl: Method:createBacklog() Line:29 - Backlog is not valid
+WARN  goal.GoalServiceImpl: Method:createGoal() Line:29 - Goal is not valid
+WARN  sprint.SprintServiceImpl: Method:createSprint() Line:29 - Sprint is not valid
+WARN  story.StoryServiceImpl: Method:createStory() Line:31 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:createStory() Line:31 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:createStory() Line:31 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:97 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:31 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:97 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:97 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:31 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:97 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:97 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:31 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:97 - Invalid story updating

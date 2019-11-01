@@ -24,7 +24,7 @@ public class SprintServiceImpl implements SprintService {
     }
 
     @Override
-    public boolean createBacklog(Sprint sprint) {
+    public boolean createSprint(Sprint sprint) {
         if (Objects.isNull(sprint) ) {
             LOGGER.warn("Sprint is not valid");
             throw new InvalidEntityCreation("Sprint is not valid");
@@ -34,7 +34,7 @@ public class SprintServiceImpl implements SprintService {
     }
 
     @Override
-    public List<Sprint> showAllBacklogs() {
+    public List<Sprint> showAllSprints() {
         List<SprintEntity> result = sprintDao.findAll();
 
         return result.isEmpty() ? Collections.emptyList()
