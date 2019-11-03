@@ -3,30 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
-<fmt:setLocale value="${param.lang}"/>
-<fmt:setBundle basename="text"/>
+<fmt:setLocale value="${param.lang}" scope="session"/>
+<fmt:setBundle basename="text" scope="session"/>
 
-<%--<html lang="${param.lang}">--%>
-<%--<head>--%>
-<%--    <title>PhraseApp - i18n</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<p>--%>
-<%--    <fmt:message key="main.home.header" />--%>
-<%--</p>--%>
-<%--<ul>--%>
-<%--&lt;%&ndash;    <li><a href="?lang=en">English</a></li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;    <li><a href="?lang=ru">Russian</a></li>&ndash;%&gt;--%>
-<%--    <form>--%>
-<%--        <select id="lang" name="lang" onchange="submit()">--%>
-<%--            <option value="en" ${param.lang == 'en' ? 'selected' : ''}>English</option>--%>
-<%--            <option value="ru" ${param.lang == 'ru' ? 'selected' : ''}>Russian</option>--%>
-<%--        </select>--%>
-<%--    </form>--%>
-<%--</ul>--%>
-<%--</body>--%>
-<%--</html>--%>
-<%--${param.lang}--%>
 <!DOCTYPE html>
 <html lang="${param.lang}">
 <head>

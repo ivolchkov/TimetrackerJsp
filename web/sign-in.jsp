@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: ivolchkov
@@ -46,12 +47,12 @@
 <form class="form-signin" name = "loginForm" method="POST" action="user" >
     <input type="hidden" name="command" value="signIn" />
     <img class="mb-4" src="img/t-letter.png" alt="" width="100" height="100">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email" value="">
+    <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="signIn.introduce"/></h1>
+    <label for="inputEmail" class="sr-only">Email</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder=<fmt:message key="signIn.email"/> required autofocus name="email" value="">
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password" value="">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <input type="password" id="inputPassword" class="form-control" placeholder= <fmt:message key="signIn.password"/> required name="password" value="">
+    <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="signIn.login"/></button>
     <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
 </form>
 </body>
