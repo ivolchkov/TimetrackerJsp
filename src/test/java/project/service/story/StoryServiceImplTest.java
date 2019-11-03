@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.goal.Goal;
 import project.domain.story.Story;
 import project.entity.story.Status;
 import project.entity.story.StoryEntity;
@@ -29,9 +28,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StoryServiceImplTest {
-    private static Story story;
-    private static List<StoryEntity> entities;
-    private static List<Story> stories;
+    private static final Story story = Story.builder().withId(1).build();
+    private static final List<StoryEntity> entities = Arrays.asList(
+            StoryEntity.builder().withId(1).build(),
+            StoryEntity.builder().withId(2).build());
+    private static final List<Story> stories = Arrays.asList(story, story);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -44,15 +45,6 @@ public class StoryServiceImplTest {
 
     @InjectMocks
     private StoryServiceImpl service;
-
-    @BeforeClass
-    public static void init() {
-        story = Story.builder().withId(1).build();
-
-        entities = Arrays.asList(StoryEntity.builder().withId(1).build(),
-                StoryEntity.builder().withId(2).build());
-        stories = Arrays.asList(story,story);
-    }
 
     @After
     public void resetMock() {

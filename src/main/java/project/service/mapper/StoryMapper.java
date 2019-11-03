@@ -24,6 +24,7 @@ public class StoryMapper {
 
     public StoryEntity mapStoryToStoryEntity(Story domain, User user) {
         return StoryEntity.builder()
+                .withId(domain.getId())
                 .withName(domain.getName())
                 .withSpentTime(domain.getSpentTime())
                 .withDescription(domain.getDescription())
@@ -39,6 +40,7 @@ public class StoryMapper {
 
     public StoryEntity mapStoryToStoryEntity(Story domain, Sprint sprint) {
         return StoryEntity.builder()
+                .withId(domain.getId())
                 .withName(domain.getName())
                 .withSpentTime(domain.getSpentTime())
                 .withDescription(domain.getDescription())

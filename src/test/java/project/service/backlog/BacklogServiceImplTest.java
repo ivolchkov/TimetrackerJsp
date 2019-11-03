@@ -22,9 +22,11 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BacklogServiceImplTest {
-    private static Backlog backlog;
-    private static List<BacklogEntity> entities;
-    private static List<Backlog> backlogs;
+    private static final Backlog backlog = new Backlog(1, "Test", "Test");
+    private static final List<BacklogEntity> entities = Arrays.asList(
+            BacklogEntity.builder().withId(1).build(),
+            BacklogEntity.builder().withId(2).build());
+    private static final List<Backlog> backlogs = Arrays.asList(backlog, backlog);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -37,15 +39,6 @@ public class BacklogServiceImplTest {
 
     @InjectMocks
     private BacklogServiceImpl service;
-
-    @BeforeClass
-    public static void init() {
-        backlog = new Backlog(1, "Test", "Test");
-
-        entities = Arrays.asList(BacklogEntity.builder().withId(1).build(),
-                BacklogEntity.builder().withId(2).build());
-        backlogs = Arrays.asList(backlog,backlog);
-    }
 
     @After
     public void resetMock() {

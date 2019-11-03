@@ -13,6 +13,7 @@ import project.repository.userDao.UserDao;
 import project.service.encoder.PasswordEncoder;
 import project.service.mapper.UserMapper;
 import project.service.validator.UserValidator;
+import project.service.validator.Validator;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,9 +27,9 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final PasswordEncoder encoder;
     private final UserMapper mapper;
-    private final UserValidator validator;
+    private final Validator<User> validator;
 
-    public UserServiceImpl(UserDao userDao, PasswordEncoder encoder, UserMapper mapper, UserValidator validator) {
+    public UserServiceImpl(UserDao userDao, PasswordEncoder encoder, UserMapper mapper, Validator<User> validator) {
         this.userDao = userDao;
         this.encoder = encoder;
         this.mapper = mapper;
@@ -53,15 +54,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String email, String password) {
-        String encodedPassword = encoder.encode(password).
-                orElseThrow(() -> new InvalidEncodingException("Encode process exception"));
+//        String encodedPassword = encoder.encode(password).
+//                orElseThrow(() -> new InvalidEncodingException("Encode process exception"));
         Optional<UserEntity> entity = userDao.findByEmail(email);
 
         if (!entity.isPresent()) {
             LOGGER.warn("There is no user with this e-mail");
             throw new UserNotFoundException("There is no user with this e-mail");
         } else {
-            if (entity.get().getPassword().equals(encodedPassword)) {
+            //encodedPassword
+            if (entity.get().getPassword().equals(password)) {
                 return mapper.mapUserEntityToUser(entity.get());
             } else {
                 LOGGER.warn("Incorrect password");

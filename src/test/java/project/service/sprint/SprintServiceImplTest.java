@@ -1,7 +1,6 @@
 package project.service.sprint;
 
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -26,9 +25,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SprintServiceImplTest {
-    private static Sprint sprint;
-    private static List<SprintEntity> entities;
-    private static List<Sprint> sprints;
+    private static final Sprint sprint = Sprint.builder().withId(1).build();
+    private static final List<SprintEntity> entities = Arrays.asList(
+            SprintEntity.builder().withId(1).build(),
+            SprintEntity.builder().withId(2).build());
+    private static final List<Sprint> sprints = Arrays.asList(sprint,sprint);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -41,15 +42,6 @@ public class SprintServiceImplTest {
 
     @InjectMocks
     private SprintServiceImpl service;
-
-    @BeforeClass
-    public static void init() {
-        sprint = Sprint.builder().withId(1).build();
-
-        entities = Arrays.asList(SprintEntity.builder().withId(1).build(),
-                SprintEntity.builder().withId(2).build());
-        sprints = Arrays.asList(sprint,sprint);
-    }
 
     @After
     public void resetMock() {

@@ -1,7 +1,6 @@
 package project.service.mapper;
 
 import project.domain.backlog.Backlog;
-import project.domain.goal.Goal;
 import project.domain.user.User;
 import project.entity.backlog.BacklogEntity;
 import project.entity.user.UserEntity;
@@ -19,6 +18,7 @@ public class UserMapper {
 
     public UserEntity mapUserToUserEntity(User domain, Backlog backlog) {
         return UserEntity.builder()
+                .withId(domain.getId())
                 .withName(domain.getName())
                 .withSurname(domain.getSurname())
                 .withEmail(domain.getEmail())

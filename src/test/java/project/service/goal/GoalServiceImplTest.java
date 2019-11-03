@@ -26,9 +26,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GoalServiceImplTest {
-    private static Goal goal;
-    private static List<GoalEntity> entities;
-    private static List<Goal> goals;
+    private static final Goal goal = new Goal(1);
+    private static final List<GoalEntity> entities = Arrays.asList(
+            GoalEntity.builder().withId(1).build(),
+            GoalEntity.builder().withId(2).build());
+    private static final List<Goal> goals = Arrays.asList(goal, goal);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -41,15 +43,6 @@ public class GoalServiceImplTest {
 
     @InjectMocks
     private GoalServiceImpl service;
-
-    @BeforeClass
-    public static void init() {
-        goal = new Goal(1);
-
-        entities = Arrays.asList(GoalEntity.builder().withId(1).build(),
-                GoalEntity.builder().withId(2).build());
-        goals = Arrays.asList(goal,goal);
-    }
 
     @After
     public void resetMock() {

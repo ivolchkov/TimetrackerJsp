@@ -30,8 +30,20 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserEntityServiceImplTest {
-    private static UserEntity entity;
-    private static User user;
+    private static final UserEntity entity = UserEntity.builder()
+            .withId(1)
+            .withName("Igor")
+            .withSurname("Volchkov")
+            .withPassword("ENCODED")
+            .withEmail("igorik@gmail.com")
+            .build();
+    ;
+    private static final User user = User.builder()
+            .withName("Igor")
+            .withSurname("Volchkov")
+            .withPassword("Babushka3529")
+            .withEmail("igorik@gmail.com")
+            .build();
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -47,23 +59,6 @@ public class UserEntityServiceImplTest {
 
     @InjectMocks
     private UserServiceImpl userService;
-
-    @BeforeClass
-    public static void initUser() {
-        entity= UserEntity.builder()
-                .withId(1)
-                .withName("Igor")
-                .withSurname("Volchkov")
-                .withPassword("ENCODED")
-                .withEmail("igorik@gmail.com")
-                .build();
-        user= User.builder()
-                .withName("Igor")
-                .withSurname("Volchkov")
-                .withPassword("Babushka3529")
-                .withEmail("igorik@gmail.com")
-                .build();
-    }
 
     @After
     public void resetMock() {
