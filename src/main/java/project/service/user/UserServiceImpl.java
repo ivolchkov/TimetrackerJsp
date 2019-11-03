@@ -54,16 +54,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String email, String password) {
-//        String encodedPassword = encoder.encode(password).
-//                orElseThrow(() -> new InvalidEncodingException("Encode process exception"));
+        String encodedPassword = encoder.encode(password).
+                orElseThrow(() -> new InvalidEncodingException("Encode process exception"));
         Optional<UserEntity> entity = userDao.findByEmail(email);
 
         if (!entity.isPresent()) {
             LOGGER.warn("There is no user with this e-mail");
             throw new UserNotFoundException("There is no user with this e-mail");
         } else {
-            //encodedPassword
-            if (entity.get().getPassword().equals(password)) {
+            if (entity.get().getPassword().equals(encodedPassword)) {
                 return mapper.mapUserEntityToUser(entity.get());
             } else {
                 LOGGER.warn("Incorrect password");

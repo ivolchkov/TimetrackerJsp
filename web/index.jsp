@@ -1,6 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+
+<fmt:setLocale value="${param.lang}"/>
+<fmt:setBundle basename="text"/>
+
+<%--<html lang="${param.lang}">--%>
+<%--<head>--%>
+<%--    <title>PhraseApp - i18n</title>--%>
+<%--</head>--%>
+<%--<body>--%>
+<%--<p>--%>
+<%--    <fmt:message key="main.home.header" />--%>
+<%--</p>--%>
+<%--<ul>--%>
+<%--&lt;%&ndash;    <li><a href="?lang=en">English</a></li>&ndash;%&gt;--%>
+<%--&lt;%&ndash;    <li><a href="?lang=ru">Russian</a></li>&ndash;%&gt;--%>
+<%--    <form>--%>
+<%--        <select id="lang" name="lang" onchange="submit()">--%>
+<%--            <option value="en" ${param.lang == 'en' ? 'selected' : ''}>English</option>--%>
+<%--            <option value="ru" ${param.lang == 'ru' ? 'selected' : ''}>Russian</option>--%>
+<%--        </select>--%>
+<%--    </form>--%>
+<%--</ul>--%>
+<%--</body>--%>
+<%--</html>--%>
+<%--${param.lang}--%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${param.lang}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,26 +61,44 @@
     <link href="css/cover.css" rel="stylesheet">
 </head>
 <body class="text-center">
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<div class="cover-container d-flex w-200 h-200 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
-            <h3 class="masthead-brand">Timetracker</h3>
             <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">Home</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Contact</a>
-                <a class="nav-link" href="sign-in.jsp"> Sign in</a>
-                <a class="nav-link" href="#">Sign up</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="nav-link" href="index.jsp">Timetracker</a>
+                <a class="nav-link" href="#"><label><fmt:message key="main.nav.feature"/></label></a>
+                <a class="nav-link" href="#"><label><fmt:message key="main.nav.contact"/></label></a>
+                <a class="nav-link" href="sign-in.jsp"><label><fmt:message key="main.nav.signIn"/></label></a>
+                <a class="nav-link" href="#"><label><fmt:message key="main.nav.signUp"/></label></a>
+                <form>
+                    <label class="nav-link">
+                        <select class="nav-link" id="lang" name="lang" onchange="submit()">
+                            <option class="bg-secondary text-white" value="en" ${param.lang == 'en' ? 'selected' : ''}>
+                                English
+                            </option>
+                            <option class="bg-secondary text-white" value="ru" ${param.lang  == 'ru' ? 'selected' : ''}>
+                                Russian
+                            </option>
+                        </select>
+                    </label>
+                </form>
+
             </nav>
+
         </div>
     </header>
 
     <main role="main" class="inner cover">
-        <h1 class="cover-heading">Track your time.</h1>
-        <p class="lead">This service can help you to manage the project creating time.
-            It is provided with Agile framework, called "Scrum". Choose your Scrum-master and start to create the product. </p>
+        <h1 class="cover-heading"><fmt:message key="main.home.header"/></h1>
+        <p class="lead"><fmt:message key="main.home.text"/></p>
         <p class="lead">
-            <a href="https://www.atlassian.com/agile/scrum" class="btn btn-lg btn-secondary">Learn more</a>
+            <a href="https://www.atlassian.com/agile/scrum" class="btn btn-lg btn-secondary"><fmt:message
+                    key="main.home.learn"/></a>
         </p>
     </main>
 
