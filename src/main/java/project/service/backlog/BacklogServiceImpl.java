@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import project.domain.backlog.Backlog;
 import project.entity.backlog.BacklogEntity;
 import project.exception.InvalidEntityCreation;
+import project.exception.InvalidPaginatingException;
 import project.repository.backlogDao.BacklogDao;
 import project.service.mapper.BacklogMapper;
 
@@ -34,12 +35,23 @@ public class BacklogServiceImpl implements BacklogService {
     }
 
     @Override
-    public List<Backlog> showAllBacklogs() {
-        List<BacklogEntity> result = backlogDao.findAll();
+    public List<Backlog> showAllBacklogs(Integer currentPage, Integer recordsPerPage) {
+        if ( currentPage == 0 || recordsPerPage == 0 ) {
+            LOGGER.error("Invalid number of current page or records per page");
+            throw new InvalidPaginatingException("Invalid number of current page or records per page");
+        }
+
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+        List<BacklogEntity> result = backlogDao.findAll(offset, recordsPerPage);
 
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapBacklogEntityToBacklog)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer showNumberOfRows() {
+        return backlogDao.findAmountOfRows();
     }
 }

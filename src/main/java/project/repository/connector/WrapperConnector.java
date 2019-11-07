@@ -11,26 +11,27 @@ import java.util.ResourceBundle;
 public final class WrapperConnector {
     private static final Logger LOGGER = Logger.getLogger(WrapperConnector.class);
 
-    private static final BasicDataSource ds = new BasicDataSource();
+    private final BasicDataSource pool;
 
-    public WrapperConnector(String fileConfigName) {
+    public WrapperConnector(String fileConfigName, BasicDataSource pool) {
         ResourceBundle resource = ResourceBundle.getBundle(fileConfigName);
+        this.pool = pool;
 
-        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        ds.setUrl(resource.getString("db.url"));
-        ds.setUsername(resource.getString("db.user"));
-        ds.setPassword(resource.getString("db.password"));
-        ds.setMinIdle(5);
-        ds.setMaxIdle(10);
-        ds.setMaxOpenPreparedStatements(100);
+        pool.setDriverClassName(resource.getString("db.driver"));
+        pool.setUrl(resource.getString("db.url"));
+        pool.setUsername(resource.getString("db.user"));
+        pool.setPassword(resource.getString("db.password"));
+        pool.setMinIdle(Integer.parseInt(resource.getString("db.minIdle")));
+        pool.setMaxIdle(Integer.parseInt(resource.getString("db.maxIdle")));
+        pool.setMaxOpenPreparedStatements(Integer.parseInt(resource.getString("db.maxPreparedStatement")));
     }
 
     public Connection getConnection() {
         try {
-            return ds.getConnection();
+            return pool.getConnection();
         } catch (SQLException e) {
-            LOGGER.error("Could not get connection from database" + e.getMessage());
-            throw new InvalidDatabaseConnectionException("Could not get connection from database " + e.getMessage());
+            LOGGER.error("Could not get connection from database" , e);
+            throw new InvalidDatabaseConnectionException("Could not get connection from database ", e);
         }
     }
 }

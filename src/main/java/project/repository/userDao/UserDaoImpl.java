@@ -17,7 +17,8 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
 
     private static final String INSERT_USER = "INSERT INTO timetracking.users(user_name, user_surname, user_email, user_password, user_role) VALUES(?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.users WHERE user_id = ?";
-    private static final String FIND_ALL_USERS = "SELECT * FROM timetracking.users";
+    private static final String FIND_ALL_USERS = "SELECT * FROM timetracking.users LIMIT ?, ?";
+    private static final String FIND_ALL_ROWS = "SELECT COUNT(user_id) FROM timetracking.users";
     private static final String FIND_BY_BACKLOG = "SELECT * FROM timetracking.users WHERE backlog_id = ?";
     private static final String FIND_BY_EMAIL = "SELECT * FROM timetracking.users WHERE user_email = ?";
     private static final String UPDATE_USER = "UPDATE timetracking.users SET user_name = ?, user_surname = ?, user_email = ?, user_password = ?, user_role = ?, backlog_id = ? WHERE user_id = ?";
@@ -40,8 +41,13 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     }
 
     @Override
-    public List<UserEntity> findAll() {
-        return findAll(FIND_ALL_USERS);
+    public List<UserEntity> findAll(Integer offset, Integer amount) {
+        return findAll(FIND_ALL_USERS, offset, amount);
+    }
+
+    @Override
+    public Integer findAmountOfRows() {
+        return findNumberOfRows(FIND_ALL_ROWS);
     }
 
     @Override
@@ -54,7 +60,7 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
 
             return user.next() ? mapResultSetToEntity(user) : Optional.empty();
         } catch (SQLException e) {
-            LOGGER.error("Invalid user search" + e.getMessage());
+            LOGGER.error("Invalid user search" , e);
             throw new DatabaseRuntimeException("Invalid user search", e);
         }
     }
@@ -73,7 +79,7 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Invalid entity updating" + e.getMessage());
+            LOGGER.error("Invalid entity updating" , e);
             throw new DatabaseRuntimeException("Invalid entity updating", e);
         }
     }
@@ -97,7 +103,7 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
             int delete = preparedStatement.executeUpdate();
             return delete != 0;
         } catch (SQLException e) {
-            LOGGER.error("Invalid user deleting" + e.getMessage());
+            LOGGER.error("Invalid user deleting" , e);
             throw new DatabaseRuntimeException("Invalid user deleting", e);
         }
     }

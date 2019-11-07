@@ -12,7 +12,9 @@ public interface UserService {
 
     List<User> findTeam(Integer backlogId);
 
-    List<User> findAll();
+    List<User> findAll(Integer currentPage, Integer recordsPerPage);
 
     void addProjectToUser(User user, Backlog backlog);
+
+    Integer showNumberOfRows();
 }

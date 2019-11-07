@@ -1,1 +1,43 @@
 
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:97 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:31 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:90 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:97 - Invalid story updating
+WARN  validator.UserValidator: Method:validateByParam() Line:38 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:38 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:38 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:38 - Incorrect name
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  user.UserServiceImpl: Method:register() Line:44 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:68 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:62 - There is no user with this e-mail
+WARN  user.UserServiceImpl: Method:register() Line:44 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:68 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:62 - There is no user with this e-mail
+WARN  sprint.SprintServiceImpl: Method:createSprint() Line:29 - Sprint is not valid
+WARN  goal.GoalServiceImpl: Method:createGoal() Line:29 - Goal is not valid
+WARN  backlog.BacklogServiceImpl: Method:createBacklog() Line:29 - Backlog is not valid
+ERROR backlog.BacklogServiceImpl: Method:showAllBacklogs() Line:40 - Invalid number of current page or records per page
+ERROR goal.GoalServiceImpl: Method:showAllGoals() Line:40 - Invalid number of current page or records per page
+ERROR sprint.SprintServiceImpl: Method:showAllSprints() Line:40 - Invalid number of current page or records per page
+ERROR user.UserServiceImpl: Method:findAll() Line:83 - Invalid number of current page or records per page
+ERROR repository.AbstractDao: Method:findAll() Line:116 - Invalid entities search
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?, ?' at line 1
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
+	at project.repository.AbstractDao.findAll(AbstractDao.java:108)
+	at project.repository.userDao.UserDaoImpl.findAll(UserDaoImpl.java:45)
+	at project.repository.MainRepository.main(MainRepository.java:31)

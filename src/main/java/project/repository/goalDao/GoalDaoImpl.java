@@ -14,8 +14,9 @@ import java.util.Optional;
 public class GoalDaoImpl extends AbstractDao<GoalEntity> implements GoalDao {
     private static final String INSERT_GOAL = "INSERT INTO timetracking.goals(goal_name, backlog_id) VALUES(?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.goals WHERE goal_id = ?";
+    private static final String FIND_ALL_ROWS = "SELECT COUNT(goal_id) FROM timetracking.goals";
     private static final String FIND_BY_BACKLOG = "SELECT * FROM timetracking.goals WHERE backlog_id = ?";
-    private static final String FIND_ALL_GOALS = "SELECT * FROM timetracking.goals";
+    private static final String FIND_ALL_GOALS = "SELECT * FROM timetracking.goals LIMIT ?, ?";
     private static final String UPDATE_GOAL = "UPDATE timetracking.goals SET goal_name = ?, backlog_id = ? WHERE goal_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.goals WHERE goal_id = ?";
 
@@ -34,8 +35,13 @@ public class GoalDaoImpl extends AbstractDao<GoalEntity> implements GoalDao {
     }
 
     @Override
-    public List<GoalEntity> findAll() {
-        return findAll(FIND_ALL_GOALS);
+    public List<GoalEntity> findAll(Integer offset, Integer amount) {
+        return findAll(FIND_ALL_GOALS, offset, amount);
+    }
+
+    @Override
+    public Integer findAmountOfRows() {
+        return findNumberOfRows(FIND_ALL_ROWS);
     }
 
     @Override

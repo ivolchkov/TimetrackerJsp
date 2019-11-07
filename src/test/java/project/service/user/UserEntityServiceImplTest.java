@@ -1,7 +1,6 @@
 package project.service.user;
 
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import project.domain.user.User;
 import project.entity.user.UserEntity;
 import project.exception.AlreadyRegisteredException;
+import project.exception.InvalidPaginatingException;
 import project.exception.InvalidRegistrationException;
 import project.exception.UserNotFoundException;
 import project.repository.userDao.UserDao;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserEntityServiceImplTest {
-    private static final UserEntity entity = UserEntity.builder()
+    private static final UserEntity ENTITY = UserEntity.builder()
             .withId(1)
             .withName("Igor")
             .withSurname("Volchkov")
@@ -38,7 +38,7 @@ public class UserEntityServiceImplTest {
             .withEmail("igorik@gmail.com")
             .build();
     ;
-    private static final User user = User.builder()
+    private static final User USER = User.builder()
             .withName("Igor")
             .withSurname("Volchkov")
             .withPassword("Babushka3529")
@@ -62,17 +62,15 @@ public class UserEntityServiceImplTest {
 
     @After
     public void resetMock() {
-        reset(repository);
-        reset(validator);
-        reset(encoder);
+        reset(repository, validator, encoder);
     }
 
     @Test
     public void shouldRegisterUser() {
         when(repository.save(any(UserEntity.class))).thenReturn(true);
-        when(mapper.mapUserToUserEntity(any(User.class))).thenReturn(entity);
-        when(encoder.encode(any(String.class))).thenReturn(Optional.of(entity.getPassword()));
-        boolean actual = userService.register(user);
+        when(mapper.mapUserToUserEntity(any(User.class))).thenReturn(ENTITY);
+        when(encoder.encode(any(String.class))).thenReturn(Optional.of(ENTITY.getPassword()));
+        boolean actual = userService.register(USER);
 
         assertTrue(actual);
     }
@@ -82,10 +80,10 @@ public class UserEntityServiceImplTest {
         exception.expect(AlreadyRegisteredException.class);
         exception.expectMessage("User is already registered by this e-mail");
 
-        when(repository.findByEmail(any(String.class))).thenReturn(Optional.ofNullable(entity));
+        when(repository.findByEmail(any(String.class))).thenReturn(Optional.ofNullable(ENTITY));
 
 
-        userService.register(user);
+        userService.register(USER);
     }
 
     @Test
@@ -98,13 +96,13 @@ public class UserEntityServiceImplTest {
 
     @Test
     public void shouldLoginUser() {
-        when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.of(entity));
-        when(encoder.encode("Babushka3529")).thenReturn(Optional.of(entity.getPassword()));
-        when(mapper.mapUserEntityToUser(any(UserEntity.class))).thenReturn(user);
+        when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.of(ENTITY));
+        when(encoder.encode("Babushka3529")).thenReturn(Optional.of(ENTITY.getPassword()));
+        when(mapper.mapUserEntityToUser(any(UserEntity.class))).thenReturn(USER);
 
         User actual = userService.login("igorik@gmail.com", "Babushka3529");
 
-        assertEquals(user, actual);
+        assertEquals(USER, actual);
     }
 
     @Test
@@ -113,7 +111,7 @@ public class UserEntityServiceImplTest {
         exception.expectMessage("Incorrect password");
 
         when(encoder.encode(any(String.class))).thenReturn(Optional.of("test"));
-        when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.ofNullable(entity));
+        when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.ofNullable(ENTITY));
 
         userService.login("igorik@gmail.com", "test");
     }
@@ -130,11 +128,11 @@ public class UserEntityServiceImplTest {
 
     @Test
     public void shouldReturnTeam() {
-        List<User> expected = Collections.singletonList(user);
-        List<UserEntity> entities = Collections.singletonList(entity);
+        List<User> expected = Collections.singletonList(USER);
+        List<UserEntity> entities = Collections.singletonList(ENTITY);
 
         when(repository.findByBacklog(any(Integer.class))).thenReturn(entities);
-        when(mapper.mapUserEntityToUser(entity)).thenReturn(user);
+        when(mapper.mapUserEntityToUser(ENTITY)).thenReturn(USER);
         List<User> actual = userService.findTeam(3);
 
         assertEquals(expected, actual);
@@ -152,12 +150,12 @@ public class UserEntityServiceImplTest {
 
     @Test
     public void shouldReturnAllUsers() {
-        List<User> expected = Collections.singletonList(user);
-        List<UserEntity> entities = Collections.singletonList(entity);
+        List<User> expected = Collections.singletonList(USER);
+        List<UserEntity> entities = Collections.singletonList(ENTITY);
 
-        when(repository.findAll()).thenReturn(entities);
-        when(mapper.mapUserEntityToUser(entity)).thenReturn(user);
-        List<User> actual = userService.findAll();
+        when(repository.findAll(any(Integer.class) , any(Integer.class))).thenReturn(entities);
+        when(mapper.mapUserEntityToUser(ENTITY)).thenReturn(USER);
+        List<User> actual = userService.findAll(1 , 10);
 
         assertEquals(expected, actual);
     }
@@ -166,9 +164,17 @@ public class UserEntityServiceImplTest {
     public void shouldReturnEmptyListWhenThereIsNoUsers() {
         List<User> expected = Collections.emptyList();
 
-        when(repository.findAll()).thenReturn(Collections.emptyList());
-        List<User> actual = userService.findAll();
+        when(repository.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
+        List<User> actual = userService.findAll(1 , 10);
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldThrowInvalidPaginatingException() {
+        exception.expect(InvalidPaginatingException.class);
+        exception.expectMessage("Invalid number of current page or records per page");
+
+        userService.findAll(0 ,1);
     }
 }

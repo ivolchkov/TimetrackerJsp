@@ -13,7 +13,7 @@ public class ScrumMasterServlet extends HttpServlet {
     static {
         nameToCommand.put("addDeveloper", new AddDeveloper());
         nameToCommand.put("addGoal", new AddGoal());
-        nameToCommand.put("addStory", new AddStory());
+        nameToCommand.put("addStory", new CreateStory());
         nameToCommand.put("createProject", new CreateProject());
         nameToCommand.put("createSprint", new CreateSprint());
     }

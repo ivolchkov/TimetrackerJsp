@@ -13,7 +13,8 @@ import java.util.Optional;
 public class BacklogDaoImpl extends AbstractDao<BacklogEntity> implements BacklogDao {
     private static final String INSERT_BACKLOG = "INSERT INTO timetracking.backlogs(backlog_project_name, backlog_description) VALUES(?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.backlogs WHERE backlog_id = ?";
-    private static final String FIND_ALL_BACKLOGS = "SELECT * FROM timetracking.backlogs";
+    private static final String FIND_ALL_BACKLOGS = "SELECT * FROM timetracking.backlogs LIMIT ?, ?";
+    private static final String FIND_ALL_ROWS = "SELECT COUNT(backlog_id) FROM timetracking.backlogs";
     private static final String UPDATE_BACKLOG = "UPDATE timetracking.backlogs SET backlog_project_name = ?, backlog_description = ? WHERE backlog_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.backlogs WHERE backlog_id = ?";
 
@@ -32,8 +33,13 @@ public class BacklogDaoImpl extends AbstractDao<BacklogEntity> implements Backlo
     }
 
     @Override
-    public List<BacklogEntity> findAll() {
-        return findAll(FIND_ALL_BACKLOGS);
+    public List<BacklogEntity> findAll(Integer offset, Integer amount) {
+        return findAll(FIND_ALL_BACKLOGS, offset, amount);
+    }
+
+    @Override
+    public Integer findAmountOfRows() {
+        return findNumberOfRows(FIND_ALL_ROWS);
     }
 
     @Override

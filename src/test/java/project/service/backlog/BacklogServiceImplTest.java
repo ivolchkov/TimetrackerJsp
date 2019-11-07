@@ -5,11 +5,11 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import project.domain.backlog.Backlog;
 import project.entity.backlog.BacklogEntity;
 import project.exception.InvalidEntityCreation;
+import project.exception.InvalidPaginatingException;
 import project.repository.backlogDao.BacklogDao;
 import project.service.mapper.BacklogMapper;
 
@@ -22,11 +22,11 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BacklogServiceImplTest {
-    private static final Backlog backlog = new Backlog(1, "Test", "Test");
-    private static final List<BacklogEntity> entities = Arrays.asList(
+    private static final Backlog BACKLOG = new Backlog(1, "Test", "Test");
+    private static final List<BacklogEntity> ENTITIES = Arrays.asList(
             BacklogEntity.builder().withId(1).build(),
             BacklogEntity.builder().withId(2).build());
-    private static final List<Backlog> backlogs = Arrays.asList(backlog, backlog);
+    private static final List<Backlog> BACKLOGS = Arrays.asList(BACKLOG, BACKLOG);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -48,10 +48,10 @@ public class BacklogServiceImplTest {
 
     @Test
     public void shouldCreateBacklog() {
-        when(mapper.mapBacklogToBacklogEntity(any(Backlog.class))).thenReturn(entities.get(1));
+        when(mapper.mapBacklogToBacklogEntity(any(Backlog.class))).thenReturn(ENTITIES.get(1));
         when(backlogDao.save(any(BacklogEntity.class))).thenReturn(true);
 
-        assertTrue(service.createBacklog(backlog));
+        assertTrue(service.createBacklog(BACKLOG));
     }
 
     @Test
@@ -64,20 +64,28 @@ public class BacklogServiceImplTest {
 
     @Test
     public void shouldShowAllBacklogs() {
-        when(backlogDao.findAll()).thenReturn(entities);
-        when(mapper.mapBacklogEntityToBacklog(any(BacklogEntity.class))).thenReturn(backlog);
+        when(backlogDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
+        when(mapper.mapBacklogEntityToBacklog(any(BacklogEntity.class))).thenReturn(BACKLOG);
 
-        List<Backlog> actual = service.showAllBacklogs();
+        List<Backlog> actual = service.showAllBacklogs(1 , 10);
 
-        assertEquals(backlogs, actual);
+        assertEquals(BACKLOGS, actual);
     }
 
     @Test
     public void shouldReturnEmptyList() {
-        when(backlogDao.findAll()).thenReturn(Collections.emptyList());
+        when(backlogDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
 
-        List<Backlog> actual = service.showAllBacklogs();
+        List<Backlog> actual = service.showAllBacklogs(1 , 10);
 
         assertEquals(Collections.emptyList(), actual);
+    }
+
+    @Test
+    public void shouldThrowInvalidPaginatingException() {
+        exception.expect(InvalidPaginatingException.class);
+        exception.expectMessage("Invalid number of current page or records per page");
+
+        service.showAllBacklogs(0 ,1);
     }
 }

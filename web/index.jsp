@@ -53,8 +53,8 @@
                 <a class="nav-link" href="#"><label><fmt:message key="main.nav.feature"/></label></a>
                 <a class="nav-link" href="#"><label><fmt:message key="main.nav.contact"/></label></a>
                 <a class="nav-link" href="sign-in.jsp"><label><fmt:message key="main.nav.signIn"/></label></a>
-                <a class="nav-link" href="#"><label><fmt:message key="main.nav.signUp"/></label></a>
-                <form>
+                <a class="nav-link" href="register.jsp"><label><fmt:message key="main.nav.signUp"/></label></a>
+                <form style="position:absolute; right:73px;">
                     <label class="nav-link">
                         <select class="nav-link" id="lang" name="lang" onchange="submit()">
                             <option class="bg-secondary text-white" value="en" ${param.lang == 'en' ? 'selected' : ''}>
@@ -83,7 +83,7 @@
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
-            <p> Copyright 2019-2020 by Ihor Volchkov. All Rights Reserved.</p>
+            <p> <fmt:message key="footer.copyright"/></p>
         </div>
     </footer>
 </div>

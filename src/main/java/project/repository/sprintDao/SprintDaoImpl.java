@@ -11,7 +11,8 @@ import java.util.Optional;
 public class SprintDaoImpl extends AbstractDao<SprintEntity> implements SprintDao {
     private static final String INSERT_SPRINT = "INSERT INTO timetracking.sprints(sprint_name, sprint_start, sprint_end, sprint_description) VALUES(?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.sprints WHERE sprint_id = ?";
-    private static final String FIND_ALL_SPRINTS = "SELECT * FROM timetracking.sprints";
+    private static final String FIND_ALL_ROWS = "SELECT COUNT(sprint_id) FROM timetracking.sprints";
+    private static final String FIND_ALL_SPRINTS = "SELECT * FROM timetracking.sprints LIMIT ?, ?";
     private static final String UPDATE_SPRINT = "UPDATE timetracking.sprints SET sprint_name = ?, sprint_start = ?, sprint_end = ?, sprint_description = ? WHERE sprint_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.sprints WHERE sprint_id = ?";
 
@@ -31,8 +32,13 @@ public class SprintDaoImpl extends AbstractDao<SprintEntity> implements SprintDa
     }
 
     @Override
-    public List<SprintEntity> findAll() {
-        return findAll(FIND_ALL_SPRINTS);
+    public List<SprintEntity> findAll(Integer offset, Integer amount) {
+        return findAll(FIND_ALL_SPRINTS, offset, amount);
+    }
+
+    @Override
+    public Integer findAmountOfRows() {
+        return findNumberOfRows(FIND_ALL_ROWS);
     }
 
     @Override

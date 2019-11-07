@@ -7,5 +7,7 @@ import java.util.List;
 public interface BacklogService {
     boolean createBacklog(Backlog backlog);
 
-    List<Backlog> showAllBacklogs();
+    List<Backlog> showAllBacklogs(Integer currentPage, Integer recordsPerPage);
+
+    Integer showNumberOfRows();
 }

@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import project.domain.sprint.Sprint;
 import project.entity.sprint.SprintEntity;
 import project.exception.InvalidEntityCreation;
+import project.exception.InvalidPaginatingException;
 import project.repository.sprintDao.SprintDao;
 import project.service.mapper.SprintMapper;
 
@@ -25,11 +26,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SprintServiceImplTest {
-    private static final Sprint sprint = Sprint.builder().withId(1).build();
-    private static final List<SprintEntity> entities = Arrays.asList(
+    private static final Sprint SPRINT = Sprint.builder().withId(1).build();
+    private static final List<SprintEntity> ENTITIES = Arrays.asList(
             SprintEntity.builder().withId(1).build(),
             SprintEntity.builder().withId(2).build());
-    private static final List<Sprint> sprints = Arrays.asList(sprint,sprint);
+    private static final List<Sprint> SPRINTS = Arrays.asList(SPRINT, SPRINT);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -51,10 +52,10 @@ public class SprintServiceImplTest {
 
     @Test
     public void shouldCreateSprint() {
-        when(mapper.mapSprintToSprintEntity(any(Sprint.class))).thenReturn(entities.get(1));
+        when(mapper.mapSprintToSprintEntity(any(Sprint.class))).thenReturn(ENTITIES.get(1));
         when(sprintDao.save(any(SprintEntity.class))).thenReturn(true);
 
-        assertTrue(service.createSprint(sprint));
+        assertTrue(service.createSprint(SPRINT));
     }
 
     @Test
@@ -67,20 +68,28 @@ public class SprintServiceImplTest {
 
     @Test
     public void shouldShowAllSprints() {
-        when(sprintDao.findAll()).thenReturn(entities);
-        when(mapper.mapSprintEntityToSprint(any(SprintEntity.class))).thenReturn(sprint);
+        when(sprintDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
+        when(mapper.mapSprintEntityToSprint(any(SprintEntity.class))).thenReturn(SPRINT);
 
-        List<Sprint> actual = service.showAllSprints();
+        List<Sprint> actual = service.showAllSprints(1 , 10);
 
-        assertEquals(sprints, actual);
+        assertEquals(SPRINTS, actual);
     }
 
     @Test
     public void shouldReturnEmptyList() {
-        when(sprintDao.findAll()).thenReturn(Collections.emptyList());
+        when(sprintDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
 
-        List<Sprint> actual = service.showAllSprints();
+        List<Sprint> actual = service.showAllSprints(1 , 10);
 
         assertEquals(Collections.emptyList(), actual);
+    }
+
+    @Test
+    public void shouldThrowInvalidPaginatingException() {
+        exception.expect(InvalidPaginatingException.class);
+        exception.expectMessage("Invalid number of current page or records per page");
+
+        service.showAllSprints(0 ,1);
     }
 }

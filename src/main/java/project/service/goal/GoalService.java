@@ -7,5 +7,7 @@ import java.util.List;
 public interface GoalService {
     boolean createGoal(Goal goal);
 
-    List<Goal> showAllGoals();
+    List<Goal> showAllGoals(Integer currentPage, Integer recordsPerPage);
+
+    Integer showNumberOfRows();
 }

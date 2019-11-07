@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import project.domain.sprint.Sprint;
 import project.entity.sprint.SprintEntity;
 import project.exception.InvalidEntityCreation;
+import project.exception.InvalidPaginatingException;
 import project.repository.sprintDao.SprintDao;
 import project.service.mapper.SprintMapper;
 
@@ -34,12 +35,23 @@ public class SprintServiceImpl implements SprintService {
     }
 
     @Override
-    public List<Sprint> showAllSprints() {
-        List<SprintEntity> result = sprintDao.findAll();
+    public List<Sprint> showAllSprints(Integer currentPage, Integer recordsPerPage) {
+        if ( currentPage == 0 || recordsPerPage == 0 ) {
+            LOGGER.error("Invalid number of current page or records per page");
+            throw new InvalidPaginatingException("Invalid number of current page or records per page");
+        }
+
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+        List<SprintEntity> result = sprintDao.findAll(offset, recordsPerPage);
 
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapSprintEntityToSprint)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer showNumberOfRows() {
+        return sprintDao.findAmountOfRows();
     }
 }

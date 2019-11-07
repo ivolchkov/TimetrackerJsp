@@ -2,13 +2,9 @@ package project.service.user;
 
 import org.apache.log4j.Logger;
 import project.domain.backlog.Backlog;
-import project.domain.goal.Goal;
 import project.domain.user.User;
 import project.entity.user.UserEntity;
-import project.exception.AlreadyRegisteredException;
-import project.exception.InvalidEncodingException;
-import project.exception.InvalidEntityUpdating;
-import project.exception.UserNotFoundException;
+import project.exception.*;
 import project.repository.userDao.UserDao;
 import project.service.encoder.PasswordEncoder;
 import project.service.mapper.UserMapper;
@@ -82,8 +78,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
-        List<UserEntity> result = userDao.findAll();
+    public List<User> findAll(Integer currentPage, Integer recordsPerPage) {
+        if ( currentPage == 0 || recordsPerPage == 0 ) {
+            LOGGER.error("Invalid number of current page or records per page");
+            throw new InvalidPaginatingException("Invalid number of current page or records per page");
+        }
+
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+        List<UserEntity> result = userDao.findAll(offset, recordsPerPage);
 
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
@@ -99,5 +101,10 @@ public class UserServiceImpl implements UserService {
         }
 
         userDao.updateBacklogId(mapper.mapUserToUserEntity(user, backlog));
+    }
+
+    @Override
+    public Integer showNumberOfRows() {
+        return userDao.findAmountOfRows();
     }
 }

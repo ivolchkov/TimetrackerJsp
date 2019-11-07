@@ -22,7 +22,8 @@ public class StoryDaoImpl extends AbstractDao<StoryEntity> implements StoryDao {
     private static final String FIND_BY_GOAL = "SELECT * FROM timetracking.stories WHERE goal_id = ?";
     private static final String FIND_BY_USER = "SELECT * FROM timetracking.stories WHERE user_id = ?";
     private static final String FIND_BY_SPRINT = "SELECT * FROM timetracking.stories WHERE sprint_id = ?";
-    private static final String FIND_ALL_STORIES = "SELECT * FROM timetracking.stories";
+    private static final String FIND_ALL_ROWS = "SELECT COUNT(sprint_id) FROM timetracking.stories";
+    private static final String FIND_ALL_STORIES = "SELECT * FROM timetracking.stories LIMIT ?, ?";
     private static final String UPDATE_STORY = "UPDATE timetracking.stories SET story_name = ?, story_spent_time = ?, story_description = ?, story_status = ?, goal_id = ?, user_id = ?, sprint_id = ? WHERE story_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.stories WHERE story_id = ?";
     private static final String FIND_BY_NAME = "SELECT * FROM timetracking.stories WHERE story_name LIKE ?";
@@ -73,8 +74,13 @@ public class StoryDaoImpl extends AbstractDao<StoryEntity> implements StoryDao {
     }
 
     @Override
-    public List<StoryEntity> findAll() {
-        return findAll(FIND_ALL_STORIES);
+    public List<StoryEntity> findAll(Integer offset, Integer amount) {
+        return findAll(FIND_ALL_STORIES, offset, amount);
+    }
+
+    @Override
+    public Integer findAmountOfRows() {
+        return findNumberOfRows(FIND_ALL_ROWS);
     }
 
     @Override
@@ -147,7 +153,7 @@ public class StoryDaoImpl extends AbstractDao<StoryEntity> implements StoryDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Invalid entity updating" + e.getMessage());
+            LOGGER.error("Invalid entity updating", e);
             throw new DatabaseRuntimeException("Invalid entity updating", e);
         }
     }

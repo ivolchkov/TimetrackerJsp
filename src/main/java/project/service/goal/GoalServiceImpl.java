@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import project.domain.goal.Goal;
 import project.entity.goal.GoalEntity;
 import project.exception.InvalidEntityCreation;
+import project.exception.InvalidPaginatingException;
 import project.repository.goalDao.GoalDao;
 import project.service.mapper.GoalMapper;
 
@@ -34,12 +35,23 @@ public class GoalServiceImpl implements GoalService {
     }
 
     @Override
-    public List<Goal> showAllGoals() {
-        List<GoalEntity> result = goalDao.findAll();
+    public List<Goal> showAllGoals(Integer currentPage, Integer recordsPerPage) {
+        if ( currentPage == 0 || recordsPerPage == 0 ) {
+            LOGGER.error("Invalid number of current page or records per page");
+            throw new InvalidPaginatingException("Invalid number of current page or records per page");
+        }
+
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+        List<GoalEntity> result = goalDao.findAll(offset, recordsPerPage);
 
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapGoalEntityToGoal)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer showNumberOfRows() {
+        return goalDao.findAmountOfRows();
     }
 }

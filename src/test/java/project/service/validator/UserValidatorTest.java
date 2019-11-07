@@ -63,7 +63,7 @@ public class UserValidatorTest {
         User student = User.builder().withName("Ihor").
                 withSurname("Volchkov").
                 withEmail("test@gmail.com").
-                withPassword("plohoyparol").
+                withPassword("pGlohoyparol").
                 build();
         exception.expect(InvalidRegistrationException.class);
         exception.expectMessage("Incorrect password");

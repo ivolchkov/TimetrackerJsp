@@ -1,8 +1,8 @@
 package project.command.user;
 
 import project.command.Command;
-import project.context.ApplicationContextInjector;
 import project.domain.user.User;
+import project.entity.user.Role;
 import project.service.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,22 +13,32 @@ public class SignIn implements Command {
 
     private final UserService userService;
 
-    public SignIn() {
-        userService = ApplicationContextInjector.getInstance().getUserService();
+    public SignIn(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = null;
-
+        String page;
         String email = request.getParameter(EMAIL);
         String password = request.getParameter(PASSWORD);
 
-        try {
-            userService.login(email, password);
-            page = "index.jsp";
-        } catch (Exception e) {
-            System.out.println("Oppaa " + e.getMessage());
+        User user = userService.login(email, password);
+        request.getSession().setAttribute("user", user);
+        Role role = user.getRole();
+
+        switch (role) {
+            case ADMIN:
+                page = "admin-service.jsp";
+                break;
+            case DEVELOPER:
+                page = "developer-service.jsp";
+                break;
+            case SCRUM_MASTER:
+                page = "scrum-master-service.jsp";
+                break;
+            default:
+                page = "index.jsp";
         }
 
         return page;

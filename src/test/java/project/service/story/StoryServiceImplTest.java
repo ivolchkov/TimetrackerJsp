@@ -1,7 +1,6 @@
 package project.service.story;
 
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -28,11 +27,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StoryServiceImplTest {
-    private static final Story story = Story.builder().withId(1).build();
-    private static final List<StoryEntity> entities = Arrays.asList(
+    private static final Story STORY = Story.builder().withId(1).build();
+    private static final List<StoryEntity> ENTITIES = Arrays.asList(
             StoryEntity.builder().withId(1).build(),
             StoryEntity.builder().withId(2).build());
-    private static final List<Story> stories = Arrays.asList(story, story);
+    private static final List<Story> STORIES = Arrays.asList(STORY, STORY);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -54,10 +53,10 @@ public class StoryServiceImplTest {
 
     @Test
     public void shouldCreateStory() {
-        when(mapper.mapStoryToStoryEntity(any(Story.class))).thenReturn(entities.get(1));
+        when(mapper.mapStoryToStoryEntity(any(Story.class))).thenReturn(ENTITIES.get(1));
         when(storyDao.save(any(StoryEntity.class))).thenReturn(true);
 
-        assertTrue(service.createStory(story));
+        assertTrue(service.createStory(STORY));
     }
 
     @Test
@@ -70,12 +69,12 @@ public class StoryServiceImplTest {
 
     @Test
     public void shouldShowAllStoriesByStatus() {
-        when(storyDao.findByStatus(any(Status.class))).thenReturn(entities);
-        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(story);
+        when(storyDao.findByStatus(any(Status.class))).thenReturn(ENTITIES);
+        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
         List<Story> actual = service.showStoryByStatus(Status.TO_DO);
 
-        assertEquals(stories, actual);
+        assertEquals(STORIES, actual);
     }
 
     @Test
@@ -97,12 +96,12 @@ public class StoryServiceImplTest {
 
     @Test
     public void shouldShowAllStoriesByGoal() {
-        when(storyDao.findByGoal(any(Integer.class))).thenReturn(entities);
-        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(story);
+        when(storyDao.findByGoal(any(Integer.class))).thenReturn(ENTITIES);
+        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
         List<Story> actual = service.showStoryByGoal(1);
 
-        assertEquals(stories, actual);
+        assertEquals(STORIES, actual);
     }
 
     @Test
@@ -124,12 +123,12 @@ public class StoryServiceImplTest {
 
     @Test
     public void shouldShowAllStoriesByUser() {
-        when(storyDao.findByUser(any(Integer.class))).thenReturn(entities);
-        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(story);
+        when(storyDao.findByUser(any(Integer.class))).thenReturn(ENTITIES);
+        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
         List<Story> actual = service.showStoryByUser(1);
 
-        assertEquals(stories, actual);
+        assertEquals(STORIES, actual);
     }
 
     @Test
@@ -151,12 +150,12 @@ public class StoryServiceImplTest {
 
     @Test
     public void shouldShowAllStoriesBySprint() {
-        when(storyDao.findBySprint(any(Integer.class))).thenReturn(entities);
-        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(story);
+        when(storyDao.findBySprint(any(Integer.class))).thenReturn(ENTITIES);
+        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
         List<Story> actual = service.showStoryBySprint(1);
 
-        assertEquals(stories, actual);
+        assertEquals(STORIES, actual);
     }
 
     @Test
@@ -181,7 +180,7 @@ public class StoryServiceImplTest {
         exception.expect(InvalidEntityUpdating.class);
         exception.expectMessage("Invalid story updating");
 
-        service.addStoryToUser(story, null);
+        service.addStoryToUser(STORY, null);
     }
 
     @Test
@@ -189,6 +188,6 @@ public class StoryServiceImplTest {
         exception.expect(InvalidEntityUpdating.class);
         exception.expectMessage("Invalid story updating");
 
-        service.addStoryToSprint(story, null);
+        service.addStoryToSprint(STORY, null);
     }
 }

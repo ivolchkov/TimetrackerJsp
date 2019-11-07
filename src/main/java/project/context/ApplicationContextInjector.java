@@ -1,6 +1,17 @@
 package project.context;
 
+import org.apache.commons.dbcp.BasicDataSource;
+import project.command.Command;
+import project.command.admin.ShowProjects;
+import project.command.admin.ShowSprints;
+import project.command.admin.ShowUsers;
+import project.command.developer.AddStory;
+import project.command.scrumMaster.*;
+import project.command.user.SignIn;
+import project.command.user.SignOut;
+import project.command.user.SignUp;
 import project.domain.user.User;
+import project.exception.InvalidCommandException;
 import project.repository.backlogDao.BacklogDao;
 import project.repository.backlogDao.BacklogDaoImpl;
 import project.repository.connector.WrapperConnector;
@@ -27,8 +38,15 @@ import project.service.user.UserServiceImpl;
 import project.service.validator.UserValidator;
 import project.service.validator.Validator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class ApplicationContextInjector {
-    private static final WrapperConnector CONNECTOR = new WrapperConnector("database");
+    private static final String DATABASE_PROPERTY = "database";
+
+    private static final BasicDataSource POOL = new BasicDataSource();
+
+    private static final WrapperConnector CONNECTOR = new WrapperConnector(DATABASE_PROPERTY, POOL);
 
     private static final UserDao USER_DAO = new UserDaoImpl(CONNECTOR);
 
@@ -63,6 +81,67 @@ public final class ApplicationContextInjector {
     private static final SprintMapper SPRINT_MAPPER = new SprintMapper();
 
     private static final SprintService SPRINT_SERVICE = new SprintServiceImpl(SPRINT_DAO, SPRINT_MAPPER);
+
+    private static final Command SIGN_IN_COMMAND = new SignIn(USER_SERVICE);
+
+    private static final Command SIGN_UP_COMMAND = new SignUp(USER_SERVICE);
+
+    private static final Command SIGN_OUT_COMMAND = new SignOut();
+
+    private static final Command SHOW_PROJECTS_COMMAND = new ShowProjects();
+
+    private static final Command SHOW_SPRINTS_COMMAND = new ShowSprints();
+
+    private static final Command SHOW_USERS_COMMAND = new ShowUsers(USER_SERVICE);
+
+    private static final Command ADD_STORY_COMMAND = new AddStory();
+
+    private static final Command ADD_DEVELOPER_COMMAND = new AddDeveloper();
+
+    private static final Command ADD_GOAL_COMMAND = new AddGoal();
+
+    private static final Command CREATE_PROJECT_COMMAND = new CreateProject();
+
+    private static final Command CREATE_SPRINT_COMMAND = new CreateSprint();
+
+    private static final Command CREATE_STORY_COMMAND = new CreateStory();
+
+    private static final Command DEFAULT_COMMAND = request -> {
+        throw new InvalidCommandException("There is no such command");
+    };
+
+    private static final Map<String, Command> USER_COMMANDS = new HashMap<>();
+
+    static {
+        USER_COMMANDS.put("signIn", SIGN_IN_COMMAND);
+        USER_COMMANDS.put("signUp", SIGN_UP_COMMAND);
+        USER_COMMANDS.put("signOut", SIGN_OUT_COMMAND);
+    }
+
+    private static final Map<String, Command> ADMIN_COMMANDS = new HashMap<>();
+
+    static {
+        ADMIN_COMMANDS.put("showProjects", SHOW_PROJECTS_COMMAND);
+        ADMIN_COMMANDS.put("showSprints", SHOW_SPRINTS_COMMAND);
+        ADMIN_COMMANDS.put("showUsers", SHOW_USERS_COMMAND);
+    }
+
+    private static final Map<String, Command> DEVELOPER_COMMANDS = new HashMap<>();
+
+    static {
+        DEVELOPER_COMMANDS.put("addStory", ADD_STORY_COMMAND);
+    }
+
+    private static final Map<String, Command> SCRUM_MASTER_COMMANDS = new HashMap<>();
+
+    static {
+        SCRUM_MASTER_COMMANDS.put("addDeveloper", ADD_DEVELOPER_COMMAND);
+        SCRUM_MASTER_COMMANDS.put("addGoal", ADD_GOAL_COMMAND);
+        SCRUM_MASTER_COMMANDS.put("createProject", CREATE_PROJECT_COMMAND);
+        SCRUM_MASTER_COMMANDS.put("createSprint", CREATE_SPRINT_COMMAND);
+        SCRUM_MASTER_COMMANDS.put("createStory", CREATE_STORY_COMMAND);
+    }
+
 
     private static ApplicationContextInjector injector;
 
@@ -100,4 +179,23 @@ public final class ApplicationContextInjector {
         return SPRINT_SERVICE;
     }
 
+    public Command getDefaultCommand() {
+        return DEFAULT_COMMAND;
+    }
+
+    public Map<String, Command> getUserCommands() {
+        return USER_COMMANDS;
+    }
+
+    public Map<String, Command> getAdminCommands() {
+        return ADMIN_COMMANDS;
+    }
+
+    public Map<String, Command> getDeveloperCommands() {
+        return DEVELOPER_COMMANDS;
+    }
+
+    public Map<String, Command> getScrumMasterCommands() {
+        return SCRUM_MASTER_COMMANDS;
+    }
 }
