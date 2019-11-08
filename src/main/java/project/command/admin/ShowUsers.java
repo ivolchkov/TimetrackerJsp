@@ -19,8 +19,7 @@ public class ShowUsers implements Command {
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
         int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
 
-        List<User> users = userService.findAll(currentPage,
-                recordsPerPage);
+        List<User> users = userService.findAll(currentPage, recordsPerPage);
 
         request.setAttribute("users", users);
 
@@ -32,6 +31,7 @@ public class ShowUsers implements Command {
             numberOfPages += 1;
         }
 
+        request.setAttribute("command", "showUsers");
         request.setAttribute("numberOfPages", numberOfPages);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("recordsPerPage", recordsPerPage);

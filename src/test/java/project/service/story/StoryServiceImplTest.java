@@ -13,6 +13,7 @@ import project.entity.story.Status;
 import project.entity.story.StoryEntity;
 import project.exception.InvalidEntityCreation;
 import project.exception.InvalidEntityUpdating;
+import project.exception.InvalidPaginatingException;
 import project.repository.storyDao.StoryDao;
 import project.service.mapper.StoryMapper;
 
@@ -78,7 +79,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyList() {
+    public void shouldReturnEmptyListSearchingByStatus() {
         when(storyDao.findByStatus(any(Status.class))).thenReturn(Collections.emptyList());
 
         List<Story> actual = service.showStoryByStatus(Status.TO_DO);
@@ -189,5 +190,32 @@ public class StoryServiceImplTest {
         exception.expectMessage("Invalid story updating");
 
         service.addStoryToSprint(STORY, null);
+    }
+
+    @Test
+    public void shouldShowAllSprints() {
+        when(storyDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
+        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
+
+        List<Story> actual = service.showAllStories(1 , 10);
+
+        assertEquals(STORIES, actual);
+    }
+
+    @Test
+    public void shouldReturnEmptyList() {
+        when(storyDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
+
+        List<Story> actual = service.showAllStories(1 , 10);
+
+        assertEquals(Collections.emptyList(), actual);
+    }
+
+    @Test
+    public void shouldThrowInvalidPaginatingException() {
+        exception.expect(InvalidPaginatingException.class);
+        exception.expectMessage("Invalid number of current page or records per page");
+
+        service.showAllStories(0 ,1);
     }
 }

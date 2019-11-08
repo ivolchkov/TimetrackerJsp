@@ -1,10 +1,10 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: ivolchkov
-  Date: 11/7/19
-  Time: 9:40 PM
+  Date: 11/8/19
+  Time: 10:57 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -37,27 +37,27 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2"><fmt:message key="service.admin.sideBar.users"/></h1>
+                <h1 class="h2"><fmt:message key="service.admin.sideBar.sprints"/></h1>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th><fmt:message key="service.admin.showUsers.name"/></th>
-                        <th><fmt:message key="service.admin.showUsers.surname"/></th>
-                        <th><fmt:message key="service.admin.showUsers.email"/></th>
-                        <th><fmt:message key="service.admin.showUsers.role"/></th>
+                        <th><fmt:message key="service.admin.showSprints.name"/></th>
+                        <th><fmt:message key="service.admin.showSprints.start"/></th>
+                        <th><fmt:message key="service.admin.showSprints.end"/></th>
+                        <th><fmt:message key="service.admin.showSprints.descr"/></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${users}" var="users">
+                    <c:forEach items="${sprints}" var="sprints">
                         <tr>
-                            <td>${users.getId()}</td>
-                            <td>${users.getName()}</td>
-                            <td>${users.getSurname()}</td>
-                            <td>${users.getEmail()}</td>
-                            <td>${users.getRole().getDescription()}</td>
+                            <td>${sprints.getId()}</td>
+                            <td>${sprints.getName()}</td>
+                            <td>${sprints.getStart()}</td>
+                            <td>${sprints.getEnd()}</td>
+                            <td>${sprints.getDescription()}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -80,33 +80,3 @@
 
 </body>
 </html>
-
-
-<%--<div class="table-responsive">--%>
-<%--    <table class="table table-striped table-sm">--%>
-<%--        <thead>--%>
-<%--        <tr>--%>
-<%--            <th>Id</th>--%>
-<%--            <th><fmt:message key="service.admin.showStories.name"/></th>--%>
-<%--            <th><fmt:message key="service.admin.showStories.spentTime"/></th>--%>
-<%--            <th><fmt:message key="service.admin.showStories.descr"/></th>--%>
-<%--            <th><fmt:message key="service.admin.showStories.status"/></th>--%>
-<%--            <th><fmt:message key="service.admin.showStories.goalId"/></th>--%>
-<%--        </tr>--%>
-<%--        </thead>--%>
-<%--        <tbody>--%>
-<%--        <c:forEach items="${stories}" var="stories">--%>
-<%--            <tr>--%>
-<%--                <td>${stories.getId()}</td>--%>
-<%--                <td>${stories.getName()}</td>--%>
-<%--                <td>${stories.getSpentTime()}</td>--%>
-<%--                <td>${stories.getDescription()}</td>--%>
-<%--                <td>${stories.getStatus().getDescription()}</td>--%>
-<%--                <td>${stories.getGoal().getId()}</td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--        </tbody>--%>
-<%--    </table>--%>
-<%--</div>--%>
-
-

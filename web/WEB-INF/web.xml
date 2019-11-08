@@ -29,6 +29,11 @@
     </error-page>
 
     <error-page>
+        <exception-type>java.lang.NullPointerException</exception-type >
+        <location>/error.jsp</location>
+    </error-page>
+
+    <error-page>
         <exception-type>project.exception.InvalidEncodingException</exception-type >
         <location>/error.jsp</location>
     </error-page>

@@ -19,6 +19,10 @@ public interface StoryService {
 
     List<Story> showStoryBySprint(Integer sprintId);
 
+    List<Story> showAllStories(Integer currentPage, Integer recordsPerPage);
+
+    Integer showNumberOfRows();
+
     void addStoryToUser(Story story, User user);
 
     void addStoryToSprint(Story story, Sprint sprint);

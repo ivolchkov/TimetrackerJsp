@@ -2,9 +2,7 @@ package project.context;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import project.command.Command;
-import project.command.admin.ShowProjects;
-import project.command.admin.ShowSprints;
-import project.command.admin.ShowUsers;
+import project.command.admin.*;
 import project.command.developer.AddStory;
 import project.command.scrumMaster.*;
 import project.command.user.SignIn;
@@ -88,9 +86,13 @@ public final class ApplicationContextInjector {
 
     private static final Command SIGN_OUT_COMMAND = new SignOut();
 
-    private static final Command SHOW_PROJECTS_COMMAND = new ShowProjects();
+    private static final Command SHOW_PROJECTS_COMMAND = new ShowProjects(BACKLOG_SERVICE);
 
-    private static final Command SHOW_SPRINTS_COMMAND = new ShowSprints();
+    private static final Command SHOW_GOALS_COMMAND = new ShowGoals(GOAL_SERVICE);
+
+    private static final Command SHOW_STORIES_COMMAND = new ShowStories(STORY_SERVICE);
+
+    private static final Command SHOW_SPRINTS_COMMAND = new ShowSprints(SPRINT_SERVICE);
 
     private static final Command SHOW_USERS_COMMAND = new ShowUsers(USER_SERVICE);
 
@@ -123,6 +125,8 @@ public final class ApplicationContextInjector {
     static {
         ADMIN_COMMANDS.put("showProjects", SHOW_PROJECTS_COMMAND);
         ADMIN_COMMANDS.put("showSprints", SHOW_SPRINTS_COMMAND);
+        ADMIN_COMMANDS.put("showGoals", SHOW_GOALS_COMMAND);
+        ADMIN_COMMANDS.put("showStories", SHOW_STORIES_COMMAND);
         ADMIN_COMMANDS.put("showUsers", SHOW_USERS_COMMAND);
     }
 

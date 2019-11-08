@@ -41,3 +41,11 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at project.repository.AbstractDao.findAll(AbstractDao.java:108)
 	at project.repository.userDao.UserDaoImpl.findAll(UserDaoImpl.java:45)
 	at project.repository.MainRepository.main(MainRepository.java:31)
+WARN  story.StoryServiceImpl: Method:validateParam() Line:109 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:109 - Parameter is not valid
+ERROR story.StoryServiceImpl: Method:showAllStories() Line:80 - Invalid number of current page or records per page
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:116 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:34 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:109 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:109 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:116 - Invalid story updating

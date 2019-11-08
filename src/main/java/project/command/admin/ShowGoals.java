@@ -1,17 +1,17 @@
 package project.command.admin;
 
 import project.command.Command;
-import project.domain.backlog.Backlog;
-import project.service.backlog.BacklogService;
+import project.domain.goal.Goal;
+import project.service.goal.GoalService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class ShowProjects implements Command {
-    private final BacklogService backlogService;
+public class ShowGoals implements Command {
+    private final GoalService goalService;
 
-    public ShowProjects(BacklogService backlogService) {
-        this.backlogService = backlogService;
+    public ShowGoals(GoalService goalService) {
+        this.goalService = goalService;
     }
 
     @Override
@@ -19,11 +19,11 @@ public class ShowProjects implements Command {
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
         int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
 
-        List<Backlog> backlogs = backlogService.showAllBacklogs(currentPage, recordsPerPage);
+        List<Goal> goals = goalService.showAllGoals(currentPage, recordsPerPage);
 
-        request.setAttribute("backlogs", backlogs);
+        request.setAttribute("goals", goals);
 
-        int rows = backlogService.showNumberOfRows();
+        int rows = goalService.showNumberOfRows();
 
         int numberOfPages = rows / recordsPerPage;
 
@@ -31,11 +31,11 @@ public class ShowProjects implements Command {
             numberOfPages += 1;
         }
 
-        request.setAttribute("command", "showProjects");
+        request.setAttribute("command", "showGoals");
         request.setAttribute("numberOfPages", numberOfPages);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("recordsPerPage", recordsPerPage);
 
-        return "showProjects.jsp";
+        return "showGoals.jsp";
     }
 }

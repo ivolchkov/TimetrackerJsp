@@ -5,11 +5,14 @@ import project.domain.sprint.Sprint;
 import project.domain.story.Story;
 import project.domain.user.User;
 import project.entity.story.Status;
+import project.entity.story.StoryEntity;
 import project.exception.InvalidEntityCreation;
 import project.exception.InvalidEntityUpdating;
+import project.exception.InvalidPaginatingException;
 import project.repository.storyDao.StoryDao;
 import project.service.mapper.StoryMapper;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -69,6 +72,27 @@ public class StoryServiceImpl implements StoryService {
         return storyDao.findBySprint(sprintId).stream()
                 .map(mapper::mapStoryEntityToStory)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Story> showAllStories(Integer currentPage, Integer recordsPerPage) {
+        if ( currentPage == 0 || recordsPerPage == 0 ) {
+            LOGGER.error("Invalid number of current page or records per page");
+            throw new InvalidPaginatingException("Invalid number of current page or records per page");
+        }
+
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+        List<StoryEntity> result = storyDao.findAll(offset, recordsPerPage);
+
+        return result.isEmpty() ? Collections.emptyList()
+                : result.stream()
+                .map(mapper::mapStoryEntityToStory)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer showNumberOfRows() {
+        return storyDao.findAmountOfRows();
     }
 
     @Override
