@@ -96,7 +96,7 @@ public final class ApplicationContextInjector {
 
     private static final Command SHOW_USERS_COMMAND = new ShowUsers(USER_SERVICE);
 
-    private static final Command ADD_STORY_COMMAND = new AddStory();
+    private static final Command ADD_STORY_COMMAND = new AddStory(storyService);
 
     private static final Command ADD_DEVELOPER_COMMAND = new AddDeveloper();
 

@@ -25,16 +25,7 @@ public class ShowProjects implements Command {
 
         int rows = backlogService.showNumberOfRows();
 
-        int numberOfPages = rows / recordsPerPage;
-
-        if (numberOfPages % recordsPerPage > 0) {
-            numberOfPages += 1;
-        }
-
-        request.setAttribute("command", "showProjects");
-        request.setAttribute("numberOfPages", numberOfPages);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("recordsPerPage", recordsPerPage);
+        paginating(request, "showProjects", rows, currentPage, recordsPerPage);
 
         return "showProjects.jsp";
     }

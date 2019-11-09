@@ -193,7 +193,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldShowAllSprints() {
+    public void showAllStoriesShouldShowAllStories() {
         when(storyDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
@@ -203,7 +203,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyList() {
+    public void showAllStoriesShouldReturnEmptyList() {
         when(storyDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
 
         List<Story> actual = service.showAllStories(1 , 10);
@@ -212,10 +212,37 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidPaginatingException() {
+    public void showAllStoriesShouldThrowInvalidPaginatingException() {
         exception.expect(InvalidPaginatingException.class);
         exception.expectMessage("Invalid number of current page or records per page");
 
         service.showAllStories(0 ,1);
+    }
+
+    @Test
+    public void showStoriesWithoutUserShouldShowAllStories() {
+        when(storyDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
+        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
+
+        List<Story> actual = service.showStoriesWithoutUser(1 , 10);
+
+        assertEquals(STORIES, actual);
+    }
+
+    @Test
+    public void showStoriesWithoutUserShouldReturnEmptyList() {
+        when(storyDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
+
+        List<Story> actual = service.showStoriesWithoutUser(1 , 10);
+
+        assertEquals(Collections.emptyList(), actual);
+    }
+
+    @Test
+    public void showStoriesWithoutUserShouldThrowInvalidPaginatingException() {
+        exception.expect(InvalidPaginatingException.class);
+        exception.expectMessage("Invalid number of current page or records per page");
+
+        service.showStoriesWithoutUser(0 ,1);
     }
 }

@@ -76,23 +76,32 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     public List<Story> showAllStories(Integer currentPage, Integer recordsPerPage) {
-        if ( currentPage == 0 || recordsPerPage == 0 ) {
-            LOGGER.error("Invalid number of current page or records per page");
-            throw new InvalidPaginatingException("Invalid number of current page or records per page");
-        }
+        paginatingValidation(currentPage, recordsPerPage);
 
         Integer offset = currentPage * recordsPerPage - recordsPerPage;
         List<StoryEntity> result = storyDao.findAll(offset, recordsPerPage);
 
-        return result.isEmpty() ? Collections.emptyList()
-                : result.stream()
-                .map(mapper::mapStoryEntityToStory)
-                .collect(Collectors.toList());
+        return listMapping(result);
+    }
+
+    @Override
+    public List<Story> showStoriesWithoutUser(Integer currentPage, Integer recordsPerPage) {
+        paginatingValidation(currentPage, recordsPerPage);
+
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+        List<StoryEntity> result = storyDao.findWithoutUser(offset, recordsPerPage);
+
+        return listMapping(result);
     }
 
     @Override
     public Integer showNumberOfRows() {
         return storyDao.findAmountOfRows();
+    }
+
+    @Override
+    public Integer showNumberOfRowsWithoutUser() {
+        return storyDao.findAmountOfRowsWithoutUser();
     }
 
     @Override
@@ -116,10 +125,24 @@ public class StoryServiceImpl implements StoryService {
         }
     }
 
+    private void paginatingValidation(Integer currentPage, Integer recordsPerPage) {
+        if (currentPage == 0 || recordsPerPage == 0) {
+            LOGGER.error("Invalid number of current page or records per page");
+            throw new InvalidPaginatingException("Invalid number of current page or records per page");
+        }
+    }
+
     private <T> void validateUpdateParam(Story story, T param) {
         if (Objects.isNull(story) || Objects.isNull(param) ) {
             LOGGER.warn("Invalid story updating");
             throw new InvalidEntityUpdating("Invalid story updating");
         }
+    }
+
+    private List<Story> listMapping(List<StoryEntity> result) {
+        return result.isEmpty() ? Collections.emptyList()
+                : result.stream()
+                .map(mapper::mapStoryEntityToStory)
+                .collect(Collectors.toList());
     }
 }

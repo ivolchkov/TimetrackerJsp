@@ -21,7 +21,11 @@ public interface StoryService {
 
     List<Story> showAllStories(Integer currentPage, Integer recordsPerPage);
 
+    List<Story> showStoriesWithoutUser(Integer currentPage, Integer recordsPerPage);
+
     Integer showNumberOfRows();
+
+    Integer showNumberOfRowsWithoutUser();
 
     void addStoryToUser(Story story, User user);
 

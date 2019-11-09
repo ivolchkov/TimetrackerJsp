@@ -12,6 +12,6 @@
     <title>Sorry for the inconvenience</title>
 </head>
 <body>
-<img src="img/404.jpg" alt = "error" height="1200" width="1900">
+<img src="img/404.jpg" alt = "error" height="1200">
 </body>
 </html>

@@ -9,6 +9,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>DeveloperServlet</servlet-name>
+        <servlet-class>project.servlet.developer.DeveloperServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>project.servlet.user.UserServlet</servlet-class>
     </servlet>
@@ -16,6 +21,11 @@
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DeveloperServlet</servlet-name>
+        <url-pattern>/developer</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -30,6 +40,11 @@
 
     <error-page>
         <exception-type>java.lang.NullPointerException</exception-type >
+        <location>/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>project.exception.InvalidEntityUpdating</exception-type >
         <location>/error.jsp</location>
     </error-page>
 

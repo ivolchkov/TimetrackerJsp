@@ -25,16 +25,7 @@ public class ShowSprints implements Command {
 
         int rows = sprintService.showNumberOfRows();
 
-        int numberOfPages = rows / recordsPerPage;
-
-        if (numberOfPages % recordsPerPage > 0) {
-            numberOfPages += 1;
-        }
-
-        request.setAttribute("command", "showSprints");
-        request.setAttribute("numberOfPages", numberOfPages);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("recordsPerPage", recordsPerPage);
+        paginating(request, "showSprints", rows, currentPage, recordsPerPage);
 
         return "showSprints.jsp";
     }

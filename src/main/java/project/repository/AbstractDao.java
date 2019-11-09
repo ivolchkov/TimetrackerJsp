@@ -64,7 +64,7 @@ public abstract class AbstractDao<E> {
         }
     }
 
-    protected List<E> findEntitiesByForeignKey(Integer id, String query) {
+    protected List<E> findEntitiesByForeignKey(Integer id, String query, ) {
         List<E> result = new ArrayList<>();
 
         try (Connection connection = connector.getConnection();

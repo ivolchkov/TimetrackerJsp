@@ -22,31 +22,31 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showProjects&currentPage=1&recordsPerPage=20">
+                <a class="nav-link" href="admin?command=showProjects&currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.admin.sideBar.projects"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showGoals&currentPage=1&recordsPerPage=20">
+                <a class="nav-link" href="admin?command=showGoals&currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.admin.sideBar.goals"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showStories&currentPage=1&recordsPerPage=20">
+                <a class="nav-link" href="admin?command=showStories&currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.admin.sideBar.stories"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showSprints&currentPage=1&recordsPerPage=20">
+                <a class="nav-link" href="admin?command=showSprints&currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.admin.sideBar.sprints"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showUsers&currentPage=1&recordsPerPage=20">
+                <a class="nav-link" href="admin?command=showUsers&currentPage=1&recordsPerPage=10">
                     <span data-feather="users"></span>
                     <fmt:message key="service.admin.sideBar.users"/>
                 </a>

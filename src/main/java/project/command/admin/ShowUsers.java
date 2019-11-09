@@ -25,16 +25,7 @@ public class ShowUsers implements Command {
 
         int rows = userService.showNumberOfRows();
 
-        int numberOfPages = rows / recordsPerPage;
-
-        if (numberOfPages % recordsPerPage > 0) {
-            numberOfPages += 1;
-        }
-
-        request.setAttribute("command", "showUsers");
-        request.setAttribute("numberOfPages", numberOfPages);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("recordsPerPage", recordsPerPage);
+        paginating(request, "showUsers", rows, currentPage, recordsPerPage);
 
         return "showUsers.jsp";
     }

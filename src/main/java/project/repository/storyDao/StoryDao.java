@@ -17,6 +17,10 @@ public interface StoryDao extends CrudRepository<Integer, StoryEntity> {
 
     List<StoryEntity> findBySprint(Integer id);
 
+    List<StoryEntity> findWithoutUser(Integer offset, Integer amount);
+
+    Integer findAmountOfRowsWithoutUser();
+
     void updateUserId(StoryEntity story);
 
     void updateSprintId(StoryEntity story);

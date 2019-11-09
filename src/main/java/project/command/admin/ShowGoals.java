@@ -25,16 +25,7 @@ public class ShowGoals implements Command {
 
         int rows = goalService.showNumberOfRows();
 
-        int numberOfPages = rows / recordsPerPage;
-
-        if (numberOfPages % recordsPerPage > 0) {
-            numberOfPages += 1;
-        }
-
-        request.setAttribute("command", "showGoals");
-        request.setAttribute("numberOfPages", numberOfPages);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("recordsPerPage", recordsPerPage);
+        paginating(request, "showGoals", rows, currentPage, recordsPerPage);
 
         return "showGoals.jsp";
     }
