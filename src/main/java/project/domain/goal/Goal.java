@@ -15,6 +15,12 @@ public class Goal {
         this.backlog = null;
     }
 
+    public Goal(String name, Backlog backlog) {
+        this.id = null;
+        this.name = name;
+        this.backlog = backlog;
+    }
+
     public Goal(Integer id, String name, Backlog backlog) {
         this.id = id;
         this.name = name;

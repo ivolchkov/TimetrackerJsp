@@ -3,6 +3,7 @@ package project.service.goal;
 import org.apache.log4j.Logger;
 import project.domain.goal.Goal;
 import project.entity.goal.GoalEntity;
+import project.exception.EntityNotFoundException;
 import project.exception.InvalidEntityCreation;
 import project.exception.InvalidPaginatingException;
 import project.repository.goalDao.GoalDao;
@@ -11,6 +12,7 @@ import project.service.mapper.GoalMapper;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class GoalServiceImpl implements GoalService {
@@ -32,6 +34,22 @@ public class GoalServiceImpl implements GoalService {
         }
 
         return goalDao.save(mapper.mapGoalToGoalEntity(goal));
+    }
+
+    @Override
+    public Goal showGoalById(Integer id) {
+        if (Objects.nonNull(id)) {
+            Optional<GoalEntity> entity = goalDao.findById(id);
+
+            if ( entity.isPresent() ) {
+                return mapper.mapGoalEntityToGoal(entity.get());
+            }
+
+            LOGGER.warn("There is no goal by this id");
+            throw new EntityNotFoundException("There is no goal by this id");
+        }
+        LOGGER.warn("There is no goal by this id");
+        throw new EntityNotFoundException("There is no goal by this id");
     }
 
     @Override

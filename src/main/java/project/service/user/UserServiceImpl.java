@@ -55,13 +55,13 @@ public class UserServiceImpl implements UserService {
 
         if (!entity.isPresent()) {
             LOGGER.warn("There is no user with this e-mail");
-            throw new UserNotFoundException("There is no user with this e-mail");
+            throw new EntityNotFoundException("There is no user with this e-mail");
         } else {
             if (entity.get().getPassword().equals(encodedPassword)) {
                 return mapper.mapUserEntityToUser(entity.get());
             } else {
                 LOGGER.warn("Incorrect password");
-                throw new UserNotFoundException("Incorrect password");
+                throw new EntityNotFoundException("Incorrect password");
             }
         }
     }

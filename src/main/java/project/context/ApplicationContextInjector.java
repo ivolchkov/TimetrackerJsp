@@ -104,13 +104,17 @@ public final class ApplicationContextInjector {
 
     private static final Command SHOW_FREE_STORIES_COMMAND = new ShowFreeStories(STORY_SERVICE);
 
-    private static final Command ADD_GOAL_COMMAND = new AddGoal();
+    private static final Command SHOW_ALL_BACKLOGS_COMMAND = new ShowAllBacklogs(BACKLOG_SERVICE);
+
+    private static final Command ADD_GOAL_COMMAND = new AddGoal(BACKLOG_SERVICE, GOAL_SERVICE);
 
     private static final Command CREATE_PROJECT_COMMAND = new CreateProject(BACKLOG_SERVICE);
 
-    private static final Command CREATE_SPRINT_COMMAND = new CreateSprint();
+    private static final Command CREATE_SPRINT_COMMAND = new CreateSprint(SPRINT_SERVICE);
 
-    private static final Command CREATE_STORY_COMMAND = new CreateStory();
+    private static final Command SHOW_ALL_GOALS_COMMAND = new ShowAllGoals(GOAL_SERVICE);
+
+    private static final Command CREATE_STORY_COMMAND = new CreateStory(STORY_SERVICE, GOAL_SERVICE);
 
     private static final Command DEFAULT_COMMAND = request -> {
         throw new InvalidCommandException("There is no such command");
@@ -146,9 +150,11 @@ public final class ApplicationContextInjector {
 
     static {
         SCRUM_MASTER_COMMANDS.put("addGoal", ADD_GOAL_COMMAND);
+        SCRUM_MASTER_COMMANDS.put("showAllBacklogs", SHOW_ALL_BACKLOGS_COMMAND);
         SCRUM_MASTER_COMMANDS.put("createProject", CREATE_PROJECT_COMMAND);
         SCRUM_MASTER_COMMANDS.put("createSprint", CREATE_SPRINT_COMMAND);
         SCRUM_MASTER_COMMANDS.put("createStory", CREATE_STORY_COMMAND);
+        SCRUM_MASTER_COMMANDS.put("showAllGoals", SHOW_ALL_GOALS_COMMAND);
     }
 
 

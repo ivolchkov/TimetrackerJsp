@@ -6,6 +6,7 @@ import project.domain.story.Story;
 import project.domain.user.User;
 import project.entity.story.Status;
 import project.entity.story.StoryEntity;
+import project.exception.EntityNotFoundException;
 import project.exception.InvalidEntityCreation;
 import project.exception.InvalidEntityUpdating;
 import project.exception.InvalidPaginatingException;
@@ -15,6 +16,7 @@ import project.service.mapper.StoryMapper;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StoryServiceImpl implements StoryService {

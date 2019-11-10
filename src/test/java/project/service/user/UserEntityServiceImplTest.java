@@ -11,9 +11,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import project.domain.user.User;
 import project.entity.user.UserEntity;
 import project.exception.AlreadyRegisteredException;
+import project.exception.EntityNotFoundException;
 import project.exception.InvalidPaginatingException;
 import project.exception.InvalidRegistrationException;
-import project.exception.UserNotFoundException;
 import project.repository.userDao.UserDao;
 import project.service.encoder.PasswordEncoder;
 import project.service.mapper.UserMapper;
@@ -107,7 +107,7 @@ public class UserEntityServiceImplTest {
 
     @Test
     public void shouldThrowUserNotFoundExceptionWithIncorrectPassword() {
-        exception.expect(UserNotFoundException.class);
+        exception.expect(EntityNotFoundException.class);
         exception.expectMessage("Incorrect password");
 
         when(encoder.encode(any(String.class))).thenReturn(Optional.of("test"));
@@ -118,7 +118,7 @@ public class UserEntityServiceImplTest {
 
     @Test
     public void shouldThrowUserNotFoundExceptionWithIncorrectEmail() {
-        exception.expect(UserNotFoundException.class);
+        exception.expect(EntityNotFoundException.class);
         exception.expectMessage("There is no user with this e-mail");
         when(encoder.encode(any(String.class))).thenReturn(Optional.of("test"));
         when(repository.findByEmail(any(String.class))).thenReturn(Optional.empty());

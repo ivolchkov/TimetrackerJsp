@@ -17,8 +17,11 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="css/bootstrap.css" rel="stylesheet">
+
     <!-- Custom styles for this template -->
     <link href="css/service.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -33,38 +36,28 @@
                 <h1 class="h2"><fmt:message key="service.scrumMaster.sideBar.createProject"/></h1>
             </div>
             <!-- Material form contact -->
-            <div class="card">
-
-                <h5 class="card-header info-color white-text text-center py-4">
-                    <strong>Create project</strong>
-                </h5>
-
+            <div class="row">
+            <div class="col-sm-6">
                 <!--Card content-->
                 <div class="card-body px-lg-5 pt-0">
-
-                    <!-- Form -->
-                    <form class="text-center" style="color: #757575;" method="POST" action="scrum-master">
+                    <form class="text-center border border-light p-5" method="POST" action="scrum-master">
                         <input type="hidden" name="command" value="createProject"/>
+
+                        <p class="h4 mb-4"><fmt:message key="createProject.info"/></p>
+
                         <!-- Name -->
-                        <div class="md-form mt-3">
-                            <input type="text" id="projectName" class="form-control" name="projectName">
-                            <label for="projectName"><fmt:message key="createProject.projectName"/></label>
+                        <label for="defaultContactFormName"></label><input type="text" id="defaultContactFormName"
+                                                                           class="form-control mb-4" name="projectName" required placeholder=<fmt:message key="createProject.projectName"/>>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea2"></label><textarea class="form-control rounded-0" name ="description" id="exampleFormControlTextarea2" rows="5" placeholder=<fmt:message key="createProject.description"/>></textarea>
                         </div>
 
-                        <!--Message-->
-                        <div class="md-form">
-                            <textarea id="description" class="form-control md-textarea" rows="5" name ="description"></textarea>
-                            <label for="description"><fmt:message key="createProject.description"/></label>
-                        </div>
-
-                        <!-- Send button -->
-                        <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit"><fmt:message key="createProject.submit"/></button>
-
+                        <button class="btn btn-info btn-block" type="submit"><fmt:message key="createProject.submit"/></button>
                     </form>
-                    <!-- Form -->
-
                 </div>
 
+            </div>
             </div>
         </main>
     </div>

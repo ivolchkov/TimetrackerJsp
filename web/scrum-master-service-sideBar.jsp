@@ -28,19 +28,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="scrum-master?command=showAllBacklogs">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.scrumMaster.sideBar.createGoal"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="scrum-master?command=showAllGoals">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.scrumMaster.sideBar.createStory"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="createSprint.jsp">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.scrumMaster.sideBar.createSprint"/>
                 </a>
