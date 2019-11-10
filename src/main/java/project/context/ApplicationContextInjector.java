@@ -4,6 +4,8 @@ import org.apache.commons.dbcp.BasicDataSource;
 import project.command.Command;
 import project.command.admin.*;
 import project.command.developer.AddStory;
+import project.command.developer.ShowDeveloperStories;
+import project.command.developer.ShowFreeStories;
 import project.command.scrumMaster.*;
 import project.command.user.SignIn;
 import project.command.user.SignOut;
@@ -96,13 +98,15 @@ public final class ApplicationContextInjector {
 
     private static final Command SHOW_USERS_COMMAND = new ShowUsers(USER_SERVICE);
 
-    private static final Command ADD_STORY_COMMAND = new AddStory(storyService);
+    private static final Command ADD_STORY_COMMAND = new AddStory(STORY_SERVICE);
 
-    private static final Command ADD_DEVELOPER_COMMAND = new AddDeveloper();
+    private static final Command SHOW_DEVELOPERS_STORIES_COMMAND = new ShowDeveloperStories(STORY_SERVICE);
+
+    private static final Command SHOW_FREE_STORIES_COMMAND = new ShowFreeStories(STORY_SERVICE);
 
     private static final Command ADD_GOAL_COMMAND = new AddGoal();
 
-    private static final Command CREATE_PROJECT_COMMAND = new CreateProject();
+    private static final Command CREATE_PROJECT_COMMAND = new CreateProject(BACKLOG_SERVICE);
 
     private static final Command CREATE_SPRINT_COMMAND = new CreateSprint();
 
@@ -134,12 +138,13 @@ public final class ApplicationContextInjector {
 
     static {
         DEVELOPER_COMMANDS.put("addStory", ADD_STORY_COMMAND);
+        DEVELOPER_COMMANDS.put("showDeveloperStories", SHOW_DEVELOPERS_STORIES_COMMAND);
+        DEVELOPER_COMMANDS.put("showFreeStories", SHOW_FREE_STORIES_COMMAND);
     }
 
     private static final Map<String, Command> SCRUM_MASTER_COMMANDS = new HashMap<>();
 
     static {
-        SCRUM_MASTER_COMMANDS.put("addDeveloper", ADD_DEVELOPER_COMMAND);
         SCRUM_MASTER_COMMANDS.put("addGoal", ADD_GOAL_COMMAND);
         SCRUM_MASTER_COMMANDS.put("createProject", CREATE_PROJECT_COMMAND);
         SCRUM_MASTER_COMMANDS.put("createSprint", CREATE_SPRINT_COMMAND);

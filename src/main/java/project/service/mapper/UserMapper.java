@@ -19,11 +19,6 @@ public class UserMapper {
     public UserEntity mapUserToUserEntity(User domain, Backlog backlog) {
         return UserEntity.builder()
                 .withId(domain.getId())
-                .withName(domain.getName())
-                .withSurname(domain.getSurname())
-                .withEmail(domain.getEmail())
-                .withPassword(domain.getPassword())
-                .withRole(domain.getRole())
                 .withBacklog(BacklogEntity.builder()
                         .withId(backlog.getId())
                         .build())

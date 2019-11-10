@@ -17,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Admin service</title>
+    <title>Scrum master service</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
@@ -32,9 +32,10 @@
     <ul class="pagination">
         <c:if test="${currentPage != 1}">
             <li class="page-item"><a class="page-link"
-                                     href="admin?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}"><fmt:message key="service.paginating.prev"/></a>
+                                     href="scrum-master?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}"><fmt:message key="service.paginating.prev"/></a>
             </li>
         </c:if>
+
         <c:if test="${numberOfPages ne 1}">
             <c:forEach begin="1" end="${numberOfPages}" var="i">
                 <c:choose>
@@ -45,7 +46,7 @@
                     </c:when>
                     <c:otherwise>
                         <li class="page-item"><a class="page-link"
-                                                 href="admin?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${i}">${i}</a>
+                                                 href="developer?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${i}">${i}</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
@@ -54,7 +55,7 @@
 
         <c:if test="${currentPage lt numberOfPages}">
             <li class="page-item"><a class="page-link"
-                                     href="admin?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}"><fmt:message key="service.paginating.next"/></a>
+                                     href="scrum-master?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}"><fmt:message key="service.paginating.next"/></a>
             </li>
         </c:if>
     </ul>

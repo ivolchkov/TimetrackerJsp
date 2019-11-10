@@ -10,7 +10,7 @@ public interface UserService {
 
     User login(String email, String password);
 
-    List<User> findTeam(Integer backlogId);
+    List<User> findTeam(Integer backlogId, Integer currentPage, Integer recordsPerPage);
 
     List<User> findAll(Integer currentPage, Integer recordsPerPage);
 

@@ -33,12 +33,6 @@ public class UserMapperTest {
 
     private static final UserEntity ENTITY_WITH_BACKLOG = UserEntity.builder()
             .withId(1)
-            .withName("Test")
-            .withName("Test")
-            .withSurname("Test")
-            .withEmail("Test")
-            .withPassword("Test")
-            .withRole(Role.ADMIN)
             .withBacklog(BACKLOG_ENTITY)
             .build();
 

@@ -11,13 +11,13 @@ import java.util.List;
 public interface StoryService {
     boolean createStory(Story story);
 
-    List<Story> showStoryByStatus(Status status);
+    List<Story> showStoryByStatus(Status status, Integer currentPage, Integer recordsPerPage);
 
-    List<Story> showStoryByGoal(Integer goalId);
+    List<Story> showStoryByGoal(Integer goalId, Integer currentPage, Integer recordsPerPage);
 
-    List<Story> showStoryByUser(Integer userId);
+    List<Story> showStoryByUser(Integer userId, Integer currentPage, Integer recordsPerPage);
 
-    List<Story> showStoryBySprint(Integer sprintId);
+    List<Story> showStoryBySprint(Integer sprintId, Integer currentPage, Integer recordsPerPage);
 
     List<Story> showAllStories(Integer currentPage, Integer recordsPerPage);
 
@@ -26,6 +26,8 @@ public interface StoryService {
     Integer showNumberOfRows();
 
     Integer showNumberOfRowsWithoutUser();
+
+    Integer showNumberOfRowsByUserId(Integer id);
 
     void addStoryToUser(Story story, User user);
 

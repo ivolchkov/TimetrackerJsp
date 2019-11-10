@@ -13,6 +13,12 @@ public class Backlog {
         this.description = null;
     }
 
+    public Backlog(String projectName, String description) {
+        this.id = null;
+        this.projectName = projectName;
+        this.description = description;
+    }
+
     public Backlog(Integer id, String projectName, String description) {
         this.id = id;
         this.projectName = projectName;

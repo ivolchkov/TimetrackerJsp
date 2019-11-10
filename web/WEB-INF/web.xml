@@ -14,6 +14,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>ScrumMasterServlet</servlet-name>
+        <servlet-class>project.servlet.scrumMaster.ScrumMasterServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>project.servlet.user.UserServlet</servlet-class>
     </servlet>
@@ -29,59 +34,64 @@
     </servlet-mapping>
 
     <servlet-mapping>
+        <servlet-name>ScrumMasterServlet</servlet-name>
+        <url-pattern>/scrum-master</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/user</url-pattern>
     </servlet-mapping>
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/error.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>404</error-code>-->
+<!--        <location>/error.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <exception-type>java.lang.NullPointerException</exception-type >
-        <location>/error.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <exception-type>java.lang.NullPointerException</exception-type >-->
+<!--        <location>/error.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <exception-type>project.exception.InvalidEntityUpdating</exception-type >
-        <location>/error.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <exception-type>project.exception.InvalidEntityUpdating</exception-type >-->
+<!--        <location>/error.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <exception-type>project.exception.InvalidEncodingException</exception-type >
-        <location>/error.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <exception-type>project.exception.InvalidEncodingException</exception-type >-->
+<!--        <location>/error.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <exception-type>project.exception.InvalidCommandException</exception-type >
-        <location>/error.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <exception-type>project.exception.InvalidCommandException</exception-type >-->
+<!--        <location>/error.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <exception-type>project.exception.InvalidPaginatingException</exception-type >
-        <location>/error.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <exception-type>project.exception.InvalidPaginatingException</exception-type >-->
+<!--        <location>/error.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <exception-type>project.exception.DatabaseRuntimeException</exception-type >
-        <location>/error.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <exception-type>project.exception.DatabaseRuntimeException</exception-type >-->
+<!--        <location>/error.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <exception-type>project.exception.UserNotFoundException</exception-type >
-        <location>/sign-in.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <exception-type>project.exception.UserNotFoundException</exception-type >-->
+<!--        <location>/sign-in.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <exception-type>project.exception.InvalidRegistrationException</exception-type >
-        <location>/register.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <exception-type>project.exception.InvalidRegistrationException</exception-type >-->
+<!--        <location>/register.jsp</location>-->
+<!--    </error-page>-->
 
-    <error-page>
-        <exception-type>project.exception.AlreadyRegisteredException</exception-type >
-        <location>/register.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <exception-type>project.exception.AlreadyRegisteredException</exception-type >-->
+<!--        <location>/register.jsp</location>-->
+<!--    </error-page>-->
 
 
 </web-app>

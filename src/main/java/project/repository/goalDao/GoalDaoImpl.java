@@ -15,7 +15,7 @@ public class GoalDaoImpl extends AbstractDao<GoalEntity> implements GoalDao {
     private static final String INSERT_GOAL = "INSERT INTO timetracking.goals(goal_name, backlog_id) VALUES(?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.goals WHERE goal_id = ?";
     private static final String FIND_ALL_ROWS = "SELECT COUNT(goal_id) FROM timetracking.goals";
-    private static final String FIND_BY_BACKLOG = "SELECT * FROM timetracking.goals WHERE backlog_id = ?";
+    private static final String FIND_BY_BACKLOG = "SELECT * FROM timetracking.goals WHERE backlog_id = ? LIMIT ?, ?";
     private static final String FIND_ALL_GOALS = "SELECT * FROM timetracking.goals LIMIT ?, ?";
     private static final String UPDATE_GOAL = "UPDATE timetracking.goals SET goal_name = ?, backlog_id = ? WHERE goal_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.goals WHERE goal_id = ?";
@@ -79,7 +79,7 @@ public class GoalDaoImpl extends AbstractDao<GoalEntity> implements GoalDao {
     }
 
     @Override
-    public List<GoalEntity> findByBacklog(Integer id) {
-        return findEntitiesByForeignKey(id, FIND_BY_BACKLOG);
+    public List<GoalEntity> findByBacklog(Integer id, Integer offset, Integer amount) {
+        return findEntitiesByForeignKey(id, FIND_BY_BACKLOG, offset, amount);
     }
 }

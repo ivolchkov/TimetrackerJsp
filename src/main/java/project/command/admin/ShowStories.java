@@ -23,7 +23,7 @@ public class ShowStories implements Command {
 
         request.setAttribute("stories", stories);
 
-        int rows = storyService.showNumberOfRowsWithoutUser();
+        int rows = storyService.showNumberOfRows();
 
         paginating(request, "showStories", rows, currentPage, recordsPerPage);
 

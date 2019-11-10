@@ -19,7 +19,7 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.users WHERE user_id = ?";
     private static final String FIND_ALL_USERS = "SELECT * FROM timetracking.users LIMIT ?, ?";
     private static final String FIND_ALL_ROWS = "SELECT COUNT(user_id) FROM timetracking.users";
-    private static final String FIND_BY_BACKLOG = "SELECT * FROM timetracking.users WHERE backlog_id = ?";
+    private static final String FIND_BY_BACKLOG = "SELECT * FROM timetracking.users WHERE backlog_id = ? LIMIT ?, ?";
     private static final String FIND_BY_EMAIL = "SELECT * FROM timetracking.users WHERE user_email = ?";
     private static final String UPDATE_USER = "UPDATE timetracking.users SET user_name = ?, user_surname = ?, user_email = ?, user_password = ?, user_role = ?, backlog_id = ? WHERE user_id = ?";
     private static final String UPDATE_USER_BY_BACKLOG = "UPDATE timetracking.users SET backlog_id = ? WHERE user_id = ?";
@@ -66,8 +66,8 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     }
 
     @Override
-    public List<UserEntity> findByBacklog(Integer id) {
-        return findEntitiesByForeignKey(id, FIND_BY_BACKLOG);
+    public List<UserEntity> findByBacklog(Integer id, Integer offset, Integer amount) {
+        return findEntitiesByForeignKey(id, FIND_BY_BACKLOG, offset, amount);
     }
 
     @Override

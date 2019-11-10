@@ -30,7 +30,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2"><fmt:message key="service.developer.sideBar.freeStories"/></h1>
+                <h1 class="h2"><fmt:message key="service.developer.sideBar.yourStories"/></h1>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
@@ -42,7 +42,6 @@
                         <th><fmt:message key="service.admin.showStories.descr"/></th>
                         <th><fmt:message key="service.admin.showStories.status"/></th>
                         <th><fmt:message key="service.admin.showStories.goalId"/></th>
-                        <th><fmt:message key="service.developer.freeStories.takeStory"/></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -54,17 +53,6 @@
                             <td>${stories.getDescription()}</td>
                             <td>${stories.getStatus().getDescription()}</td>
                             <td>${stories.getGoal().getId()}</td>
-                            <td class="nav-item text-nowrap">
-                                <form action="developer" method="post">
-                                    <input type="hidden" name="command" value="addStory"/>
-                                    <input type="hidden" name="storyId" value=${stories.getId()}>
-                                    <input type="hidden" name="currentPage" value=${currentPage}>
-                                    <input type="hidden" name="recordsPerPage" value=${recordsPerPage}>
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        <fmt:message key="service.developer.freeStories.take"/>
-                                    </button>
-                                </form>
-                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface UserDao extends CrudRepository<Integer, UserEntity> {
     Optional<UserEntity> findByEmail(String email);
 
-    List<UserEntity> findByBacklog(Integer id);
+    List<UserEntity> findByBacklog(Integer id, Integer offset, Integer amount);
 
     void updateBacklogId(UserEntity user);
 

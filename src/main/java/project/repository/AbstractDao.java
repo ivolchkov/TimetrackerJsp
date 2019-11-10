@@ -45,12 +45,14 @@ public abstract class AbstractDao<E> {
         }
     }
 
-    protected List<E> findByStringParam(String data, String query) {
+    protected List<E> findByStringParam(String data, String query, Integer offset, Integer amount) {
         List<E> result = new ArrayList<>();
 
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, data);
+            statement.setInt(2, offset);
+            statement.setInt(3, amount);
             ResultSet entities = statement.executeQuery();
 
             while(entities.next()) {
@@ -64,12 +66,14 @@ public abstract class AbstractDao<E> {
         }
     }
 
-    protected List<E> findEntitiesByForeignKey(Integer id, String query, ) {
+    protected List<E> findEntitiesByForeignKey(Integer id, String query, Integer offset, Integer amount) {
         List<E> result = new ArrayList<>();
 
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, offset);
+            preparedStatement.setInt(3, amount);
 
             ResultSet stories = preparedStatement.executeQuery();
 
@@ -94,6 +98,20 @@ public abstract class AbstractDao<E> {
         } catch (SQLException e) {
             LOGGER.error("Invalid entities count" , e);
             throw new DatabaseRuntimeException("Invalid entities count", e);
+        }
+    }
+
+    protected Integer findNumberOfRowsById(String query, Integer id) {
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+
+            ResultSet count = statement.executeQuery();
+
+            return count.next() ? count.getInt(1) : 0;
+        } catch (SQLException e) {
+            LOGGER.error("Invalid entities count by id" , e);
+            throw new DatabaseRuntimeException("Invalid entities count by id", e);
         }
     }
 

@@ -8,7 +8,7 @@ public interface Command {
     default void paginating(HttpServletRequest request, String command, int rows, int currentPage, int recordsPerPage) {
         int numberOfPages = rows / recordsPerPage;
 
-        if (numberOfPages % recordsPerPage > 0) {
+        if (numberOfPages % recordsPerPage > 0 && rows % recordsPerPage != 0) {
             numberOfPages += 1;
         }
 

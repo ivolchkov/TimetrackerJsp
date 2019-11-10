@@ -32,28 +32,30 @@
     <ul class="pagination">
         <c:if test="${currentPage != 1}">
             <li class="page-item"><a class="page-link"
-                                     href="developer?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}"><fmt:message key="service.paginating.prev"/></a>
+                                     href="developer?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}"><fmt:message
+                    key="service.paginating.prev"/></a>
             </li>
         </c:if>
-
-        <c:forEach begin="1" end="${numberOfPages}" var="i">
-            <c:choose>
-                <c:when test="${currentPage eq i}">
-                    <li class="page-item active"><a class="page-link">
-                            ${i} <span class="sr-only">(current)</span></a>
-                    </li>
-                </c:when>
-                <c:otherwise>
-                    <li class="page-item"><a class="page-link"
-                                             href="developer?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${i}">${i}</a>
-                    </li>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-
+        <c:if test="${numberOfPages ne 1}">
+            <c:forEach begin="1" end="${numberOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <li class="page-item active"><a class="page-link">
+                                ${i} <span class="sr-only">(current)</span></a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link"
+                                                 href="developer?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${i}">${i}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </c:if>
         <c:if test="${currentPage lt numberOfPages}">
             <li class="page-item"><a class="page-link"
-                                     href="developer?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}"><fmt:message key="service.paginating.next"/></a>
+                                     href="developer?command=${command}&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}"><fmt:message
+                    key="service.paginating.next"/></a>
             </li>
         </c:if>
     </ul>

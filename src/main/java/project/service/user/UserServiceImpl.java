@@ -8,7 +8,6 @@ import project.exception.*;
 import project.repository.userDao.UserDao;
 import project.service.encoder.PasswordEncoder;
 import project.service.mapper.UserMapper;
-import project.service.validator.UserValidator;
 import project.service.validator.Validator;
 
 import java.util.Collections;
@@ -68,29 +67,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findTeam(Integer backlogId) {
-        List<UserEntity> result = userDao.findByBacklog(backlogId);
+    public List<User> findTeam(Integer backlogId, Integer currentPage, Integer recordsPerPage) {
+        paginatingValidation(currentPage, recordsPerPage);
 
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+        List<UserEntity> result = userDao.findByBacklog(backlogId, offset, recordsPerPage);
+
+        return listMapping(result);
+    }
+
+    @Override
+    public List<User> findAll(Integer currentPage, Integer recordsPerPage) {
+        paginatingValidation(currentPage, recordsPerPage);
+
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+        List<UserEntity> result = userDao.findAll(offset, recordsPerPage);
+
+        return listMapping(result);
+    }
+
+    private List<User> listMapping(List<UserEntity> result) {
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapUserEntityToUser)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<User> findAll(Integer currentPage, Integer recordsPerPage) {
-        if ( currentPage == 0 || recordsPerPage == 0 ) {
+    private void paginatingValidation(Integer currentPage, Integer recordsPerPage) {
+        if (currentPage == 0 || recordsPerPage == 0) {
             LOGGER.error("Invalid number of current page or records per page");
             throw new InvalidPaginatingException("Invalid number of current page or records per page");
         }
-
-        Integer offset = currentPage * recordsPerPage - recordsPerPage;
-        List<UserEntity> result = userDao.findAll(offset, recordsPerPage);
-
-        return result.isEmpty() ? Collections.emptyList()
-                : result.stream()
-                .map(mapper::mapUserEntityToUser)
-                .collect(Collectors.toList());
     }
 
     @Override

@@ -39,37 +39,49 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public List<Story> showStoryByStatus(Status status) {
+    public List<Story> showStoryByStatus(Status status, Integer currentPage, Integer recordsPerPage) {
         validateParam(status);
+        paginatingValidation(currentPage, recordsPerPage);
 
-        return storyDao.findByStatus(status).stream()
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+
+        return storyDao.findByStatus(status, offset, recordsPerPage).stream()
                 .map(mapper::mapStoryEntityToStory)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Story> showStoryByGoal(Integer goalId) {
+    public List<Story> showStoryByGoal(Integer goalId, Integer currentPage, Integer recordsPerPage) {
         validateParam(goalId);
+        paginatingValidation(currentPage, recordsPerPage);
 
-        return storyDao.findByGoal(goalId).stream()
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+
+        return storyDao.findByGoal(goalId, offset, recordsPerPage).stream()
                 .map(mapper::mapStoryEntityToStory)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Story> showStoryByUser(Integer userId) {
+    public List<Story> showStoryByUser(Integer userId, Integer currentPage, Integer recordsPerPage) {
         validateParam(userId);
+        paginatingValidation(currentPage, recordsPerPage);
 
-        return storyDao.findByUser(userId).stream()
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+
+        return storyDao.findByUser(userId, offset, recordsPerPage).stream()
                 .map(mapper::mapStoryEntityToStory)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Story> showStoryBySprint(Integer sprintId) {
+    public List<Story> showStoryBySprint(Integer sprintId, Integer currentPage, Integer recordsPerPage) {
         validateParam(sprintId);
+        paginatingValidation(currentPage, recordsPerPage);
 
-        return storyDao.findBySprint(sprintId).stream()
+        Integer offset = currentPage * recordsPerPage - recordsPerPage;
+
+        return storyDao.findBySprint(sprintId, offset, recordsPerPage).stream()
                 .map(mapper::mapStoryEntityToStory)
                 .collect(Collectors.toList());
     }
@@ -102,6 +114,11 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public Integer showNumberOfRowsWithoutUser() {
         return storyDao.findAmountOfRowsWithoutUser();
+    }
+
+    @Override
+    public Integer showNumberOfRowsByUserId(Integer id) {
+        return storyDao.findAmountOfRowsByUser(id);
     }
 
     @Override

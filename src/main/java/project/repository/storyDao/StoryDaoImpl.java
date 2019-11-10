@@ -19,17 +19,18 @@ public class StoryDaoImpl extends AbstractDao<StoryEntity> implements StoryDao {
 
     private static final String INSERT_STORY = "INSERT INTO timetracking.stories(story_name, story_spent_time, story_description, story_status, goal_id) VALUES(?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.stories WHERE story_id = ?";
-    private static final String FIND_BY_GOAL = "SELECT * FROM timetracking.stories WHERE goal_id = ?";
-    private static final String FIND_BY_USER = "SELECT * FROM timetracking.stories WHERE user_id = ?";
-    private static final String FIND_BY_SPRINT = "SELECT * FROM timetracking.stories WHERE sprint_id = ?";
+    private static final String FIND_BY_GOAL = "SELECT * FROM timetracking.stories WHERE goal_id = ? LIMIT ?, ?";
+    private static final String FIND_BY_USER = "SELECT * FROM timetracking.stories WHERE user_id = ? LIMIT ?, ?";
+    private static final String FIND_BY_SPRINT = "SELECT * FROM timetracking.stories WHERE sprint_id = ? LIMIT ?, ?";
     private static final String FIND_ALL_ROWS = "SELECT COUNT(story_id) FROM timetracking.stories";
     private static final String FIND_ALL_ROWS_WITHOUT_USER = "SELECT COUNT(story_id) FROM timetracking.stories WHERE user_id IS NULL";
+    private static final String FIND_ALL_ROWS_BY_USER = "SELECT COUNT(story_id) FROM timetracking.stories WHERE user_id = ?";
     private static final String FIND_ALL_STORIES = "SELECT * FROM timetracking.stories LIMIT ?, ?";
     private static final String FIND_WITHOUT_USER = "SELECT * FROM timetracking.stories WHERE user_id IS NULL LIMIT ?, ?";
     private static final String UPDATE_STORY = "UPDATE timetracking.stories SET story_name = ?, story_spent_time = ?, story_description = ?, story_status = ?, goal_id = ?, user_id = ?, sprint_id = ? WHERE story_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.stories WHERE story_id = ?";
-    private static final String FIND_BY_NAME = "SELECT * FROM timetracking.stories WHERE story_name LIKE ?";
-    private static final String FIND_BY_STATUS = "SELECT * FROM timetracking.stories WHERE story_status = ?";
+    private static final String FIND_BY_NAME = "SELECT * FROM timetracking.stories WHERE story_name LIKE ? LIMIT ?, ?";
+    private static final String FIND_BY_STATUS = "SELECT * FROM timetracking.stories WHERE story_status = ? LIMIT ?, ?";
     private static final String UPDATE_USER_ID = "UPDATE timetracking.stories SET user_id = ? WHERE story_id = ?";
 
     public StoryDaoImpl(WrapperConnector connector) {
@@ -42,32 +43,32 @@ public class StoryDaoImpl extends AbstractDao<StoryEntity> implements StoryDao {
     }
 
     @Override
-    public List<StoryEntity> findByNamePattern(String pattern) {
+    public List<StoryEntity> findByNamePattern(String pattern, Integer offset, Integer amount) {
         String queryPattern = "%" + pattern + "%";
 
-        return findByStringParam(queryPattern, FIND_BY_NAME);
+        return findByStringParam(queryPattern, FIND_BY_NAME, offset, amount);
     }
 
     @Override
-    public List<StoryEntity> findByStatus(Status status) {
+    public List<StoryEntity> findByStatus(Status status, Integer offset, Integer amount) {
         String queryPattern = status.getDescription();
 
-        return findByStringParam(queryPattern, FIND_BY_STATUS);
+        return findByStringParam(queryPattern, FIND_BY_STATUS, offset, amount);
     }
 
     @Override
-    public List<StoryEntity> findByGoal(Integer id) {
-        return findEntitiesByForeignKey(id, FIND_BY_GOAL);
+    public List<StoryEntity> findByGoal(Integer id, Integer offset, Integer amount) {
+        return findEntitiesByForeignKey(id, FIND_BY_GOAL, offset, amount);
     }
 
     @Override
-    public List<StoryEntity> findByUser(Integer id) {
-        return findEntitiesByForeignKey(id, FIND_BY_USER);
+    public List<StoryEntity> findByUser(Integer id, Integer offset, Integer amount) {
+        return findEntitiesByForeignKey(id, FIND_BY_USER, offset, amount);
     }
 
     @Override
-    public List<StoryEntity> findBySprint(Integer id) {
-        return findEntitiesByForeignKey(id, FIND_BY_SPRINT);
+    public List<StoryEntity> findBySprint(Integer id, Integer offset, Integer amount) {
+        return findEntitiesByForeignKey(id, FIND_BY_SPRINT, offset, amount);
     }
 
     @Override
@@ -78,6 +79,11 @@ public class StoryDaoImpl extends AbstractDao<StoryEntity> implements StoryDao {
     @Override
     public Integer findAmountOfRowsWithoutUser() {
         return findNumberOfRows(FIND_ALL_ROWS_WITHOUT_USER);
+    }
+
+    @Override
+    public Integer findAmountOfRowsByUser(Integer id) {
+        return findNumberOfRowsById(FIND_ALL_ROWS_BY_USER, id);
     }
 
     @Override

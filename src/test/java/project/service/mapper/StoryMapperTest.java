@@ -47,21 +47,11 @@ public class StoryMapperTest {
 
     private static final StoryEntity ENTITY_WITH_USER = StoryEntity.builder()
             .withId(1)
-            .withName("Test")
-            .withSpentTime(LocalTime.MAX)
-            .withDescription("Test description")
-            .withStatus(Status.DONE)
-            .withGoal(GOAL_ENTITY)
             .withUser(USER_ENTITY)
             .build();
 
     private static final StoryEntity ENTITY_WITH_SPRINT = StoryEntity.builder()
             .withId(1)
-            .withName("Test")
-            .withSpentTime(LocalTime.MAX)
-            .withDescription("Test description")
-            .withStatus(Status.DONE)
-            .withGoal(GOAL_ENTITY)
             .withSprint(SPRINT_ENTITY)
             .build();
 
