@@ -86,20 +86,6 @@ public class UserServiceImpl implements UserService {
         return listMapping(result);
     }
 
-    private List<User> listMapping(List<UserEntity> result) {
-        return result.isEmpty() ? Collections.emptyList()
-                : result.stream()
-                .map(mapper::mapUserEntityToUser)
-                .collect(Collectors.toList());
-    }
-
-    private void paginatingValidation(Integer currentPage, Integer recordsPerPage) {
-        if (currentPage == 0 || recordsPerPage == 0) {
-            LOGGER.error("Invalid number of current page or records per page");
-            throw new InvalidPaginatingException("Invalid number of current page or records per page");
-        }
-    }
-
     @Override
     public void addProjectToUser(User user, Backlog backlog) {
         if (Objects.isNull(user) || Objects.isNull(backlog) ) {
@@ -113,5 +99,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer showNumberOfRows() {
         return userDao.findAmountOfRows();
+    }
+
+    private List<User> listMapping(List<UserEntity> result) {
+        return result.isEmpty() ? Collections.emptyList()
+                : result.stream()
+                .map(mapper::mapUserEntityToUser)
+                .collect(Collectors.toList());
+    }
+
+    private void paginatingValidation(Integer currentPage, Integer recordsPerPage) {
+        if (currentPage == 0 || recordsPerPage == 0) {
+            LOGGER.error("Invalid number of current page or records per page");
+            throw new InvalidPaginatingException("Invalid number of current page or records per page");
+        }
     }
 }

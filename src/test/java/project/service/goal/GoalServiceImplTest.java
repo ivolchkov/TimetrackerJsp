@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import project.domain.goal.Goal;
 import project.entity.goal.GoalEntity;
+import project.exception.EntityNotFoundException;
 import project.exception.InvalidEntityCreation;
 import project.exception.InvalidPaginatingException;
 import project.repository.goalDao.GoalDao;
@@ -18,9 +19,11 @@ import project.service.mapper.GoalMapper;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
@@ -46,8 +49,33 @@ public class GoalServiceImplTest {
 
     @After
     public void resetMock() {
-        reset(goalDao);
-        reset(mapper);
+        reset(goalDao, mapper);
+    }
+
+    @Test
+    public void shouldReturnGoalById() {
+        when(goalDao.findById(anyInt())).thenReturn(Optional.of(ENTITIES.get(1)));
+        when(mapper.mapGoalEntityToGoal(any(GoalEntity.class))).thenReturn(GOAL);
+        Goal actual = service.showGoalById(1);
+
+        assertEquals(GOAL, actual);
+    }
+
+    @Test
+    public void shouldThrowEntityNotFoundExceptionWithNullId() {
+        exception.expect(EntityNotFoundException.class);
+        exception.expectMessage("There is no goal by this id");
+
+        service.showGoalById(null);
+    }
+
+    @Test
+    public void shouldThrowEntityNotFoundExceptionWithNoEntity() {
+        when(goalDao.findById(anyInt())).thenReturn(Optional.empty());
+        exception.expect(EntityNotFoundException.class);
+        exception.expectMessage("There is no goal by this id");
+
+        service.showGoalById(null);
     }
 
     @Test

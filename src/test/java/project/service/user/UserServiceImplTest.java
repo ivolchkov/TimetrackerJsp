@@ -29,7 +29,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserEntityServiceImplTest {
+public class UserServiceImplTest {
     private static final UserEntity ENTITY = UserEntity.builder()
             .withId(1)
             .withName("Igor")

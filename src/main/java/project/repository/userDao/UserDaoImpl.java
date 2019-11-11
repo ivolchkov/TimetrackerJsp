@@ -24,7 +24,6 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     private static final String UPDATE_USER = "UPDATE timetracking.users SET user_name = ?, user_surname = ?, user_email = ?, user_password = ?, user_role = ?, backlog_id = ? WHERE user_id = ?";
     private static final String UPDATE_USER_BY_BACKLOG = "UPDATE timetracking.users SET backlog_id = ? WHERE user_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM timetracking.users WHERE user_id = ?";
-    private static final String DELETE_BY_EMAIL = "DELETE FROM timetracking.users WHERE user_email = ?";
 
     public UserDaoImpl(WrapperConnector connector) {
         super(connector);
@@ -93,21 +92,6 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     public boolean deleteById(Integer id) {
         return deleteById(id, DELETE_BY_ID);
     }
-
-    @Override
-    public boolean deleteByEmail(String email) {
-        try (Connection connection = connector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_EMAIL)) {
-            preparedStatement.setString(1, email);
-
-            int delete = preparedStatement.executeUpdate();
-            return delete != 0;
-        } catch (SQLException e) {
-            LOGGER.error("Invalid user deleting" , e);
-            throw new DatabaseRuntimeException("Invalid user deleting", e);
-        }
-    }
-
 
     @Override
     protected Optional<UserEntity> mapResultSetToEntity(ResultSet user) throws SQLException {

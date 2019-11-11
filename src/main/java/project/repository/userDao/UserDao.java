@@ -13,5 +13,4 @@ public interface UserDao extends CrudRepository<Integer, UserEntity> {
 
     void updateBacklogId(UserEntity user);
 
-    boolean deleteByEmail(String email);
 }
