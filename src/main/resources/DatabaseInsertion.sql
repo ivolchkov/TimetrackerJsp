@@ -56,7 +56,7 @@ VALUES ('Creating DB', '2019-11-1', '2019-11-10', 'Creating DB entities and prod
 
 
 INSERT INTO timetracking.users (user_name, user_surname, user_email, user_password, user_role)
-VALUES ('Ihor', 'Volchkov', 'igorik@gmail.com', 'pass', 'Admin');
+VALUES ('Ihor', 'Volchkov', 'igorik@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'Admin');
 
 INSERT INTO timetracking.users (user_name, user_surname, user_email, user_password, user_role, backlog_id)
 VALUES ('Fred', 'Smith', 'fred@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'Scrum master', 1),

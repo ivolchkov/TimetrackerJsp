@@ -20,7 +20,7 @@ public class SprintDaoImpl extends AbstractDao<SprintEntity> implements SprintDa
 
 
     public SprintDaoImpl(WrapperConnector connector) {
-        super(INSERT_SPRINT, FIND_BY_ID, FIND_ALL_ROWS, FIND_ALL_SPRINTS, UPDATE_SPRINT, connector);
+        super(INSERT_SPRINT, FIND_BY_ID, FIND_ALL_SPRINTS, FIND_ALL_ROWS, UPDATE_SPRINT, connector);
     }
 
     @Override

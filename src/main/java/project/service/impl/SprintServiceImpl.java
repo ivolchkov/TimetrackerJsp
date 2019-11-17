@@ -37,7 +37,7 @@ public class SprintServiceImpl implements SprintService {
 
     @Override
     public List<Sprint> showAllSprints(Integer currentPage, Integer recordsPerPage) {
-        if ( currentPage == 0 || recordsPerPage == 0 ) {
+        if ( currentPage <= 0 || recordsPerPage <= 0 ) {
             LOGGER.error("Invalid number of current page or records per page");
             throw new InvalidPaginatingException("Invalid number of current page or records per page");
         }

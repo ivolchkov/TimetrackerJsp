@@ -55,7 +55,7 @@ public class BacklogServiceImpl implements BacklogService {
 
     @Override
     public List<Backlog> showAllBacklogs(Integer currentPage, Integer recordsPerPage) {
-        if (currentPage == 0 || recordsPerPage == 0) {
+        if (currentPage <= 0 || recordsPerPage <= 0) {
             LOGGER.error("Invalid number of current page or records per page");
             throw new InvalidPaginatingException("Invalid number of current page or records per page");
         }

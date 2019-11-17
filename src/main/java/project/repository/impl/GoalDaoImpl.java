@@ -19,7 +19,7 @@ public class GoalDaoImpl extends AbstractDao<GoalEntity> implements GoalDao {
     private static final String UPDATE_GOAL = "UPDATE timetracking.goals SET goal_name = ?, backlog_id = ? WHERE goal_id = ?";
 
     public GoalDaoImpl(WrapperConnector connector) {
-        super(INSERT_GOAL, FIND_BY_ID, FIND_ALL_ROWS, FIND_ALL_GOALS, UPDATE_GOAL, connector);
+        super(INSERT_GOAL, FIND_BY_ID, FIND_ALL_GOALS, FIND_ALL_ROWS, UPDATE_GOAL, connector);
     }
 
     @Override
