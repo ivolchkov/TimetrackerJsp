@@ -5,10 +5,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.goal.Goal;
-import project.domain.story.Story;
-import project.service.goal.GoalService;
-import project.service.story.StoryService;
+import project.domain.Goal;
+import project.domain.Story;
+import project.service.GoalService;
+import project.service.StoryService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,7 +35,8 @@ public class CreateStoryTest {
     @Test
     public void executeShouldReturnPage() {
         Goal goal = new Goal(1);
-        when(request.getParameter(anyString())).thenReturn(LocalTime.now().toString());
+        when(request.getParameter("spentTime")).thenReturn(LocalTime.now().toString());
+        when(request.getParameter("goalId")).thenReturn("1");
         when(goalService.showGoalById(anyInt())).thenReturn(goal);
         when(storyService.createStory(any(Story.class))).thenReturn(true);
         String expected = "scrum-master-service.jsp";

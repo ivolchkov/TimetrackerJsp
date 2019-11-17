@@ -1,8 +1,8 @@
 package project.command.admin;
 
 import project.command.Command;
-import project.domain.goal.Goal;
-import project.service.goal.GoalService;
+import project.domain.Goal;
+import project.service.GoalService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

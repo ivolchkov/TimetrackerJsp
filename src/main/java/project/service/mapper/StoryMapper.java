@@ -1,13 +1,13 @@
 package project.service.mapper;
 
-import project.domain.goal.Goal;
-import project.domain.sprint.Sprint;
-import project.domain.story.Story;
-import project.domain.user.User;
-import project.entity.goal.GoalEntity;
-import project.entity.sprint.SprintEntity;
-import project.entity.story.StoryEntity;
-import project.entity.user.UserEntity;
+import project.domain.Goal;
+import project.domain.Sprint;
+import project.domain.Story;
+import project.domain.User;
+import project.entity.GoalEntity;
+import project.entity.SprintEntity;
+import project.entity.StoryEntity;
+import project.entity.UserEntity;
 
 public class StoryMapper {
     public StoryEntity mapStoryToStoryEntity(Story domain) {

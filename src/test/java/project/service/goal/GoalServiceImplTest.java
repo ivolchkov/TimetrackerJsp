@@ -8,12 +8,13 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.goal.Goal;
-import project.entity.goal.GoalEntity;
+import project.domain.Goal;
+import project.entity.GoalEntity;
 import project.exception.EntityNotFoundException;
 import project.exception.InvalidEntityCreation;
 import project.exception.InvalidPaginatingException;
-import project.repository.goalDao.GoalDao;
+import project.repository.GoalDao;
+import project.service.impl.GoalServiceImpl;
 import project.service.mapper.GoalMapper;
 
 import java.util.Arrays;

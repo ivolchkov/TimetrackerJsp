@@ -8,13 +8,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.story.Story;
-import project.entity.story.Status;
-import project.entity.story.StoryEntity;
+import project.domain.Story;
+import project.entity.Status;
+import project.entity.StoryEntity;
 import project.exception.InvalidEntityCreation;
 import project.exception.InvalidEntityUpdating;
 import project.exception.InvalidPaginatingException;
-import project.repository.storyDao.StoryDao;
+import project.repository.StoryDao;
+import project.service.impl.StoryServiceImpl;
 import project.service.mapper.StoryMapper;
 
 import java.util.Arrays;
@@ -28,10 +29,10 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StoryServiceImplTest {
-    private static final Story STORY = Story.builder().withId(1).build();
+    private static final Story STORY = Story.builder().withId(1).withStatus(Status.TO_DO).build();
     private static final List<StoryEntity> ENTITIES = Arrays.asList(
-            StoryEntity.builder().withId(1).build(),
-            StoryEntity.builder().withId(2).build());
+            StoryEntity.builder().withId(1).withStatus(Status.TO_DO).build(),
+            StoryEntity.builder().withId(2).withStatus(Status.TO_DO).build());
     private static final List<Story> STORIES = Arrays.asList(STORY, STORY);
 
     @Rule
@@ -48,8 +49,7 @@ public class StoryServiceImplTest {
 
     @After
     public void resetMock() {
-        reset(storyDao);
-        reset(mapper);
+        reset(storyDao, mapper);
     }
 
     @Test
@@ -221,7 +221,7 @@ public class StoryServiceImplTest {
 
     @Test
     public void showStoriesWithoutUserShouldShowAllStories() {
-        when(storyDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
+        when(storyDao.findWithoutUser(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
         List<Story> actual = service.showStoriesWithoutUser(1 , 10);

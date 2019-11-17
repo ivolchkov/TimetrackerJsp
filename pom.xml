@@ -26,7 +26,13 @@
                 <version>0.7.7.201606060606</version>
                 <configuration>
                     <excludes>
-
+                        <exclude>project/context/*</exclude>
+                        <exclude>project/domain/*</exclude>
+                        <exclude>project/entity/*</exclude>
+                        <exclude>project/repository/**</exclude>
+                        <exclude>project/exception/*</exclude>
+                        <exclude>project/filter/*</exclude>
+                        <exclude>project/servlet/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

@@ -6,12 +6,13 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.backlog.Backlog;
-import project.entity.backlog.BacklogEntity;
+import project.domain.Backlog;
+import project.entity.BacklogEntity;
 import project.exception.EntityNotFoundException;
 import project.exception.InvalidEntityCreation;
 import project.exception.InvalidPaginatingException;
-import project.repository.backlogDao.BacklogDao;
+import project.repository.BacklogDao;
+import project.service.impl.BacklogServiceImpl;
 import project.service.mapper.BacklogMapper;
 
 import java.util.Arrays;
@@ -44,8 +45,7 @@ public class BacklogServiceImplTest {
 
     @After
     public void resetMock() {
-        reset(backlogDao);
-        reset(mapper);
+        reset(backlogDao, mapper);
     }
 
     @Test

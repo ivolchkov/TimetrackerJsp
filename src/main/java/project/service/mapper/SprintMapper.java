@@ -1,7 +1,7 @@
 package project.service.mapper;
 
-import project.domain.sprint.Sprint;
-import project.entity.sprint.SprintEntity;
+import project.domain.Sprint;
+import project.entity.SprintEntity;
 
 public class SprintMapper {
     public SprintEntity mapSprintToSprintEntity(Sprint domain) {

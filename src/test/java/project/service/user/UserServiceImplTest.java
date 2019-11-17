@@ -8,13 +8,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.user.User;
-import project.entity.user.UserEntity;
+import project.domain.User;
+import project.entity.UserEntity;
 import project.exception.AlreadyRegisteredException;
 import project.exception.EntityNotFoundException;
 import project.exception.InvalidPaginatingException;
 import project.exception.InvalidRegistrationException;
-import project.repository.userDao.UserDao;
+import project.repository.UserDao;
+import project.service.impl.UserServiceImpl;
 import project.service.encoder.PasswordEncoder;
 import project.service.mapper.UserMapper;
 import project.service.validator.UserValidator;
@@ -124,28 +125,6 @@ public class UserServiceImplTest {
         when(repository.findByEmail(any(String.class))).thenReturn(Optional.empty());
 
         userService.login("igorik@gmail.com", "test");
-    }
-
-    @Test
-    public void shouldReturnTeam() {
-        List<User> expected = Collections.singletonList(USER);
-        List<UserEntity> entities = Collections.singletonList(ENTITY);
-
-        when(repository.findByBacklog(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(entities);
-        when(mapper.mapUserEntityToUser(ENTITY)).thenReturn(USER);
-        List<User> actual = userService.findTeam(3, 5 , 6);
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldReturnEmptyListWhenThereIsNoTeam() {
-        List<User> expected = Collections.emptyList();
-
-        when(repository.findByBacklog(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(Collections.emptyList());
-        List<User> actual = userService.findTeam(3, 5 ,6);
-
-        assertEquals(expected, actual);
     }
 
     @Test

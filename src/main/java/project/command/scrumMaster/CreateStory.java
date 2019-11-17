@@ -1,11 +1,11 @@
 package project.command.scrumMaster;
 
 import project.command.Command;
-import project.domain.goal.Goal;
-import project.domain.story.Story;
-import project.entity.story.Status;
-import project.service.goal.GoalService;
-import project.service.story.StoryService;
+import project.domain.Goal;
+import project.domain.Story;
+import project.entity.Status;
+import project.service.GoalService;
+import project.service.StoryService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalTime;

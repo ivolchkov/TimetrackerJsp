@@ -5,11 +5,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.backlog.Backlog;
-import project.service.backlog.BacklogService;
+import project.domain.Backlog;
+import project.service.BacklogService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.*;

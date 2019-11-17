@@ -1,9 +1,9 @@
 package project.command.user;
 
 import project.command.Command;
-import project.domain.user.User;
-import project.entity.user.Role;
-import project.service.user.UserService;
+import project.domain.User;
+import project.entity.Role;
+import project.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;

@@ -1,9 +1,9 @@
 package project.command.developer;
 
 import project.command.Command;
-import project.domain.story.Story;
-import project.domain.user.User;
-import project.service.story.StoryService;
+import project.domain.Story;
+import project.domain.User;
+import project.service.StoryService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

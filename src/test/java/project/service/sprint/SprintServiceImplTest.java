@@ -8,11 +8,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.sprint.Sprint;
-import project.entity.sprint.SprintEntity;
+import project.domain.Sprint;
+import project.entity.SprintEntity;
 import project.exception.InvalidEntityCreation;
 import project.exception.InvalidPaginatingException;
-import project.repository.sprintDao.SprintDao;
+import project.repository.SprintDao;
+import project.service.impl.SprintServiceImpl;
 import project.service.mapper.SprintMapper;
 
 import java.util.Arrays;
@@ -46,8 +47,7 @@ public class SprintServiceImplTest {
 
     @After
     public void resetMock() {
-        reset(sprintDao);
-        reset(mapper);
+        reset(sprintDao, mapper);
     }
 
     @Test

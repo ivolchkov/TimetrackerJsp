@@ -39,7 +39,7 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
 	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
 	at project.repository.AbstractDao.findAll(AbstractDao.java:108)
-	at project.repository.userDao.UserDaoImpl.findAll(UserDaoImpl.java:45)
+	at project.repository.impl.UserDaoImpl.findAll(UserDaoImpl.java:45)
 	at project.repository.MainRepository.main(MainRepository.java:31)
 WARN  story.StoryServiceImpl: Method:validateParam() Line:109 - Parameter is not valid
 WARN  story.StoryServiceImpl: Method:validateParam() Line:109 - Parameter is not valid
@@ -58,7 +58,7 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
 	at org.apache.commons.dbcp.DelegatingStatement.executeQuery(DelegatingStatement.java:208)
 	at project.repository.AbstractDao.findNumberOfRowsById(AbstractDao.java:109)
-	at project.repository.storyDao.StoryDaoImpl.findAmountOfRowsByUser(StoryDaoImpl.java:86)
+	at project.repository.impl.StoryDaoImpl.findAmountOfRowsByUser(StoryDaoImpl.java:86)
 	at project.repository.MainRepository.main(MainRepository.java:33)
 ERROR backlog.BacklogServiceImpl: Method:showAllBacklogs() Line:58 - Invalid number of current page or records per page
 WARN  backlog.BacklogServiceImpl: Method:createBacklog() Line:32 - Backlog is not valid
@@ -82,3 +82,214 @@ ERROR user.UserServiceImpl: Method:paginatingValidation() Line:98 - Invalid numb
 WARN  user.UserServiceImpl: Method:register() Line:39 - User is already registered by this e-mail
 WARN  user.UserServiceImpl: Method:login() Line:63 - Incorrect password
 WARN  user.UserServiceImpl: Method:login() Line:57 - There is no user with this e-mail
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+ERROR user.UserServiceImpl: Method:paginatingValidation() Line:91 - Invalid number of current page or records per page
+WARN  user.UserServiceImpl: Method:register() Line:37 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:61 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:55 - There is no user with this e-mail
+ERROR goal.GoalServiceImpl: Method:showAllGoals() Line:58 - Invalid number of current page or records per page
+WARN  goal.GoalServiceImpl: Method:createGoal() Line:32 - Goal is not valid
+WARN  goal.GoalServiceImpl: Method:showGoalById() Line:51 - There is no goal by this id
+WARN  goal.GoalServiceImpl: Method:showGoalById() Line:51 - There is no goal by this id
+ERROR sprint.SprintServiceImpl: Method:showAllSprints() Line:40 - Invalid number of current page or records per page
+WARN  sprint.SprintServiceImpl: Method:createSprint() Line:30 - Sprint is not valid
+ERROR backlog.BacklogServiceImpl: Method:showAllBacklogs() Line:58 - Invalid number of current page or records per page
+WARN  backlog.BacklogServiceImpl: Method:createBacklog() Line:32 - Backlog is not valid
+WARN  backlog.BacklogServiceImpl: Method:showBacklogById() Line:51 - There is no backlog by this id
+WARN  backlog.BacklogServiceImpl: Method:showBacklogById() Line:51 - There is no backlog by this id
+WARN  story.StoryServiceImpl: Method:validateParam() Line:142 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:142 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:156 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:36 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:142 - Parameter is not valid
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:149 - Invalid number of current page or records per page
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:149 - Invalid number of current page or records per page
+WARN  story.StoryServiceImpl: Method:validateParam() Line:142 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:156 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:validateParam() Line:142 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:142 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:156 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:36 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:142 - Parameter is not valid
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:149 - Invalid number of current page or records per page
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:149 - Invalid number of current page or records per page
+WARN  story.StoryServiceImpl: Method:validateParam() Line:142 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:156 - Invalid story updating
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+ERROR user.UserServiceImpl: Method:paginatingValidation() Line:91 - Invalid number of current page or records per page
+WARN  user.UserServiceImpl: Method:register() Line:37 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:61 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:55 - There is no user with this e-mail
+ERROR goal.GoalServiceImpl: Method:showAllGoals() Line:58 - Invalid number of current page or records per page
+WARN  goal.GoalServiceImpl: Method:createGoal() Line:32 - Goal is not valid
+WARN  goal.GoalServiceImpl: Method:showGoalById() Line:51 - There is no goal by this id
+WARN  goal.GoalServiceImpl: Method:showGoalById() Line:51 - There is no goal by this id
+ERROR sprint.SprintServiceImpl: Method:showAllSprints() Line:40 - Invalid number of current page or records per page
+WARN  sprint.SprintServiceImpl: Method:createSprint() Line:30 - Sprint is not valid
+ERROR backlog.BacklogServiceImpl: Method:showAllBacklogs() Line:58 - Invalid number of current page or records per page
+WARN  backlog.BacklogServiceImpl: Method:createBacklog() Line:32 - Backlog is not valid
+WARN  backlog.BacklogServiceImpl: Method:showBacklogById() Line:51 - There is no backlog by this id
+WARN  backlog.BacklogServiceImpl: Method:showBacklogById() Line:51 - There is no backlog by this id
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:154 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:34 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:147 - Invalid number of current page or records per page
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:147 - Invalid number of current page or records per page
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:154 - Invalid story updating
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+ERROR user.UserServiceImpl: Method:paginatingValidation() Line:91 - Invalid number of current page or records per page
+WARN  user.UserServiceImpl: Method:register() Line:37 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:61 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:55 - There is no user with this e-mail
+ERROR goal.GoalServiceImpl: Method:showAllGoals() Line:58 - Invalid number of current page or records per page
+WARN  goal.GoalServiceImpl: Method:createGoal() Line:32 - Goal is not valid
+WARN  goal.GoalServiceImpl: Method:showGoalById() Line:51 - There is no goal by this id
+WARN  goal.GoalServiceImpl: Method:showGoalById() Line:51 - There is no goal by this id
+ERROR sprint.SprintServiceImpl: Method:showAllSprints() Line:40 - Invalid number of current page or records per page
+WARN  sprint.SprintServiceImpl: Method:createSprint() Line:30 - Sprint is not valid
+ERROR backlog.BacklogServiceImpl: Method:showAllBacklogs() Line:58 - Invalid number of current page or records per page
+WARN  backlog.BacklogServiceImpl: Method:createBacklog() Line:32 - Backlog is not valid
+WARN  backlog.BacklogServiceImpl: Method:showBacklogById() Line:51 - There is no backlog by this id
+WARN  backlog.BacklogServiceImpl: Method:showBacklogById() Line:51 - There is no backlog by this id
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:154 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:34 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:147 - Invalid number of current page or records per page
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:147 - Invalid number of current page or records per page
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:154 - Invalid story updating
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+ERROR user.UserServiceImpl: Method:paginatingValidation() Line:91 - Invalid number of current page or records per page
+WARN  user.UserServiceImpl: Method:register() Line:37 - User is already registered by this e-mail
+WARN  user.UserServiceImpl: Method:login() Line:61 - Incorrect password
+WARN  user.UserServiceImpl: Method:login() Line:55 - There is no user with this e-mail
+ERROR goal.GoalServiceImpl: Method:showAllGoals() Line:58 - Invalid number of current page or records per page
+WARN  goal.GoalServiceImpl: Method:createGoal() Line:32 - Goal is not valid
+WARN  goal.GoalServiceImpl: Method:showGoalById() Line:51 - There is no goal by this id
+WARN  goal.GoalServiceImpl: Method:showGoalById() Line:51 - There is no goal by this id
+ERROR sprint.SprintServiceImpl: Method:showAllSprints() Line:40 - Invalid number of current page or records per page
+WARN  sprint.SprintServiceImpl: Method:createSprint() Line:30 - Sprint is not valid
+ERROR backlog.BacklogServiceImpl: Method:showAllBacklogs() Line:58 - Invalid number of current page or records per page
+WARN  backlog.BacklogServiceImpl: Method:createBacklog() Line:32 - Backlog is not valid
+WARN  backlog.BacklogServiceImpl: Method:showBacklogById() Line:51 - There is no backlog by this id
+WARN  backlog.BacklogServiceImpl: Method:showBacklogById() Line:51 - There is no backlog by this id
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:154 - Invalid story updating
+WARN  story.StoryServiceImpl: Method:createStory() Line:34 - Story is not valid
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:147 - Invalid number of current page or records per page
+ERROR story.StoryServiceImpl: Method:paginatingValidation() Line:147 - Invalid number of current page or records per page
+WARN  story.StoryServiceImpl: Method:validateParam() Line:140 - Parameter is not valid
+WARN  story.StoryServiceImpl: Method:validateUpdateParam() Line:154 - Invalid story updating
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+ERROR impl.UserServiceImpl: Method:paginatingValidation() Line:92 - Invalid number of current page or records per page
+WARN  impl.UserServiceImpl: Method:register() Line:38 - User is already registered by this e-mail
+WARN  impl.UserServiceImpl: Method:login() Line:62 - Incorrect password
+WARN  impl.UserServiceImpl: Method:login() Line:56 - There is no user with this e-mail
+ERROR impl.GoalServiceImpl: Method:showAllGoals() Line:59 - Invalid number of current page or records per page
+WARN  impl.GoalServiceImpl: Method:createGoal() Line:33 - Goal is not valid
+WARN  impl.GoalServiceImpl: Method:showGoalById() Line:52 - There is no goal by this id
+WARN  impl.GoalServiceImpl: Method:showGoalById() Line:52 - There is no goal by this id
+ERROR impl.SprintServiceImpl: Method:showAllSprints() Line:41 - Invalid number of current page or records per page
+WARN  impl.SprintServiceImpl: Method:createSprint() Line:31 - Sprint is not valid
+ERROR impl.BacklogServiceImpl: Method:showAllBacklogs() Line:59 - Invalid number of current page or records per page
+WARN  impl.BacklogServiceImpl: Method:createBacklog() Line:33 - Backlog is not valid
+WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
+WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateUpdateParam() Line:155 - Invalid story updating
+WARN  impl.StoryServiceImpl: Method:createStory() Line:35 - Story is not valid
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+ERROR impl.StoryServiceImpl: Method:paginatingValidation() Line:148 - Invalid number of current page or records per page
+ERROR impl.StoryServiceImpl: Method:paginatingValidation() Line:148 - Invalid number of current page or records per page
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateUpdateParam() Line:155 - Invalid story updating
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+ERROR impl.UserServiceImpl: Method:paginatingValidation() Line:92 - Invalid number of current page or records per page
+WARN  impl.UserServiceImpl: Method:register() Line:38 - User is already registered by this e-mail
+WARN  impl.UserServiceImpl: Method:login() Line:62 - Incorrect password
+WARN  impl.UserServiceImpl: Method:login() Line:56 - There is no user with this e-mail
+ERROR impl.GoalServiceImpl: Method:showAllGoals() Line:59 - Invalid number of current page or records per page
+WARN  impl.GoalServiceImpl: Method:createGoal() Line:33 - Goal is not valid
+WARN  impl.GoalServiceImpl: Method:showGoalById() Line:52 - There is no goal by this id
+WARN  impl.GoalServiceImpl: Method:showGoalById() Line:52 - There is no goal by this id
+ERROR impl.SprintServiceImpl: Method:showAllSprints() Line:41 - Invalid number of current page or records per page
+WARN  impl.SprintServiceImpl: Method:createSprint() Line:31 - Sprint is not valid
+ERROR impl.BacklogServiceImpl: Method:showAllBacklogs() Line:59 - Invalid number of current page or records per page
+WARN  impl.BacklogServiceImpl: Method:createBacklog() Line:33 - Backlog is not valid
+WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
+WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateUpdateParam() Line:155 - Invalid story updating
+WARN  impl.StoryServiceImpl: Method:createStory() Line:35 - Story is not valid
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+ERROR impl.StoryServiceImpl: Method:paginatingValidation() Line:148 - Invalid number of current page or records per page
+ERROR impl.StoryServiceImpl: Method:paginatingValidation() Line:148 - Invalid number of current page or records per page
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateUpdateParam() Line:155 - Invalid story updating
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+ERROR impl.UserServiceImpl: Method:paginatingValidation() Line:92 - Invalid number of current page or records per page
+WARN  impl.UserServiceImpl: Method:register() Line:38 - User is already registered by this e-mail
+WARN  impl.UserServiceImpl: Method:login() Line:62 - Incorrect password
+WARN  impl.UserServiceImpl: Method:login() Line:56 - There is no user with this e-mail
+ERROR impl.GoalServiceImpl: Method:showAllGoals() Line:59 - Invalid number of current page or records per page
+WARN  impl.GoalServiceImpl: Method:createGoal() Line:33 - Goal is not valid
+WARN  impl.GoalServiceImpl: Method:showGoalById() Line:52 - There is no goal by this id
+WARN  impl.GoalServiceImpl: Method:showGoalById() Line:52 - There is no goal by this id
+ERROR impl.SprintServiceImpl: Method:showAllSprints() Line:41 - Invalid number of current page or records per page
+WARN  impl.SprintServiceImpl: Method:createSprint() Line:31 - Sprint is not valid
+ERROR impl.BacklogServiceImpl: Method:showAllBacklogs() Line:59 - Invalid number of current page or records per page
+WARN  impl.BacklogServiceImpl: Method:createBacklog() Line:33 - Backlog is not valid
+WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
+WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateUpdateParam() Line:155 - Invalid story updating
+WARN  impl.StoryServiceImpl: Method:createStory() Line:35 - Story is not valid
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+ERROR impl.StoryServiceImpl: Method:paginatingValidation() Line:148 - Invalid number of current page or records per page
+ERROR impl.StoryServiceImpl: Method:paginatingValidation() Line:148 - Invalid number of current page or records per page
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:141 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateUpdateParam() Line:155 - Invalid story updating

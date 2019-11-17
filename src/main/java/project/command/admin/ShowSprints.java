@@ -1,11 +1,11 @@
 package project.command.admin;
 
 import project.command.Command;
-import project.domain.sprint.Sprint;
-import project.service.sprint.SprintService;
+import project.domain.Sprint;
+import project.service.SprintService;
 
-import javax.servlet.http.*;
-import java.util.*;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public class ShowSprints implements Command {
     private final SprintService sprintService;

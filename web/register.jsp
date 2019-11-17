@@ -66,13 +66,13 @@
         <div class="form-group">
             <label for="firstName" class="col-sm-3 control-label" ><fmt:message key="registration.name"/></label>
             <div class="col-sm-9">
-                <input type="text" id="firstName" name = "name" pattern="([A-Z])([a-z]{1,12})" minlength="2" maxlength="15" placeholder=<fmt:message key="registration.inline.name"/> class="form-control" autofocus required>
+                <input type="text" id="firstName" name = "name" pattern="([A-Z])([a-z]{1,12})|([А-Я]([a-я]{1,12})" minlength="2" maxlength="15" placeholder=<fmt:message key="registration.inline.name"/> class="form-control" autofocus required>
             </div>
         </div>
         <div class="form-group">
             <label for="lastName" class="col-sm-3 control-label"><fmt:message key="registration.surname"/></label>
             <div class="col-sm-9">
-                <input type="text" id="lastName" name = "surname" pattern="([A-Z])([a-z]{1,12})" minlength="2" maxlength="15" placeholder=<fmt:message key="registration.inline.surname"/> class="form-control" autofocus required>
+                <input type="text" id="lastName" name = "surname" pattern="([A-Z])([a-z]{1,12})|([А-Я]([a-я]{1,12}))" minlength="2" maxlength="15" placeholder=<fmt:message key="registration.inline.surname"/> class="form-control" autofocus required>
             </div>
         </div>
         <div class="form-group">

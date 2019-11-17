@@ -4,10 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.service.goal.GoalService;
-import project.service.goal.GoalServiceImpl;
+import project.service.GoalService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,6 +33,7 @@ public class ShowGoalsTest {
         String expected = "showGoals.jsp";
         String actual = command.execute(request);
 
+        verify(goalService).showAllGoals(anyInt(), anyInt());
         assertEquals(expected, actual);
     }
 }

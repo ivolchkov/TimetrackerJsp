@@ -1,8 +1,8 @@
 package project.command.scrumMaster;
 
 import project.command.Command;
-import project.domain.sprint.Sprint;
-import project.service.sprint.SprintService;
+import project.domain.Sprint;
+import project.service.SprintService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;

@@ -15,5 +15,7 @@ public interface CrudRepository<ID extends Serializable, E> {
 
     void update(E entity);
 
-    boolean deleteById(ID id);
+    default boolean deleteById(ID id) {
+        throw new UnsupportedOperationException();
+    }
 }

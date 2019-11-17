@@ -1,8 +1,8 @@
 package project.filter;
 
 
-import project.domain.user.User;
-import project.entity.user.Role;
+import project.domain.User;
+import project.entity.Role;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -13,10 +13,16 @@ import java.io.IOException;
 @WebFilter(dispatcherTypes = {
         DispatcherType.REQUEST,
         DispatcherType.FORWARD},
-        urlPatterns = {"/scrum-master-service.jsp"})
+        urlPatterns = {"/scrum-master-service.jsp",
+        "/scrum-master-service-paginating.jsp",
+        "/scrum-master-service-sideBar.jsp",
+        "/createProject.jsp",
+        "/createSprint.jsp",
+        "/createGoal.jsp",
+        "/createStory.jsp"})
 public class ScrumMasterSecurity implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
@@ -26,7 +32,7 @@ public class ScrumMasterSecurity implements Filter {
         User user = (User) session.getAttribute("user");
 
         if (user == null || user.getRole() != Role.SCRUM_MASTER) {
-            request.getRequestDispatcher("error.jsp").forward(servletRequest,servletResponse);
+            request.getRequestDispatcher("error.jsp").forward(servletRequest, servletResponse);
         }
 
         filterChain.doFilter(servletRequest ,servletResponse);

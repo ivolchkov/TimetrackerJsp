@@ -1,8 +1,8 @@
 package project.command.admin;
 
 import project.command.Command;
-import project.domain.backlog.Backlog;
-import project.service.backlog.BacklogService;
+import project.domain.Backlog;
+import project.service.BacklogService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

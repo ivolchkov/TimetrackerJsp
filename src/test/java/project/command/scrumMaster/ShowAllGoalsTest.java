@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.service.goal.GoalService;
+import project.service.GoalService;
 
 import javax.servlet.http.HttpServletRequest;
 

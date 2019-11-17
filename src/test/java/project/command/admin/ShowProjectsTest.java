@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.service.backlog.BacklogService;
+import project.service.BacklogService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
@@ -13,6 +13,7 @@ import java.util.Collections;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -34,6 +35,7 @@ public class ShowProjectsTest {
         String expected = "showProjects.jsp";
         String actual = command.execute(request);
 
+        verify(backlogService).showAllBacklogs(anyInt(), anyInt());
         assertEquals(expected, actual);
     }
 }

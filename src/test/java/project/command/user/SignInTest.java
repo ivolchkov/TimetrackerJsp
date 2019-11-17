@@ -1,22 +1,21 @@
 package project.command.user;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.user.User;
-import project.entity.user.Role;
-import project.service.user.UserService;
+import project.domain.User;
+import project.entity.Role;
+import project.service.UserService;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
-import java.util.Enumeration;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -32,6 +31,11 @@ public class SignInTest {
 
     @InjectMocks
     private SignIn command;
+
+    @After
+    public void resetMock() {
+        reset(request, session, userService);
+    }
 
     @Test
     public void executeShouldReturnAdminPage() {

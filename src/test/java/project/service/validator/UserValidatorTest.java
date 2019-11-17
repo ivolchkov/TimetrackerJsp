@@ -4,7 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import project.domain.user.User;
+import project.domain.User;
 import project.exception.InvalidRegistrationException;
 
 public class UserValidatorTest {
@@ -28,7 +28,7 @@ public class UserValidatorTest {
 
     @Test
     public void shouldThrowInvalidRegistrationExceptionValidatingInvalidName() {
-        User student = User.builder().withName("ihor").build();
+        User student = User.builder().withName("игорь").build();
         exception.expect(InvalidRegistrationException.class);
         exception.expectMessage("Incorrect name");
 

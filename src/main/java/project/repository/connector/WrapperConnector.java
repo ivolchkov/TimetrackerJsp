@@ -4,8 +4,8 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 import project.exception.InvalidDatabaseConnectionException;
 
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public final class WrapperConnector {

@@ -1,8 +1,8 @@
 package project.service.mapper;
 
 import org.junit.Test;
-import project.domain.sprint.Sprint;
-import project.entity.sprint.SprintEntity;
+import project.domain.Sprint;
+import project.entity.SprintEntity;
 
 import java.time.LocalDate;
 

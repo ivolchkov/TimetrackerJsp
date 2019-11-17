@@ -1,9 +1,9 @@
 package project.service.mapper;
 
-import project.domain.backlog.Backlog;
-import project.domain.goal.Goal;
-import project.entity.backlog.BacklogEntity;
-import project.entity.goal.GoalEntity;
+import project.domain.Backlog;
+import project.domain.Goal;
+import project.entity.BacklogEntity;
+import project.entity.GoalEntity;
 
 public class GoalMapper {
     public GoalEntity mapGoalToGoalEntity(Goal domain) {

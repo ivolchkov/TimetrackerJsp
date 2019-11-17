@@ -1,8 +1,8 @@
 package project.service.mapper;
 
 import org.junit.Test;
-import project.domain.backlog.Backlog;
-import project.entity.backlog.BacklogEntity;
+import project.domain.Backlog;
+import project.entity.BacklogEntity;
 
 import static org.junit.Assert.*;
 

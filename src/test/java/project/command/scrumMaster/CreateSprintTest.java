@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.sprint.Sprint;
-import project.service.sprint.SprintService;
+import project.domain.Sprint;
+import project.service.SprintService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +30,6 @@ public class CreateSprintTest {
 
     @Test
     public void executeShouldReturnPage() {
-        when(request.getParameter("goalId")).thenReturn("1");
         when(request.getParameter(anyString())).thenReturn(LocalDate.now().toString());
         when(sprintService.createSprint(any(Sprint.class))).thenReturn(true);
         String expected = "scrum-master-service.jsp";

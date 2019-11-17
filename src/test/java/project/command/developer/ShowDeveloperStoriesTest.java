@@ -5,15 +5,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import project.domain.user.User;
-import project.service.story.StoryService;
+import project.domain.User;
+import project.service.StoryService;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 import java.util.Collections;
-import java.util.Enumeration;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;

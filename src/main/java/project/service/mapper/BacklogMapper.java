@@ -1,7 +1,7 @@
 package project.service.mapper;
 
-import project.domain.backlog.Backlog;
-import project.entity.backlog.BacklogEntity;
+import project.domain.Backlog;
+import project.entity.BacklogEntity;
 
 public class BacklogMapper {
     public BacklogEntity mapBacklogToBacklogEntity(Backlog domain) {

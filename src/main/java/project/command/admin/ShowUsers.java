@@ -1,8 +1,8 @@
 package project.command.admin;
 
 import project.command.Command;
-import project.domain.user.User;
-import project.service.user.UserService;
+import project.domain.User;
+import project.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

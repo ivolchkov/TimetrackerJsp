@@ -5,22 +5,22 @@
          version="4.0">
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>project.servlet.admin.AdminServlet</servlet-class>
+        <servlet-class>project.servlet.AdminServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>DeveloperServlet</servlet-name>
-        <servlet-class>project.servlet.developer.DeveloperServlet</servlet-class>
+        <servlet-class>project.servlet.DeveloperServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>ScrumMasterServlet</servlet-name>
-        <servlet-class>project.servlet.scrumMaster.ScrumMasterServlet</servlet-class>
+        <servlet-class>project.servlet.ScrumMasterServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>UserServlet</servlet-name>
-        <servlet-class>project.servlet.user.UserServlet</servlet-class>
+        <servlet-class>project.servlet.UserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

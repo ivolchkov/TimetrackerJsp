@@ -1,10 +1,10 @@
 package project.command.scrumMaster;
 
 import project.command.Command;
-import project.domain.backlog.Backlog;
-import project.domain.goal.Goal;
-import project.service.backlog.BacklogService;
-import project.service.goal.GoalService;
+import project.domain.Backlog;
+import project.domain.Goal;
+import project.service.BacklogService;
+import project.service.GoalService;
 
 import javax.servlet.http.HttpServletRequest;
 
