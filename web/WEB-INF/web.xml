@@ -3,95 +3,54 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <servlet>
-        <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>project.servlet.AdminServlet</servlet-class>
-    </servlet>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
 
-    <servlet>
-        <servlet-name>DeveloperServlet</servlet-name>
-        <servlet-class>project.servlet.DeveloperServlet</servlet-class>
-    </servlet>
+    <error-page>
+        <exception-type>java.lang.NullPointerException</exception-type >
+        <location>/error.jsp</location>
+    </error-page>
 
-    <servlet>
-        <servlet-name>ScrumMasterServlet</servlet-name>
-        <servlet-class>project.servlet.ScrumMasterServlet</servlet-class>
-    </servlet>
+    <error-page>
+        <exception-type>project.exception.InvalidEntityUpdating</exception-type >
+        <location>/error.jsp</location>
+    </error-page>
 
-    <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>project.servlet.UserServlet</servlet-class>
-    </servlet>
+    <error-page>
+        <exception-type>project.exception.InvalidEncodingException</exception-type >
+        <location>/error.jsp</location>
+    </error-page>
 
-    <servlet-mapping>
-        <servlet-name>AdminServlet</servlet-name>
-        <url-pattern>/admin</url-pattern>
-    </servlet-mapping>
+    <error-page>
+        <exception-type>project.exception.InvalidCommandException</exception-type >
+        <location>/error.jsp</location>
+    </error-page>
 
-    <servlet-mapping>
-        <servlet-name>DeveloperServlet</servlet-name>
-        <url-pattern>/developer</url-pattern>
-    </servlet-mapping>
+    <error-page>
+        <exception-type>project.exception.InvalidPaginatingException</exception-type >
+        <location>/error.jsp</location>
+    </error-page>
 
-    <servlet-mapping>
-        <servlet-name>ScrumMasterServlet</servlet-name>
-        <url-pattern>/scrum-master</url-pattern>
-    </servlet-mapping>
+    <error-page>
+        <exception-type>project.exception.DatabaseRuntimeException</exception-type >
+        <location>/error.jsp</location>
+    </error-page>
 
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/user</url-pattern>
-    </servlet-mapping>
+    <error-page>
+        <exception-type>project.exception.EntityNotFoundException</exception-type >
+        <location>/sign-in.jsp</location>
+    </error-page>
 
-<!--    <error-page>-->
-<!--        <error-code>404</error-code>-->
-<!--        <location>/error.jsp</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <exception-type>project.exception.InvalidRegistrationException</exception-type >
+        <location>/register.jsp</location>
+    </error-page>
 
-<!--    <error-page>-->
-<!--        <exception-type>java.lang.NullPointerException</exception-type >-->
-<!--        <location>/error.jsp</location>-->
-<!--    </error-page>-->
-
-<!--    <error-page>-->
-<!--        <exception-type>project.exception.InvalidEntityUpdating</exception-type >-->
-<!--        <location>/error.jsp</location>-->
-<!--    </error-page>-->
-
-<!--    <error-page>-->
-<!--        <exception-type>project.exception.InvalidEncodingException</exception-type >-->
-<!--        <location>/error.jsp</location>-->
-<!--    </error-page>-->
-
-<!--    <error-page>-->
-<!--        <exception-type>project.exception.InvalidCommandException</exception-type >-->
-<!--        <location>/error.jsp</location>-->
-<!--    </error-page>-->
-
-<!--    <error-page>-->
-<!--        <exception-type>project.exception.InvalidPaginatingException</exception-type >-->
-<!--        <location>/error.jsp</location>-->
-<!--    </error-page>-->
-
-<!--    <error-page>-->
-<!--        <exception-type>project.exception.DatabaseRuntimeException</exception-type >-->
-<!--        <location>/error.jsp</location>-->
-<!--    </error-page>-->
-
-<!--    <error-page>-->
-<!--        <exception-type>project.exception.EntityNotFoundException</exception-type >-->
-<!--        <location>/sign-in.jsp</location>-->
-<!--    </error-page>-->
-
-<!--    <error-page>-->
-<!--        <exception-type>project.exception.InvalidRegistrationException</exception-type >-->
-<!--        <location>/register.jsp</location>-->
-<!--    </error-page>-->
-
-<!--    <error-page>-->
-<!--        <exception-type>project.exception.AlreadyRegisteredException</exception-type >-->
-<!--        <location>/register.jsp</location>-->
-<!--    </error-page>-->
-
+    <error-page>
+        <exception-type>project.exception.AlreadyRegisteredException</exception-type >
+        <location>/register.jsp</location>
+    </error-page>
 
 </web-app>
