@@ -21,9 +21,9 @@ public final class WrapperConnector {
         pool.setUrl(resource.getString("db.url"));
         pool.setUsername(resource.getString("db.user"));
         pool.setPassword(resource.getString("db.password"));
-        pool.setMinIdle(Integer.parseInt(resource.getString("db.minIdle")));
-        pool.setMaxIdle(Integer.parseInt(resource.getString("db.maxIdle")));
-        pool.setMaxOpenPreparedStatements(Integer.parseInt(resource.getString("db.maxPreparedStatement")));
+        pool.setMinIdle(parseInteger(resource, "db.minIdle"));
+        pool.setMaxIdle(parseInteger(resource, "db.maxIdle"));
+        pool.setMaxOpenPreparedStatements(parseInteger(resource, "db.maxPreparedStatement"));
     }
 
     public Connection getConnection() {
@@ -33,5 +33,9 @@ public final class WrapperConnector {
             LOGGER.error("Could not get connection from database" , e);
             throw new InvalidDatabaseConnectionException("Could not get connection from database ", e);
         }
+    }
+
+    private int parseInteger(ResourceBundle resource, String s) {
+        return Integer.parseInt(resource.getString(s));
     }
 }

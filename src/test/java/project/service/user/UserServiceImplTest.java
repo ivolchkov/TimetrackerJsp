@@ -38,7 +38,7 @@ public class UserServiceImplTest {
             .withPassword("ENCODED")
             .withEmail("igorik@gmail.com")
             .build();
-    ;
+
     private static final User USER = User.builder()
             .withName("Igor")
             .withSurname("Volchkov")
@@ -121,6 +121,7 @@ public class UserServiceImplTest {
     public void shouldThrowUserNotFoundExceptionWithIncorrectEmail() {
         exception.expect(EntityNotFoundException.class);
         exception.expectMessage("There is no user with this e-mail");
+
         when(encoder.encode(any(String.class))).thenReturn(Optional.of("test"));
         when(repository.findByEmail(any(String.class))).thenReturn(Optional.empty());
 
@@ -134,6 +135,7 @@ public class UserServiceImplTest {
 
         when(repository.findAll(any(Integer.class) , any(Integer.class))).thenReturn(entities);
         when(mapper.mapUserEntityToUser(ENTITY)).thenReturn(USER);
+
         List<User> actual = userService.findAll(1 , 10);
 
         assertEquals(expected, actual);
@@ -144,6 +146,7 @@ public class UserServiceImplTest {
         List<User> expected = Collections.emptyList();
 
         when(repository.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
+
         List<User> actual = userService.findAll(1 , 10);
 
         assertEquals(expected, actual);

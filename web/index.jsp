@@ -3,11 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
-<fmt:setLocale value="${param.lang}" scope="session"/>
-<fmt:setBundle basename="text" scope="session"/>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="text"/>
 
 <!DOCTYPE html>
-<html lang="${param.lang}">
+<html lang="${sessionScope.lang}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -61,7 +61,7 @@
                                 English
                             </option>
                             <option class="bg-secondary text-white" value="ru" ${param.lang  == 'ru' ? 'selected' : ''}>
-                                Russian
+                                Русский
                             </option>
                         </select>
                     </label>

@@ -12,7 +12,6 @@ public class UserMapperTest {
             .withName("Test")
             .withSurname("Test")
             .withEmail("Test")
-            .withPassword("Test")
             .withRole(Role.ADMIN)
             .build();
 
@@ -30,7 +29,6 @@ public class UserMapperTest {
             .withName("Test")
             .withSurname("Test")
             .withEmail("Test")
-            .withPassword("Test")
             .withRole(Role.ADMIN)
             .build();
 

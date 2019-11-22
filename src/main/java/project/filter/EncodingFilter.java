@@ -2,33 +2,28 @@ package project.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/*"},
-        initParams = {@WebInitParam(name = "encoding", value = "UTF-8")})
+@WebFilter(urlPatterns = {"/*"})
 public class EncodingFilter implements Filter {
-    private String code;
-
     @Override
     public void init(FilterConfig filterConfig) {
-        code = filterConfig.getInitParameter("encoding");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        String codeRequest = servletRequest.getCharacterEncoding();
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        request.setCharacterEncoding("UTF-8");
 
-        if (code != null && !code.equalsIgnoreCase(codeRequest)) {
-            servletRequest.setCharacterEncoding(code);
-            servletResponse.setCharacterEncoding(code);
+        if(request.getParameter("lang") != null){
+            request.getSession().setAttribute("lang", request.getParameter("lang"));
         }
 
-        filterChain.doFilter(servletRequest,servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
     public void destroy() {
-        code = null;
     }
 }

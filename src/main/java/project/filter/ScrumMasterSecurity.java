@@ -1,6 +1,5 @@
 package project.filter;
 
-
 import project.domain.User;
 import project.entity.Role;
 
@@ -26,7 +25,8 @@ public class ScrumMasterSecurity implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -35,7 +35,7 @@ public class ScrumMasterSecurity implements Filter {
             request.getRequestDispatcher("error.jsp").forward(servletRequest, servletResponse);
         }
 
-        filterChain.doFilter(servletRequest ,servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

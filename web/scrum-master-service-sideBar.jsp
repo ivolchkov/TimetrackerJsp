@@ -5,8 +5,10 @@
   Time: 12:39 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="text"/>
 <html>
 <head>
     <title>Scrum master side bar</title>

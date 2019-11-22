@@ -17,10 +17,10 @@ public class AddStory implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-        int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
+        int currentPage = parseParameter(request, "currentPage");
+        int recordsPerPage = parseParameter(request, "recordsPerPage");
         User user = (User) request.getSession().getAttribute("user");
-        Story story = Story.builder().withId(Integer.parseInt(request.getParameter("storyId"))).build();
+        Story story = Story.builder().withId(parseParameter(request, "storyId")).build();
 
         storyService.addStoryToUser(story, user);
 

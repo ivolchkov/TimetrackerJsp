@@ -20,7 +20,7 @@ public class AddGoal implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String name = request.getParameter("name");
-        Integer id = Integer.parseInt(request.getParameter("backlogId"));
+        Integer id = parseParameter(request, "backlogId");
 
         Backlog backlog = backlogService.showBacklogById(id);
         Goal goal = new Goal(name, backlog);

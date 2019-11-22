@@ -26,16 +26,17 @@ public class AdminSecurity implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
         if (user == null || user.getRole() != Role.ADMIN) {
-            request.getRequestDispatcher("error.jsp").forward(servletRequest,servletResponse);
+            request.getRequestDispatcher("error.jsp").forward(servletRequest, servletResponse);
         }
 
-        filterChain.doFilter(servletRequest ,servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

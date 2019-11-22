@@ -174,26 +174,6 @@ public final class ApplicationContextInjector {
         return injector;
     }
 
-    public UserService getUserService() {
-        return USER_SERVICE;
-    }
-
-    public BacklogService getBacklogService() {
-        return BACKLOG_SERVICE;
-    }
-
-    public GoalService getGoalService() {
-        return GOAL_SERVICE;
-    }
-
-    public StoryService getStoryService() {
-        return STORY_SERVICE;
-    }
-
-    public SprintService getSprintService() {
-        return SPRINT_SERVICE;
-    }
-
     public Command getDefaultCommand() {
         return DEFAULT_COMMAND;
     }

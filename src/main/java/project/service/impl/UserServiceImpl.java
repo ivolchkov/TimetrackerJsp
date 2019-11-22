@@ -55,14 +55,14 @@ public class UserServiceImpl implements UserService {
         if (!entity.isPresent()) {
             LOGGER.warn("There is no user with this e-mail");
             throw new EntityNotFoundException("There is no user with this e-mail");
-        } else {
-            if (entity.get().getPassword().equals(encodedPassword)) {
-                return mapper.mapUserEntityToUser(entity.get());
-            } else {
-                LOGGER.warn("Incorrect password");
-                throw new EntityNotFoundException("Incorrect password");
-            }
         }
+        if (entity.get().getPassword().equals(encodedPassword)) {
+            return mapper.mapUserEntityToUser(entity.get());
+        } else {
+            LOGGER.warn("Incorrect password");
+            throw new EntityNotFoundException("Incorrect password");
+        }
+
     }
 
     @Override
@@ -81,8 +81,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private List<User> listMapping(List<UserEntity> result) {
-        return result.isEmpty() ? Collections.emptyList()
-                : result.stream()
+        return result.isEmpty() ?
+                Collections.emptyList() : result.stream()
                 .map(mapper::mapUserEntityToUser)
                 .collect(Collectors.toList());
     }

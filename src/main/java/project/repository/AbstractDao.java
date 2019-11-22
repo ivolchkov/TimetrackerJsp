@@ -20,7 +20,8 @@ public abstract class AbstractDao<E> implements CrudRepository<Integer, E> {
 
     protected WrapperConnector connector;
 
-    public AbstractDao(String saveQuery, String findByIdQuery, String findAllQuery, String countQuery, String updateQuery, WrapperConnector connector) {
+    public AbstractDao(String saveQuery, String findByIdQuery, String findAllQuery, String countQuery,
+                       String updateQuery, WrapperConnector connector) {
         this.saveQuery = saveQuery;
         this.findByIdQuery = findByIdQuery;
         this.findAllQuery = findAllQuery;
@@ -57,37 +58,11 @@ public abstract class AbstractDao<E> implements CrudRepository<Integer, E> {
     }
 
     public Integer findAmountOfRows() {
-        try (Connection connection = connector.getConnection();
-             Statement statement = connection.createStatement()) {
-
-            ResultSet count = statement.executeQuery(countQuery);
-
-            return count.next() ? count.getInt(1) : 0;
-        } catch (SQLException e) {
-            LOGGER.error("Invalid entities count" , e);
-            throw new DatabaseRuntimeException("Invalid entities count", e);
-        }
+        return count(countQuery);
     }
 
     public List<E> findAll(Integer offset, Integer amount) {
-        List<E> result = new ArrayList<>();
-
-        try (Connection connection = connector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(findAllQuery)) {
-            statement.setInt(1, offset);
-            statement.setInt(2, amount);
-
-            ResultSet entities = statement.executeQuery();
-
-            while(entities.next()) {
-                mapResultSetToEntity(entities).ifPresent(result::add);
-            }
-
-            return result;
-        } catch (SQLException e) {
-            LOGGER.error("Invalid entities search" , e);
-            throw new DatabaseRuntimeException("Invalid entities search", e);
-        }
+        return findAll(offset, amount, findAllQuery);
     }
 
     public void update(E entity) {
@@ -120,6 +95,40 @@ public abstract class AbstractDao<E> implements CrudRepository<Integer, E> {
         } catch (SQLException e) {
             LOGGER.error("Invalid entities search by foreign key" , e);
             throw new DatabaseRuntimeException("Invalid entities search by foreign key", e);
+        }
+    }
+
+    protected List<E> findAll(Integer offset, Integer amount, String query) {
+        List<E> result = new ArrayList<>();
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, offset);
+            statement.setInt(2, amount);
+
+            ResultSet entities = statement.executeQuery();
+
+            while(entities.next()) {
+                mapResultSetToEntity(entities).ifPresent(result::add);
+            }
+
+            return result;
+        } catch (SQLException e) {
+            LOGGER.error("Invalid entities search" , e);
+            throw new DatabaseRuntimeException("Invalid entities search", e);
+        }
+    }
+
+    protected Integer count(String query) {
+        try (Connection connection = connector.getConnection();
+             Statement statement = connection.createStatement()) {
+
+            ResultSet count = statement.executeQuery(query);
+
+            return count.next() ? count.getInt(1) : 0;
+        } catch (SQLException e) {
+            LOGGER.error("Invalid entities count" , e);
+            throw new DatabaseRuntimeException("Invalid entities count", e);
         }
     }
 

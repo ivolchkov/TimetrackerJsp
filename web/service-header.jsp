@@ -1,5 +1,7 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="text"/>
 <%--
   Created by IntelliJ IDEA.
   User: ivolchkov
@@ -16,6 +18,8 @@
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.jsp">Timetracker</a>
+    <a class="nav-link active" style="color: #dcebe9" href="?lang=en">English</a>
+    <a class="nav-link active" style="color: #dcebe9" href="?lang=ru">Русский</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <form action="user" method="post">

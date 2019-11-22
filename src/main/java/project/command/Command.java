@@ -17,4 +17,12 @@ public interface Command {
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("recordsPerPage", recordsPerPage);
     }
+
+    default int parseParameter(HttpServletRequest request, String param) {
+        try {
+            return Integer.parseInt(request.getParameter(param));
+        } catch (NumberFormatException | NullPointerException e) {
+            return 1;
+        }
+    }
 }

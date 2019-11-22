@@ -20,7 +20,6 @@ public class UserMapper {
                 .withName(entity.getName())
                 .withSurname(entity.getSurname())
                 .withEmail(entity.getEmail())
-                .withPassword(entity.getPassword())
                 .withRole(entity.getRole())
                 .build();
     }

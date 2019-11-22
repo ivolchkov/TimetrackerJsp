@@ -13,18 +13,18 @@ import java.io.IOException;
         DispatcherType.REQUEST,
         DispatcherType.FORWARD},
         urlPatterns = {"/developer-service.jsp",
-        "/developer-service-paginating.jsp",
-        "/developer-service-sideBar.jsp",
-        "/freeStories.jsp",
-        "/showDeveloperStories.jsp",})
-
+                "/developer-service-paginating.jsp",
+                "/developer-service-sideBar.jsp",
+                "/freeStories.jsp",
+                "/showDeveloperStories.jsp",})
 public class DeveloperSecurity implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -33,7 +33,7 @@ public class DeveloperSecurity implements Filter {
             request.getRequestDispatcher("error.jsp").forward(servletRequest, servletResponse);
         }
 
-        filterChain.doFilter(servletRequest ,servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

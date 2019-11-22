@@ -76,38 +76,12 @@ public class StoryDaoImpl extends AbstractDao<StoryEntity> implements StoryDao {
 
     @Override
     public List<StoryEntity> findWithoutUser(Integer offset, Integer amount) {
-        List<StoryEntity> result = new ArrayList<>();
-
-        try (Connection connection = connector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_WITHOUT_USER)) {
-            statement.setInt(1, offset);
-            statement.setInt(2, amount);
-
-            ResultSet entities = statement.executeQuery();
-
-            while(entities.next()) {
-                mapResultSetToEntity(entities).ifPresent(result::add);
-            }
-
-            return result;
-        } catch (SQLException e) {
-            LOGGER.error("Invalid entities search" , e);
-            throw new DatabaseRuntimeException("Invalid entities search", e);
-        }
+        return findAll(offset, amount, FIND_WITHOUT_USER);
     }
 
     @Override
     public Integer findAmountOfRowsWithoutUser() {
-        try (Connection connection = connector.getConnection();
-             Statement statement = connection.createStatement()) {
-
-            ResultSet count = statement.executeQuery(FIND_ALL_ROWS_WITHOUT_USER);
-
-            return count.next() ? count.getInt(1) : 0;
-        } catch (SQLException e) {
-            LOGGER.error("Invalid entities count" , e);
-            throw new DatabaseRuntimeException("Invalid entities count", e);
-        }
+        return count(FIND_ALL_ROWS_WITHOUT_USER);
     }
 
     @Override

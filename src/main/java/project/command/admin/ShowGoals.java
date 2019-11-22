@@ -6,6 +6,7 @@ import project.service.GoalService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 public class ShowGoals implements Command {
     private final GoalService goalService;
@@ -16,8 +17,8 @@ public class ShowGoals implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-        int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
+        int currentPage = parseParameter(request, "currentPage");
+        int recordsPerPage = parseParameter(request, "recordsPerPage");
 
         List<Goal> goals = goalService.showAllGoals(currentPage, recordsPerPage);
 

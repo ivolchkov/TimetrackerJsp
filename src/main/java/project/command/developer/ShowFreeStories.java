@@ -16,8 +16,8 @@ public class ShowFreeStories implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-        int recordsPerPage = Integer.parseInt(request.getParameter("recordsPerPage"));
+        int currentPage = parseParameter(request, "currentPage");
+        int recordsPerPage = parseParameter(request, "recordsPerPage");
 
         List<Story> stories = storyService.showStoriesWithoutUser(currentPage, recordsPerPage);
 

@@ -1,4 +1,4 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: ivolchkov
@@ -8,8 +8,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isErrorPage="true" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="text"/>
 <!DOCTYPE html>
-<html lang="${param.lang}">
+<html lang="${sessionScope.lang}">
 
 <head>
     <meta charset="utf-8">
