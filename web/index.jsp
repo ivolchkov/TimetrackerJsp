@@ -50,8 +50,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="nav-link" href="index.jsp">Timetracker</a>
-                <a class="nav-link" href="#"><label><fmt:message key="main.nav.feature"/></label></a>
-                <a class="nav-link" href="#"><label><fmt:message key="main.nav.contact"/></label></a>
                 <a class="nav-link" href="sign-in.jsp"><label><fmt:message key="main.nav.signIn"/></label></a>
                 <a class="nav-link" href="register.jsp"><label><fmt:message key="main.nav.signUp"/></label></a>
                 <form style="position:absolute; right:73px;">

@@ -105,11 +105,6 @@ public class StoryDaoImpl extends AbstractDao<StoryEntity> implements StoryDao {
     }
 
     @Override
-    public void updateSprintId(StoryEntity story) {
-        updateForeignKeyId(story.getSprint().getId(), story.getId());
-    }
-
-    @Override
     protected Optional<StoryEntity> mapResultSetToEntity(ResultSet story) throws SQLException {
         GoalEntity goal = GoalEntity.builder()
                 .withId(story.getInt(6))

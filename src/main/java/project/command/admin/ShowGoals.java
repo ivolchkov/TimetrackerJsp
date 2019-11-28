@@ -6,7 +6,6 @@ import project.service.GoalService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 public class ShowGoals implements Command {
     private final GoalService goalService;

@@ -30,6 +30,4 @@ public interface StoryService {
     Integer showNumberOfRowsByUserId(Integer id);
 
     void addStoryToUser(Story story, User user);
-
-    void addStoryToSprint(Story story, Sprint sprint);
 }

@@ -35,7 +35,7 @@ public final class WrapperConnector {
         }
     }
 
-    private int parseInteger(ResourceBundle resource, String s) {
-        return Integer.parseInt(resource.getString(s));
+    private int parseInteger(ResourceBundle resource, String parameter) {
+        return Integer.parseInt(resource.getString(parameter));
     }
 }

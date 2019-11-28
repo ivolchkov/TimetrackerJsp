@@ -21,6 +21,4 @@ public interface StoryDao extends CrudRepository<Integer, StoryEntity> {
     Integer findAmountOfRowsByUser(Integer id);
 
     void updateUserId(StoryEntity story);
-
-    void updateSprintId(StoryEntity story);
 }

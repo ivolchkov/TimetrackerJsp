@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
@@ -22,10 +21,8 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     private static final String FIND_BY_ID = "SELECT * FROM timetracking.users WHERE user_id = ?";
     private static final String FIND_ALL_USERS = "SELECT * FROM timetracking.users LIMIT ?, ?";
     private static final String FIND_ALL_ROWS = "SELECT COUNT(user_id) FROM timetracking.users";
-    private static final String FIND_BY_BACKLOG = "SELECT * FROM timetracking.users WHERE backlog_id = ? LIMIT ?, ?";
     private static final String FIND_BY_EMAIL = "SELECT * FROM timetracking.users WHERE user_email = ?";
     private static final String UPDATE_USER = "UPDATE timetracking.users SET user_name = ?, user_surname = ?, user_email = ?, user_password = ?, user_role = ?, backlog_id = ? WHERE user_id = ?";
-    private static final String UPDATE_USER_BY_BACKLOG = "UPDATE timetracking.users SET backlog_id = ? WHERE user_id = ?";
 
     public UserDaoImpl(WrapperConnector connector) {
         super(INSERT_USER, FIND_BY_ID, FIND_ALL_USERS, FIND_ALL_ROWS, UPDATE_USER, connector);
@@ -43,25 +40,6 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
         } catch (SQLException e) {
             LOGGER.error("Invalid user search" , e);
             throw new DatabaseRuntimeException("Invalid user search", e);
-        }
-    }
-
-    @Override
-    public List<UserEntity> findByBacklog(Integer id, Integer offset, Integer amount) {
-        return findEntitiesByForeignKey(id, FIND_BY_BACKLOG, offset, amount);
-    }
-
-    @Override
-    public void updateBacklogId(UserEntity user) {
-        try (Connection connection = connector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_BY_BACKLOG)) {
-            preparedStatement.setInt(1, user.getBacklog().getId());
-            preparedStatement.setInt(2, user.getId());
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.error("Invalid entity updating" , e);
-            throw new DatabaseRuntimeException("Invalid entity updating", e);
         }
     }
 

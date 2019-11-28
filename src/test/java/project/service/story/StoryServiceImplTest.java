@@ -185,14 +185,6 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldThrowIllegalArgumentExceptionAddingStoryToSprint() {
-        exception.expect(InvalidEntityUpdating.class);
-        exception.expectMessage("Invalid story updating");
-
-        service.addStoryToSprint(STORY, null);
-    }
-
-    @Test
     public void showAllStoriesShouldShowAllStories() {
         when(storyDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);

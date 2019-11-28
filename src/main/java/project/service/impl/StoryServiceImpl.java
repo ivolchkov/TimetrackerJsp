@@ -1,7 +1,6 @@
 package project.service.impl;
 
 import org.apache.log4j.Logger;
-import project.domain.Sprint;
 import project.domain.Story;
 import project.domain.User;
 import project.entity.Status;
@@ -127,13 +126,6 @@ public class StoryServiceImpl implements StoryService {
         validateUpdateParam(story, user);
 
         storyDao.updateUserId(mapper.mapStoryToStoryEntity(story, user));
-    }
-
-    @Override
-    public void addStoryToSprint(Story story, Sprint sprint) {
-        validateUpdateParam(story, sprint);
-
-        storyDao.updateSprintId(mapper.mapStoryToStoryEntity(story, sprint));
     }
 
     private <T> void validateParam(T param) {
