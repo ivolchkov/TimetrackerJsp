@@ -91,3 +91,30 @@ WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
 WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
 WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
 WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
+WARN  impl.UserServiceImpl: Method:login() Line:62 - Incorrect password
+WARN  impl.UserServiceImpl: Method:register() Line:38 - User is already registered by this e-mail
+ERROR impl.UserServiceImpl: Method:paginatingValidation() Line:92 - Invalid number of current page or records per page
+WARN  impl.UserServiceImpl: Method:login() Line:56 - There is no user with this e-mail
+WARN  impl.GoalServiceImpl: Method:createGoal() Line:33 - Goal is not valid
+WARN  impl.GoalServiceImpl: Method:showGoalById() Line:52 - There is no goal by this id
+WARN  impl.GoalServiceImpl: Method:showGoalById() Line:52 - There is no goal by this id
+ERROR impl.GoalServiceImpl: Method:showAllGoals() Line:59 - Invalid number of current page or records per page
+WARN  impl.SprintServiceImpl: Method:createSprint() Line:31 - Sprint is not valid
+ERROR impl.SprintServiceImpl: Method:showAllSprints() Line:41 - Invalid number of current page or records per page
+WARN  impl.BacklogServiceImpl: Method:createBacklog() Line:33 - Backlog is not valid
+WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
+WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
+ERROR impl.BacklogServiceImpl: Method:showAllBacklogs() Line:59 - Invalid number of current page or records per page
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:133 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:133 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:createStory() Line:34 - Story is not valid
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:133 - Parameter is not valid
+WARN  impl.StoryServiceImpl: Method:validateParam() Line:133 - Parameter is not valid
+ERROR impl.StoryServiceImpl: Method:paginatingValidation() Line:140 - Invalid number of current page or records per page
+ERROR impl.StoryServiceImpl: Method:paginatingValidation() Line:140 - Invalid number of current page or records per page
+WARN  impl.StoryServiceImpl: Method:validateUpdateParam() Line:147 - Invalid story updating

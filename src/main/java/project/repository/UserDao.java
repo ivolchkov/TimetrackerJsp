@@ -4,6 +4,6 @@ import project.entity.UserEntity;
 
 import java.util.Optional;
 
-public interface UserDao extends CrudRepository<Integer, UserEntity> {
+public interface UserDao {
     Optional<UserEntity> findByEmail(String email);
 }
