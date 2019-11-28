@@ -1,4 +1,6 @@
 package project.repository;
 
-public interface GoalDao {
+import project.entity.GoalEntity;
+
+public interface GoalDao extends CrudRepository<Integer, GoalEntity> {
 }

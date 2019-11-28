@@ -1,4 +1,6 @@
 package project.repository;
 
-public interface BacklogDao {
+import project.entity.BacklogEntity;
+
+public interface BacklogDao extends CrudRepository<Integer, BacklogEntity> {
 }

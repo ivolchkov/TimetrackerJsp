@@ -81,10 +81,10 @@ public class UserServiceImpl implements UserService {
     }
 
     private List<User> listMapping(List<UserEntity> result) {
-        return result.isEmpty() ?
-                Collections.emptyList() : result.stream()
-                .map(mapper::mapUserEntityToUser)
-                .collect(Collectors.toList());
+        return result.isEmpty() ? Collections.emptyList() :
+                result.stream()
+                        .map(mapper::mapUserEntityToUser)
+                        .collect(Collectors.toList());
     }
 
     private void paginatingValidation(Integer currentPage, Integer recordsPerPage) {

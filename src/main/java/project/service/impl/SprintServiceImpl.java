@@ -27,7 +27,7 @@ public class SprintServiceImpl implements SprintService {
 
     @Override
     public boolean createSprint(Sprint sprint) {
-        if (Objects.isNull(sprint) ) {
+        if (Objects.isNull(sprint)) {
             LOGGER.warn("Sprint is not valid");
             throw new InvalidEntityCreation("Sprint is not valid");
         }
@@ -37,7 +37,7 @@ public class SprintServiceImpl implements SprintService {
 
     @Override
     public List<Sprint> showAllSprints(Integer currentPage, Integer recordsPerPage) {
-        if ( currentPage <= 0 || recordsPerPage <= 0 ) {
+        if (currentPage <= 0 || recordsPerPage <= 0) {
             LOGGER.error("Invalid number of current page or records per page");
             throw new InvalidPaginatingException("Invalid number of current page or records per page");
         }
@@ -45,10 +45,10 @@ public class SprintServiceImpl implements SprintService {
         Integer offset = currentPage * recordsPerPage - recordsPerPage;
         List<SprintEntity> result = sprintDao.findAll(offset, recordsPerPage);
 
-        return result.isEmpty() ? Collections.emptyList()
-                : result.stream()
-                .map(mapper::mapSprintEntityToSprint)
-                .collect(Collectors.toList());
+        return result.isEmpty() ? Collections.emptyList() :
+                result.stream()
+                        .map(mapper::mapSprintEntityToSprint)
+                        .collect(Collectors.toList());
     }
 
     @Override

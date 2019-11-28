@@ -5,7 +5,7 @@ import project.entity.StoryEntity;
 
 import java.util.List;
 
-public interface StoryDao {
+public interface StoryDao extends CrudRepository<Integer, StoryEntity> {
     List<StoryEntity> findByStatus(Status status, Integer offset, Integer amount);
 
     List<StoryEntity> findByGoal(Integer id, Integer offset, Integer amount);

@@ -29,7 +29,7 @@ public class GoalServiceImpl implements GoalService {
 
     @Override
     public boolean createGoal(Goal goal) {
-        if (Objects.isNull(goal) ) {
+        if (Objects.isNull(goal)) {
             LOGGER.warn("Goal is not valid");
             throw new InvalidEntityCreation("Goal is not valid");
         }
@@ -42,7 +42,7 @@ public class GoalServiceImpl implements GoalService {
         if (Objects.nonNull(id)) {
             Optional<GoalEntity> entity = goalDao.findById(id);
 
-            if ( entity.isPresent() ) {
+            if (entity.isPresent()) {
                 return mapper.mapGoalEntityToGoal(entity.get());
             }
 
@@ -55,7 +55,7 @@ public class GoalServiceImpl implements GoalService {
 
     @Override
     public List<Goal> showAllGoals(Integer currentPage, Integer recordsPerPage) {
-        if ( currentPage <= 0 || recordsPerPage <= 0 ) {
+        if (currentPage <= 0 || recordsPerPage <= 0) {
             LOGGER.error("Invalid number of current page or records per page");
             throw new InvalidPaginatingException("Invalid number of current page or records per page");
         }
@@ -63,10 +63,10 @@ public class GoalServiceImpl implements GoalService {
         Integer offset = currentPage * recordsPerPage - recordsPerPage;
         List<GoalEntity> result = goalDao.findAll(offset, recordsPerPage);
 
-        return result.isEmpty() ? Collections.emptyList()
-                : result.stream()
-                .map(mapper::mapGoalEntityToGoal)
-                .collect(Collectors.toList());
+        return result.isEmpty() ? Collections.emptyList() :
+                result.stream()
+                        .map(mapper::mapGoalEntityToGoal)
+                        .collect(Collectors.toList());
     }
 
     @Override

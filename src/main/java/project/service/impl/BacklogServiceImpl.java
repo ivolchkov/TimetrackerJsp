@@ -42,7 +42,7 @@ public class BacklogServiceImpl implements BacklogService {
         if (Objects.nonNull(id)) {
             Optional<BacklogEntity> entity = backlogDao.findById(id);
 
-            if ( entity.isPresent() ) {
+            if (entity.isPresent()) {
                 return mapper.mapBacklogEntityToBacklog(entity.get());
             }
 
@@ -63,10 +63,10 @@ public class BacklogServiceImpl implements BacklogService {
         Integer offset = currentPage * recordsPerPage - recordsPerPage;
         List<BacklogEntity> result = backlogDao.findAll(offset, recordsPerPage);
 
-        return result.isEmpty() ? Collections.emptyList()
-                : result.stream()
-                .map(mapper::mapBacklogEntityToBacklog)
-                .collect(Collectors.toList());
+        return result.isEmpty() ? Collections.emptyList() :
+                result.stream()
+                        .map(mapper::mapBacklogEntityToBacklog)
+                        .collect(Collectors.toList());
     }
 
     @Override

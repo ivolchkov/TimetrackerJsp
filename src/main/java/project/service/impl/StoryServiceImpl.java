@@ -30,7 +30,7 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     public boolean createStory(Story story) {
-        if (Objects.isNull(story) ) {
+        if (Objects.isNull(story)) {
             LOGGER.warn("Story is not valid");
             throw new InvalidEntityCreation("Story is not valid");
         }
@@ -143,16 +143,16 @@ public class StoryServiceImpl implements StoryService {
     }
 
     private <T> void validateUpdateParam(Story story, T param) {
-        if (Objects.isNull(story) || Objects.isNull(param) ) {
+        if (Objects.isNull(story) || Objects.isNull(param)) {
             LOGGER.warn("Invalid story updating");
             throw new InvalidEntityUpdating("Invalid story updating");
         }
     }
 
     private List<Story> listMapping(List<StoryEntity> result) {
-        return result.isEmpty() ? Collections.emptyList()
-                : result.stream()
-                .map(mapper::mapStoryEntityToStory)
-                .collect(Collectors.toList());
+        return result.isEmpty() ? Collections.emptyList() :
+                result.stream()
+                        .map(mapper::mapStoryEntityToStory)
+                        .collect(Collectors.toList());
     }
 }
