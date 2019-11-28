@@ -160,7 +160,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void showStoryBySprintShhouldReturnEmptyListSearchingBySprint() {
+    public void showStoryBySprintShouldReturnEmptyListSearchingBySprint() {
         when(storyDao.findBySprint(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(Collections.emptyList());
 
         List<Story> actual = service.showStoryBySprint(1,1,1);

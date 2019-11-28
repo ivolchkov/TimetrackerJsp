@@ -1,6 +1,5 @@
 package project.service.validator;
 
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -8,22 +7,17 @@ import project.domain.User;
 import project.exception.InvalidRegistrationException;
 
 public class UserValidatorTest {
-    private static UserValidator validator;
+    private static final UserValidator VALIDATOR = new UserValidator();;
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
-
-    @BeforeClass
-    public static void initUser() {
-        validator = new UserValidator();
-    }
 
     @Test
     public void validateShouldThrowInvalidRegistrationExceptionValidatingNullUser() {
         exception.expect(InvalidRegistrationException.class);
         exception.expectMessage("User is not valid");
 
-        validator.validate(null);
+        VALIDATOR.validate(null);
     }
 
     @Test
@@ -32,7 +26,7 @@ public class UserValidatorTest {
         exception.expect(InvalidRegistrationException.class);
         exception.expectMessage("Incorrect name");
 
-        validator.validate(student);
+        VALIDATOR.validate(student);
     }
 
     @Test
@@ -43,7 +37,7 @@ public class UserValidatorTest {
         exception.expect(InvalidRegistrationException.class);
         exception.expectMessage("Incorrect surname");
 
-        validator.validate(student);
+        VALIDATOR.validate(student);
     }
 
     @Test
@@ -55,7 +49,7 @@ public class UserValidatorTest {
         exception.expect(InvalidRegistrationException.class);
         exception.expectMessage("Incorrect e-mail");
 
-        validator.validate(student);
+        VALIDATOR.validate(student);
     }
 
     @Test
@@ -68,6 +62,6 @@ public class UserValidatorTest {
         exception.expect(InvalidRegistrationException.class);
         exception.expectMessage("Incorrect password");
 
-        validator.validate(student);
+        VALIDATOR.validate(student);
     }
 }

@@ -31,30 +31,22 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
-    private static final UserEntity ENTITY = UserEntity.builder()
-            .withId(1)
-            .withName("Igor")
-            .withSurname("Volchkov")
-            .withPassword("ENCODED")
-            .withEmail("igorik@gmail.com")
-            .build();
+    private static final UserEntity USER_ENTITY = getUserEntity();
 
-    private static final User USER = User.builder()
-            .withName("Igor")
-            .withSurname("Volchkov")
-            .withPassword("Babushka3529")
-            .withEmail("igorik@gmail.com")
-            .build();
+    private static final User USER = getUser();
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
     @Mock
     private UserDao repository;
+
     @Mock
     private UserMapper mapper;
+
     @Mock
     private UserValidator validator;
+
     @Mock
     private PasswordEncoder encoder;
 
@@ -69,8 +61,8 @@ public class UserServiceImplTest {
     @Test
     public void registerShouldRegisterUser() {
         when(repository.save(any(UserEntity.class))).thenReturn(true);
-        when(mapper.mapUserToUserEntity(any(User.class))).thenReturn(ENTITY);
-        when(encoder.encode(any(String.class))).thenReturn(Optional.of(ENTITY.getPassword()));
+        when(mapper.mapUserToUserEntity(any(User.class))).thenReturn(USER_ENTITY);
+        when(encoder.encode(any(String.class))).thenReturn(Optional.of(USER_ENTITY.getPassword()));
         boolean actual = userService.register(USER);
 
         assertTrue(actual);
@@ -81,7 +73,7 @@ public class UserServiceImplTest {
         exception.expect(AlreadyRegisteredException.class);
         exception.expectMessage("User is already registered by this e-mail");
 
-        when(repository.findByEmail(any(String.class))).thenReturn(Optional.ofNullable(ENTITY));
+        when(repository.findByEmail(any(String.class))).thenReturn(Optional.ofNullable(USER_ENTITY));
 
 
         userService.register(USER);
@@ -97,8 +89,8 @@ public class UserServiceImplTest {
 
     @Test
     public void loginShouldLoginUser() {
-        when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.of(ENTITY));
-        when(encoder.encode("Babushka3529")).thenReturn(Optional.of(ENTITY.getPassword()));
+        when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.of(USER_ENTITY));
+        when(encoder.encode("Babushka3529")).thenReturn(Optional.of(USER_ENTITY.getPassword()));
         when(mapper.mapUserEntityToUser(any(UserEntity.class))).thenReturn(USER);
 
         User actual = userService.login("igorik@gmail.com", "Babushka3529");
@@ -112,7 +104,7 @@ public class UserServiceImplTest {
         exception.expectMessage("Incorrect password");
 
         when(encoder.encode(any(String.class))).thenReturn(Optional.of("test"));
-        when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.ofNullable(ENTITY));
+        when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.ofNullable(USER_ENTITY));
 
         userService.login("igorik@gmail.com", "test");
     }
@@ -131,10 +123,10 @@ public class UserServiceImplTest {
     @Test
     public void findAllShouldReturnAllUsers() {
         List<User> expected = Collections.singletonList(USER);
-        List<UserEntity> entities = Collections.singletonList(ENTITY);
+        List<UserEntity> entities = Collections.singletonList(USER_ENTITY);
 
         when(repository.findAll(any(Integer.class) , any(Integer.class))).thenReturn(entities);
-        when(mapper.mapUserEntityToUser(ENTITY)).thenReturn(USER);
+        when(mapper.mapUserEntityToUser(USER_ENTITY)).thenReturn(USER);
 
         List<User> actual = userService.findAll(1 , 10);
 
@@ -158,5 +150,24 @@ public class UserServiceImplTest {
         exception.expectMessage("Invalid number of current page or records per page");
 
         userService.findAll(0 ,1);
+    }
+
+    private static UserEntity getUserEntity() {
+        return UserEntity.builder()
+                .withId(1)
+                .withName("Igor")
+                .withSurname("Volchkov")
+                .withPassword("ENCODED")
+                .withEmail("igorik@gmail.com")
+                .build();
+    }
+
+    private static User getUser() {
+        return User.builder()
+                .withName("Igor")
+                .withSurname("Volchkov")
+                .withPassword("Babushka3529")
+                .withEmail("igorik@gmail.com")
+                .build();
     }
 }

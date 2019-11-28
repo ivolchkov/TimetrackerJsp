@@ -7,32 +7,33 @@ import project.entity.BacklogEntity;
 import static org.junit.Assert.*;
 
 public class BacklogMapperTest {
-    private static final BacklogEntity ENTITY = BacklogEntity.builder()
-            .withProjectName("Test")
-            .withDescription("Test description")
-            .build();
+    private static final BacklogEntity BACKLOG_ENTITY = getBacklogEntity(BacklogEntity.builder());
 
-    private static final BacklogEntity ENTITY_WITH_ID = BacklogEntity.builder()
-            .withId(1)
-            .withProjectName("Test")
-            .withDescription("Test description")
-            .build();
+    private static final BacklogEntity ENTITY_WITH_ID = getBacklogEntity(BacklogEntity.builder()
+            .withId(1));
 
     private static final Backlog DOMAIN = new Backlog(1, "Test", "Test description");
 
-    private static final BacklogMapper MAPPER = new BacklogMapper();
+    private final BacklogMapper backlogMapper = new BacklogMapper();
 
     @Test
     public void mapBacklogToBacklogEntityShouldMapToEntity() {
-        BacklogEntity actual = MAPPER.mapBacklogToBacklogEntity(DOMAIN);
+        BacklogEntity actual = backlogMapper.mapBacklogToBacklogEntity(DOMAIN);
 
-        assertEquals(ENTITY, actual);
+        assertEquals(BACKLOG_ENTITY, actual);
     }
 
     @Test
     public void mapBacklogEntityToBacklogShouldMapToDomain() {
-        Backlog actual = MAPPER.mapBacklogEntityToBacklog(ENTITY_WITH_ID);
+        Backlog actual = backlogMapper.mapBacklogEntityToBacklog(ENTITY_WITH_ID);
 
         assertEquals(DOMAIN, actual);
+    }
+
+    private static BacklogEntity getBacklogEntity(BacklogEntity.BacklogBuilder builder) {
+        return builder
+                .withProjectName("Test")
+                .withDescription("Test description")
+                .build();
     }
 }

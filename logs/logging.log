@@ -86,3 +86,8 @@ ERROR impl.BacklogServiceImpl: Method:showAllBacklogs() Line:59 - Invalid number
 WARN  impl.BacklogServiceImpl: Method:createBacklog() Line:33 - Backlog is not valid
 WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
 WARN  impl.BacklogServiceImpl: Method:showBacklogById() Line:52 - There is no backlog by this id
+WARN  validator.UserValidator: Method:validate() Line:23 - User is not valid
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect name
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect surname
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect e-mail
+WARN  validator.UserValidator: Method:validateByParam() Line:37 - Incorrect password
