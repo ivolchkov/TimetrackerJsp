@@ -51,7 +51,7 @@ public class SprintServiceImplTest {
     }
 
     @Test
-    public void shouldCreateSprint() {
+    public void createSprintShouldCreateSprint() {
         when(mapper.mapSprintToSprintEntity(any(Sprint.class))).thenReturn(ENTITIES.get(1));
         when(sprintDao.save(any(SprintEntity.class))).thenReturn(true);
 
@@ -59,7 +59,7 @@ public class SprintServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidEntityCreationWithNullSprint() {
+    public void createSprintShouldThrowInvalidEntityCreationWithNullSprint() {
         exception.expect(InvalidEntityCreation.class);
         exception.expectMessage("Sprint is not valid");
 
@@ -67,7 +67,7 @@ public class SprintServiceImplTest {
     }
 
     @Test
-    public void shouldShowAllSprints() {
+    public void createSprintShouldShowAllSprints() {
         when(sprintDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapSprintEntityToSprint(any(SprintEntity.class))).thenReturn(SPRINT);
 
@@ -77,7 +77,7 @@ public class SprintServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyList() {
+    public void createSprintShouldReturnEmptyList() {
         when(sprintDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
 
         List<Sprint> actual = service.showAllSprints(1 , 10);
@@ -86,7 +86,7 @@ public class SprintServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidPaginatingException() {
+    public void createSprintShouldThrowInvalidPaginatingException() {
         exception.expect(InvalidPaginatingException.class);
         exception.expectMessage("Invalid number of current page or records per page");
 

@@ -54,7 +54,7 @@ public class GoalServiceImplTest {
     }
 
     @Test
-    public void shouldReturnGoalById() {
+    public void showGoalByIdShouldReturnGoalById() {
         when(goalDao.findById(anyInt())).thenReturn(Optional.of(ENTITIES.get(1)));
         when(mapper.mapGoalEntityToGoal(any(GoalEntity.class))).thenReturn(GOAL);
         Goal actual = service.showGoalById(1);
@@ -63,7 +63,7 @@ public class GoalServiceImplTest {
     }
 
     @Test
-    public void shouldThrowEntityNotFoundExceptionWithNullId() {
+    public void showGoalByIdShouldThrowEntityNotFoundExceptionWithNullId() {
         exception.expect(EntityNotFoundException.class);
         exception.expectMessage("There is no goal by this id");
 
@@ -71,7 +71,7 @@ public class GoalServiceImplTest {
     }
 
     @Test
-    public void shouldThrowEntityNotFoundExceptionWithNoEntity() {
+    public void showGoalByIdShouldThrowEntityNotFoundExceptionWithNoEntity() {
         when(goalDao.findById(anyInt())).thenReturn(Optional.empty());
         exception.expect(EntityNotFoundException.class);
         exception.expectMessage("There is no goal by this id");
@@ -80,7 +80,7 @@ public class GoalServiceImplTest {
     }
 
     @Test
-    public void shouldCreateGoal() {
+    public void createGoalShouldCreateGoal() {
         when(mapper.mapGoalToGoalEntity(any(Goal.class))).thenReturn(ENTITIES.get(1));
         when(goalDao.save(any(GoalEntity.class))).thenReturn(true);
 
@@ -88,7 +88,7 @@ public class GoalServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidEntityCreationWithNullGoal() {
+    public void createGoalShouldThrowInvalidEntityCreationWithNullGoal() {
         exception.expect(InvalidEntityCreation.class);
         exception.expectMessage("Goal is not valid");
 
@@ -96,7 +96,7 @@ public class GoalServiceImplTest {
     }
 
     @Test
-    public void shouldShowAllGoals() {
+    public void showAllGoalsShouldShowAllGoals() {
         when(goalDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapGoalEntityToGoal(any(GoalEntity.class))).thenReturn(GOAL);
 
@@ -106,7 +106,7 @@ public class GoalServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyList() {
+    public void showAllGoalsShouldReturnEmptyList() {
         when(goalDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
 
         List<Goal> actual = service.showAllGoals(1 , 10);
@@ -115,7 +115,7 @@ public class GoalServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidPaginatingException() {
+    public void showAllGoalsShouldThrowInvalidPaginatingException() {
         exception.expect(InvalidPaginatingException.class);
         exception.expectMessage("Invalid number of current page or records per page");
 

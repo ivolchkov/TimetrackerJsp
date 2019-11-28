@@ -53,7 +53,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldCreateStory() {
+    public void createStoryShouldCreateStory() {
         when(mapper.mapStoryToStoryEntity(any(Story.class))).thenReturn(ENTITIES.get(1));
         when(storyDao.save(any(StoryEntity.class))).thenReturn(true);
 
@@ -61,7 +61,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidEntityCreationWithNullStory() {
+    public void createStoryShouldThrowInvalidEntityCreationWithNullStory() {
         exception.expect(InvalidEntityCreation.class);
         exception.expectMessage("Story is not valid");
 
@@ -69,7 +69,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldShowAllStoriesByStatus() {
+    public void showStoryByStatusShouldShowAllStoriesByStatus() {
         when(storyDao.findByStatus(any(Status.class), any(Integer.class), any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
@@ -79,7 +79,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyListSearchingByStatus() {
+    public void showStoryByStatusShouldReturnEmptyListSearchingByStatus() {
         when(storyDao.findByStatus(any(Status.class), any(Integer.class), any(Integer.class))).thenReturn(Collections.emptyList());
 
         List<Story> actual = service.showStoryByStatus(Status.TO_DO, 1 , 1);
@@ -88,7 +88,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldThrowIllegalArgumentExceptionWithNullStatus() {
+    public void showStoryByStatusShouldThrowIllegalArgumentExceptionWithNullStatus() {
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage("Parameter is not valid");
 
@@ -96,7 +96,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldShowAllStoriesByGoal() {
+    public void showStoryByGoalShouldShowAllStoriesByGoal() {
         when(storyDao.findByGoal(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
@@ -106,7 +106,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyListSearchingByGoal() {
+    public void showStoryByGoalShouldReturnEmptyListSearchingByGoal() {
         when(storyDao.findByGoal(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(Collections.emptyList());
 
         List<Story> actual = service.showStoryByGoal(1,1, 1);
@@ -115,7 +115,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldThrowIllegalArgumentExceptionWithNullGoalId() {
+    public void showStoryByGoalShouldThrowIllegalArgumentExceptionWithNullGoalId() {
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage("Parameter is not valid");
 
@@ -123,7 +123,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldShowAllStoriesByUser() {
+    public void showStoryByUserShouldShowAllStoriesByUser() {
         when(storyDao.findByUser(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
@@ -133,7 +133,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyListSearchingByUser() {
+    public void showStoryByUserShouldReturnEmptyListSearchingByUser() {
         when(storyDao.findByUser(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(Collections.emptyList());
 
         List<Story> actual = service.showStoryByUser(1,1,1);
@@ -142,7 +142,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldThrowIllegalArgumentExceptionWithNullUserId() {
+    public void showStoryByUserShouldThrowIllegalArgumentExceptionWithNullUserId() {
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage("Parameter is not valid");
 
@@ -150,7 +150,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldShowAllStoriesBySprint() {
+    public void showStoryBySprintShouldShowAllStoriesBySprint() {
         when(storyDao.findBySprint(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
 
@@ -160,7 +160,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyListSearchingBySprint() {
+    public void showStoryBySprintShhouldReturnEmptyListSearchingBySprint() {
         when(storyDao.findBySprint(any(Integer.class), any(Integer.class), any(Integer.class))).thenReturn(Collections.emptyList());
 
         List<Story> actual = service.showStoryBySprint(1,1,1);
@@ -169,7 +169,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldThrowIllegalArgumentExceptionWithNullSprintId() {
+    public void showStoryBySprintShouldThrowIllegalArgumentExceptionWithNullSprintId() {
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage("Parameter is not valid");
 
@@ -177,7 +177,7 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void shouldThrowIllegalArgumentExceptionAddingStoryToUser() {
+    public void addStoryToUserShouldThrowIllegalArgumentExceptionAddingStoryToUser() {
         exception.expect(InvalidEntityUpdating.class);
         exception.expectMessage("Invalid story updating");
 

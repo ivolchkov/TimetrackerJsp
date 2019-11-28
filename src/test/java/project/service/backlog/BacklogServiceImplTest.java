@@ -49,7 +49,7 @@ public class BacklogServiceImplTest {
     }
 
     @Test
-    public void shouldReturnBacklogById() {
+    public void showBacklogByIdShouldReturnBacklogById() {
         when(backlogDao.findById(anyInt())).thenReturn(Optional.of(ENTITIES.get(1)));
         when(mapper.mapBacklogEntityToBacklog(any(BacklogEntity.class))).thenReturn(BACKLOG);
         Backlog actual = service.showBacklogById(1);
@@ -58,7 +58,7 @@ public class BacklogServiceImplTest {
     }
 
     @Test
-    public void shouldThrowEntityNotFoundExceptionWithNullId() {
+    public void showBacklogByIdShouldThrowEntityNotFoundExceptionWithNullId() {
         exception.expect(EntityNotFoundException.class);
         exception.expectMessage("There is no backlog by this id");
 
@@ -66,7 +66,7 @@ public class BacklogServiceImplTest {
     }
 
     @Test
-    public void shouldThrowEntityNotFoundExceptionWithNoEntity() {
+    public void showBacklogByIdShouldThrowEntityNotFoundExceptionWithNoEntity() {
         when(backlogDao.findById(anyInt())).thenReturn(Optional.empty());
         exception.expect(EntityNotFoundException.class);
         exception.expectMessage("There is no backlog by this id");
@@ -75,7 +75,7 @@ public class BacklogServiceImplTest {
     }
 
     @Test
-    public void shouldCreateBacklog() {
+    public void createBacklogShouldCreateBacklog() {
         when(mapper.mapBacklogToBacklogEntity(any(Backlog.class))).thenReturn(ENTITIES.get(1));
         when(backlogDao.save(any(BacklogEntity.class))).thenReturn(true);
 
@@ -83,7 +83,7 @@ public class BacklogServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidEntityCreationWithNullBacklog() {
+    public void createBacklogShouldThrowInvalidEntityCreationWithNullBacklog() {
         exception.expect(InvalidEntityCreation.class);
         exception.expectMessage("Backlog is not valid");
 
@@ -91,7 +91,7 @@ public class BacklogServiceImplTest {
     }
 
     @Test
-    public void shouldShowAllBacklogs() {
+    public void showAllBacklogsShouldShowAllBacklogs() {
         when(backlogDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(ENTITIES);
         when(mapper.mapBacklogEntityToBacklog(any(BacklogEntity.class))).thenReturn(BACKLOG);
 
@@ -101,7 +101,7 @@ public class BacklogServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyList() {
+    public void showAllBacklogsShouldReturnEmptyList() {
         when(backlogDao.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
 
         List<Backlog> actual = service.showAllBacklogs(1 , 10);
@@ -110,7 +110,7 @@ public class BacklogServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidPaginatingException() {
+    public void showAllBacklogsShouldThrowInvalidPaginatingException() {
         exception.expect(InvalidPaginatingException.class);
         exception.expectMessage("Invalid number of current page or records per page");
 

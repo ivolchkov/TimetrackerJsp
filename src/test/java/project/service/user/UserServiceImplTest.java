@@ -67,7 +67,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldRegisterUser() {
+    public void registerShouldRegisterUser() {
         when(repository.save(any(UserEntity.class))).thenReturn(true);
         when(mapper.mapUserToUserEntity(any(User.class))).thenReturn(ENTITY);
         when(encoder.encode(any(String.class))).thenReturn(Optional.of(ENTITY.getPassword()));
@@ -77,7 +77,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldThrowRuntimeExceptionWhenRegisterUser() {
+    public void registerShouldThrowRuntimeExceptionWhenRegisterUser() {
         exception.expect(AlreadyRegisteredException.class);
         exception.expectMessage("User is already registered by this e-mail");
 
@@ -88,7 +88,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidRegistrationExceptionWhenRegisterNullUser() {
+    public void registerShouldThrowInvalidRegistrationExceptionWhenRegisterNullUser() {
         exception.expect(InvalidRegistrationException.class);
 
         doThrow(InvalidRegistrationException.class).when(validator).validate(null);
@@ -96,7 +96,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldLoginUser() {
+    public void loginShouldLoginUser() {
         when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.of(ENTITY));
         when(encoder.encode("Babushka3529")).thenReturn(Optional.of(ENTITY.getPassword()));
         when(mapper.mapUserEntityToUser(any(UserEntity.class))).thenReturn(USER);
@@ -107,7 +107,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldThrowUserNotFoundExceptionWithIncorrectPassword() {
+    public void loginShouldThrowUserNotFoundExceptionWithIncorrectPassword() {
         exception.expect(EntityNotFoundException.class);
         exception.expectMessage("Incorrect password");
 
@@ -118,7 +118,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldThrowUserNotFoundExceptionWithIncorrectEmail() {
+    public void loginShouldThrowUserNotFoundExceptionWithIncorrectEmail() {
         exception.expect(EntityNotFoundException.class);
         exception.expectMessage("There is no user with this e-mail");
 
@@ -129,7 +129,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldReturnAllUsers() {
+    public void findAllShouldReturnAllUsers() {
         List<User> expected = Collections.singletonList(USER);
         List<UserEntity> entities = Collections.singletonList(ENTITY);
 
@@ -142,7 +142,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldReturnEmptyListWhenThereIsNoUsers() {
+    public void findAllShouldReturnEmptyListWhenThereIsNoUsers() {
         List<User> expected = Collections.emptyList();
 
         when(repository.findAll(any(Integer.class) , any(Integer.class))).thenReturn(Collections.emptyList());
@@ -153,7 +153,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldThrowInvalidPaginatingException() {
+    public void findAllShouldThrowInvalidPaginatingException() {
         exception.expect(InvalidPaginatingException.class);
         exception.expectMessage("Invalid number of current page or records per page");
 

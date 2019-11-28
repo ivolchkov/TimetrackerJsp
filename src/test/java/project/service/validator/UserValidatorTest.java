@@ -19,7 +19,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void shouldThrowInvalidRegistrationExceptionValidatingNullUser() {
+    public void validateShouldThrowInvalidRegistrationExceptionValidatingNullUser() {
         exception.expect(InvalidRegistrationException.class);
         exception.expectMessage("User is not valid");
 
@@ -27,7 +27,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void shouldThrowInvalidRegistrationExceptionValidatingInvalidName() {
+    public void validateShouldThrowInvalidRegistrationExceptionValidatingInvalidName() {
         User student = User.builder().withName("игорь").build();
         exception.expect(InvalidRegistrationException.class);
         exception.expectMessage("Incorrect name");
@@ -36,7 +36,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void shouldThrowInvalidRegistrationExceptionValidatingInvalidSurname() {
+    public void validateShouldThrowInvalidRegistrationExceptionValidatingInvalidSurname() {
         User student = User.builder().withName("Ihor").
                 withSurname("volchkov").
                 build();
@@ -47,7 +47,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void shouldThrowInvalidRegistrationExceptionValidatingInvalidEmail() {
+    public void validateShouldThrowInvalidRegistrationExceptionValidatingInvalidEmail() {
         User student = User.builder().withName("Ihor").
                 withSurname("Volchkov").
                 withEmail("test.oshibka.com").
@@ -59,7 +59,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void shouldThrowInvalidRegistrationExceptionValidatingInvalidPassword() {
+    public void validateShouldThrowInvalidRegistrationExceptionValidatingInvalidPassword() {
         User student = User.builder().withName("Ihor").
                 withSurname("Volchkov").
                 withEmail("test@gmail.com").
