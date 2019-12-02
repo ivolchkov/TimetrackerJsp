@@ -14,42 +14,42 @@
     </error-page>
 
     <error-page>
-        <exception-type>project.exception.InvalidEntityUpdating</exception-type >
+        <exception-type>com.ua.timetracking.exception.InvalidEntityUpdating</exception-type >
         <location>/error.jsp</location>
     </error-page>
 
     <error-page>
-        <exception-type>project.exception.InvalidEncodingException</exception-type >
+        <exception-type>com.ua.timetracking.exception.InvalidEncodingException</exception-type >
         <location>/error.jsp</location>
     </error-page>
 
     <error-page>
-        <exception-type>project.exception.InvalidCommandException</exception-type >
+        <exception-type>com.ua.timetracking.exception.InvalidCommandException</exception-type >
         <location>/error.jsp</location>
     </error-page>
 
     <error-page>
-        <exception-type>project.exception.InvalidPaginatingException</exception-type >
+        <exception-type>com.ua.timetracking.exception.InvalidPaginatingException</exception-type >
         <location>/error.jsp</location>
     </error-page>
 
     <error-page>
-        <exception-type>project.exception.DatabaseRuntimeException</exception-type >
+        <exception-type>com.ua.timetracking.exception.DatabaseRuntimeException</exception-type >
         <location>/error.jsp</location>
     </error-page>
 
     <error-page>
-        <exception-type>project.exception.EntityNotFoundException</exception-type >
+        <exception-type>com.ua.timetracking.exception.EntityNotFoundException</exception-type >
         <location>/sign-in.jsp</location>
     </error-page>
 
     <error-page>
-        <exception-type>project.exception.InvalidRegistrationException</exception-type >
+        <exception-type>com.ua.timetracking.exception.InvalidRegistrationException</exception-type >
         <location>/register.jsp</location>
     </error-page>
 
     <error-page>
-        <exception-type>project.exception.AlreadyRegisteredException</exception-type >
+        <exception-type>com.ua.timetracking.exception.AlreadyRegisteredException</exception-type >
         <location>/register.jsp</location>
     </error-page>
 
