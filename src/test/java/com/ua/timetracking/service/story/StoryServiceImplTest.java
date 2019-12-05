@@ -90,7 +90,7 @@ public class StoryServiceImplTest {
     @Test
     public void showStoryByUserShouldThrowIllegalArgumentExceptionWithNullUserId() {
         exception.expect(IllegalArgumentException.class);
-        exception.expectMessage("Parameter is not valid");
+        exception.expectMessage("User id is not valid");
 
         service.showStoryByUser(null,1,1);
     }
