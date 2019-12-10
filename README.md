@@ -12,3 +12,12 @@ sprints and users.
 сторис на выполнение и посмотреть все его сторисы. Администратору
 осуществляется доступ ко всей информации о проектах, целях, сторисах
 , спринтах и пользователях.
+## Instalation and running
+
+### Prerequisites
+>JDK, JRE 8 or later,
+>Spring,
+>MySQL.
+
+## Set up
+>Clone the project to local reposiroty and build.
