@@ -1,10 +1,14 @@
 # **Time Tracker**
-Time-Tracking System. The administrator assigns the user
-activity. A user can have one or more activities.
-The user notes the amount of time spent on each activity.
-The user can send a request to add / remove Activities.
+Time-Tracking software development system,
+based on the SCRUM framework. Scrum master can create
+projects, goals, stories and sprints. The developer can take
+story to execute and see all his stories. Admin access 
+to all information about projects, goals, stories
+sprints and users.
 #
-Система Time-Tracking. Администратор закрепляет за пользователем
-Активность. У пользователя может быть одна или несколько Активностей.
-Пользователь отмечает кол-во затраченного времени на каждую активность.
-Пользователь может отправить запрос на добавление/удаление Активности.
+Система Time-Tracking разработки програмных продуктов,
+основана на фреймворке SCRUM. Скрам-мастер может создавать
+проекты, цели, сторисы и спринты. Разработчик может взять 
+сторис на выполнение и посмотреть все его сторисы. Администратору
+осуществляется доступ ко всей информации о проектах, целях, сторисах
+, спринтах и пользователях.
