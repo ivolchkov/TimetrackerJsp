@@ -15,9 +15,12 @@ sprints and users.
 ## Instalation and running
 
 ### Prerequisites
->JDK, JRE 8 or later,
->Spring,
->MySQL.
+- JDK, JRE 8 or later,
+- Apache Maven,
+- Apache Tomcat,
+- MySQL.
 
 ## Set up
->Clone the project to local reposiroty and build.
+- Clone the project to local reposiroty and build .war using Maven command: mvn clean package -DskipTests.
+- Create database using DatabaseCreation.sql file and insert data by executing DatabaseInsertion.sql. 
+- Deploy .war file to Apache Tomcat.
